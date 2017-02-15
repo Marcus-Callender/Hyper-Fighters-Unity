@@ -5,7 +5,8 @@ using UnityEngine;
 enum E_GameStates
 {
 	SETUP,
-	ACTION
+	MOVE_SELECT,
+	USE_ACTIONS
 }
 
 public class GameManager : MonoBehaviour
@@ -49,15 +50,15 @@ public class GameManager : MonoBehaviour
 			{
 				if (m_charScripts[1].StartKeyAssign())
 				{
-					m_state = E_GameStates.ACTION;
+					m_state = E_GameStates.MOVE_SELECT;
 				}
 			}
 		}
-		else if (m_state == E_GameStates.ACTION)
+		else if (m_state == E_GameStates.MOVE_SELECT)
 		{
-			for (int z = 0; z < 2; z++)
+			if (m_charScripts[0].SelectMove() && m_charScripts[1].SelectMove())
 			{
-				m_charScripts[z].DetectKeyPress();
+				m_state = E_GameStates.USE_ACTIONS;
 			}
 		}
 	}

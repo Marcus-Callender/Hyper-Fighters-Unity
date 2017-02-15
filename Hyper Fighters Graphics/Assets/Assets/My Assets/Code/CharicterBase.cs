@@ -7,7 +7,7 @@ public class CharicterBase : MonoBehaviour
 	const int m_c_numInputs = 6;
 	KeyCode[] m_inputs = new KeyCode[m_c_numInputs];
 	string[] m_moveNames = new string[m_c_numInputs];
-
+	int m_currentMove = -1;
 	
 
 	// Use this for initialization
@@ -57,7 +57,7 @@ public class CharicterBase : MonoBehaviour
 		return true;
 	}
 
-	public void DetectKeyPress()
+	public void CameraUpdateExample()
 	{
 		Vector3 pos = this.transform.position;
 
@@ -80,5 +80,28 @@ public class CharicterBase : MonoBehaviour
 		}
 
 		this.transform.position = pos;
+	}
+
+	public bool SelectMove()
+	{
+		if (m_currentMove != -1)
+		{
+			for (int z = 0; z < m_c_numInputs; z++)
+			{
+				if (Input.GetKeyDown(m_inputs[z]))
+				{
+					m_currentMove = z;
+				}
+			}
+
+			return false;
+		}
+
+		return true;
+	}
+
+	public void Rest()
+	{
+		m_currentMove = -1;
 	}
 }
