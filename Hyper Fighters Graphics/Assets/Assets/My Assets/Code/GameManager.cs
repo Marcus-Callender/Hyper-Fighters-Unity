@@ -18,8 +18,7 @@ public class GameManager : MonoBehaviour
 	private CameraManager m_camera;
 
 	private E_GameStates m_state = E_GameStates.SETUP;
-
-	// Use this for initialization
+	
 	void Start()
 	{
 		m_camera = FindObjectOfType<CameraManager>();
@@ -33,15 +32,11 @@ public class GameManager : MonoBehaviour
 		m_charicters[0].transform.position = new Vector3(10.0f, 0.0f, 10.0f);
 		m_charicters[1].transform.position = new Vector3(12.0f, 0.0f, 16.0f);
 
-		//m_charicters[0].transform.rotation.
-		//m_charicters[0].transform.rotation.
-
 		m_camera.Initialize(m_charicters[0], m_charicters[1]);
 
 		GetComponent<PositionManager>().Initialize(m_charicters[0], m_charicters[1], m_camera.gameObject);
 	}
-
-	// Update is called once per frame
+	
 	void Update()
 	{
 		if (m_state == E_GameStates.SETUP)

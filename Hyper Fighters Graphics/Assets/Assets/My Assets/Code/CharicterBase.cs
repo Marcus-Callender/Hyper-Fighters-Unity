@@ -9,8 +9,6 @@ public class CharicterBase : MonoBehaviour
 	string[] m_moveNames = new string[m_c_numInputs];
 	int m_currentMove = -1;
 	
-
-	// Use this for initialization
 	void Start()
 	{
 		m_moveNames[0] = "Light Attack";
@@ -27,8 +25,7 @@ public class CharicterBase : MonoBehaviour
 		m_inputs[4] = KeyCode.None;
 		m_inputs[5] = KeyCode.None;
 	}
-
-	// Update is called once per frame
+	
 	void Update()
 	{
 

@@ -6,14 +6,12 @@ public class PositionManager : MonoBehaviour
 {
 	private GameObject[] m_charicters = new GameObject[2];
 	private GameObject m_camera;
-
-	// Use this for initialization
+	
 	void Start()
 	{
 
 	}
-
-	// Update is called once per frame
+	
 	void Update()
 	{
 		Vector3 charicterMidpont = (m_charicters[0].transform.position + m_charicters[1].transform.position) * 0.5f;
@@ -22,7 +20,6 @@ public class PositionManager : MonoBehaviour
 		m_camera.transform.position = charicterMidpont;
 
 		m_camera.transform.LookAt(m_charicters[0].transform.position);
-		float angle1 = m_camera.transform.rotation.y;
 		m_camera.transform.Rotate(0.0f, 90.0f, 0.0f);
 
 		m_camera.transform.position -= m_camera.transform.forward * 20.0f;
