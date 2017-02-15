@@ -67,3 +67,7 @@ sysinfo.txt
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# my ignored folders
+Hyper Fighters Graphics\Assets\Assets\Standard Assets
+Hyper Fighters Graphics\Library\ShaderCache
