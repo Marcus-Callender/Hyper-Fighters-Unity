@@ -21,9 +21,12 @@ public class FighterData : MonoBehaviour
 	// true means moving left false is moving right
 	bool m_moving_Left_Right;
 
+	public Sprite[] m_sprites;
+	SpriteRenderer m_sprite;
+
 	void Start()
 	{
-
+		m_sprite = gameObject.GetComponent<SpriteRenderer>();
 	}
 
 	void Update()
@@ -49,6 +52,7 @@ public class FighterData : MonoBehaviour
 			{
 				m_velocity[0] = 0.0f;
 				m_moving = false;
+				m_sprite.sprite = m_sprites[0];
 			}
 		}
 	}
@@ -59,6 +63,11 @@ public class FighterData : MonoBehaviour
 		m_velocity[1] = back;
 		m_moving = true;
 		m_moving_Left_Right = Random.Range(0, 2) == 0;
+	}
+
+	public void setSprite(int id)
+	{
+		m_sprite.sprite = m_sprites[id];
 	}
 
 	public bool isMoving()

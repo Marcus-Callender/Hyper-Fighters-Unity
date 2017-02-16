@@ -98,6 +98,7 @@ public class LightAttack : BaseMove
 	public override void Win(BaseMove enemyMove, FighterData enemy)
 	{
 		enemy.AddToVelocity(1.0f, 1.0f);
+		enemy.setSprite(87);
 	}
 
 	public override void Lose(BaseMove enemyMove, FighterData enemy)
@@ -139,6 +140,7 @@ public class HeavyAttack : BaseMove
 	public override void Win(BaseMove enemyMove, FighterData enemy)
 	{
 		enemy.AddToVelocity(2.0f, 2.0f);
+		enemy.setSprite(87);
 	}
 
 	public override void Lose(BaseMove enemyMove, FighterData enemy)
@@ -176,6 +178,7 @@ public class Throw : BaseMove
 	public override void Win(BaseMove enemyMove, FighterData enemy)
 	{
 		enemy.AddToVelocity(1.5f, 1.5f);
+		enemy.setSprite(87);
 	}
 
 	public override void Lose(BaseMove enemyMove, FighterData enemy)
@@ -213,6 +216,7 @@ public class BLOCK : BaseMove
 	public override void Win(BaseMove enemyMove, FighterData enemy)
 	{
 		m_me.AddToVelocity(1.0f, 1.0f);
+		m_me.setSprite(13);
 	}
 
 	public override void Lose(BaseMove enemyMove, FighterData enemy)
@@ -250,6 +254,7 @@ public class DODGE : BaseMove
 	public override void Win(BaseMove enemyMove, FighterData enemy)
 	{
 		m_me.AddToVelocity(2.0f, 0.0f);
+		m_me.setSprite(13);
 	}
 
 	public override void Lose(BaseMove enemyMove, FighterData enemy)

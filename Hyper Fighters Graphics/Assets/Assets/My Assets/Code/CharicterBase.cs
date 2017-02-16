@@ -13,7 +13,7 @@ public class CharicterBase : MonoBehaviour
 	
 	void Start()
 	{
-		m_Data = gameObject.AddComponent<FighterData>();
+		m_Data = gameObject.GetComponent<FighterData>();
 
 		m_moveNames[0] = "Light Attack";
 		m_moveNames[1] = "Heavy Attack";
