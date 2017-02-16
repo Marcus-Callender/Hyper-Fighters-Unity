@@ -23,6 +23,7 @@ public class PositionManager : MonoBehaviour
 		m_camera.transform.Rotate(0.0f, 90.0f, 0.0f);
 
 		m_camera.transform.position -= m_camera.transform.forward * 20.0f;
+		m_camera.transform.position += m_camera.transform.up * 2.0f;
 
 		m_charicters[0].transform.rotation = m_camera.transform.rotation;
 		m_charicters[1].transform.rotation = m_camera.transform.rotation;
