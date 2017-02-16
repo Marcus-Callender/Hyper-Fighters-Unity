@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharicterBase : MonoBehaviour
+public class FighterBase : MonoBehaviour
 {
 	const int m_c_numInputs = 6;
 	KeyCode[] m_inputs = new KeyCode[m_c_numInputs];
@@ -33,7 +33,7 @@ public class CharicterBase : MonoBehaviour
 		m_moves[1] = gameObject.AddComponent<LightAttack>();
 		m_moves[2] = gameObject.AddComponent<HeavyAttack>();
 		m_moves[3] = gameObject.AddComponent<Throw>();
-		m_moves[4] = gameObject.AddComponent<BLOCK>();
+		m_moves[4] = gameObject.AddComponent<Block>();
 		m_moves[5] = gameObject.AddComponent<DODGE>();
 	}
 	

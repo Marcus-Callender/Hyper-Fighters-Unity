@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
 	public GameObject m_charicterPrefab;
 
 	private GameObject[] m_charicters = new GameObject[2];
-	private CharicterBase[] m_charicterScripts = new CharicterBase[2];
+	private FighterBase[] m_charicterScripts = new FighterBase[2];
 	private CameraManager m_camera;
 
 	private E_GameStates m_state = E_GameStates.SETUP;
@@ -27,8 +27,8 @@ public class GameManager : MonoBehaviour
 		m_charicters[0] = Instantiate(m_charicterPrefab);
 		m_charicters[1] = Instantiate(m_charicterPrefab);
 
-		m_charicterScripts[0] = m_charicters[0].GetComponent<CharicterBase>();
-		m_charicterScripts[1] = m_charicters[1].GetComponent<CharicterBase>();
+		m_charicterScripts[0] = m_charicters[0].GetComponent<FighterBase>();
+		m_charicterScripts[1] = m_charicters[1].GetComponent<FighterBase>();
 
 		m_charicters[0].transform.position = new Vector3(10.0f, 0.0f, 10.0f);
 		m_charicters[1].transform.position = new Vector3(12.0f, 0.0f, 16.0f);
@@ -77,8 +77,8 @@ public class GameManager : MonoBehaviour
 			}
 			else if (res1 > res2)
 			{
-				m_charicterScripts[0].Win(m_charicterScripts[1].GetCurrentMove(), m_charicterScripts[1].GetData());
 				m_charicterScripts[1].Lose(m_charicterScripts[0].GetCurrentMove(), m_charicterScripts[0].GetData());
+				m_charicterScripts[0].Win(m_charicterScripts[1].GetCurrentMove(), m_charicterScripts[1].GetData());
 			}
 			else if (res1 < res2)
 			{
@@ -86,15 +86,15 @@ public class GameManager : MonoBehaviour
 				m_charicterScripts[1].Win(m_charicterScripts[0].GetCurrentMove(), m_charicterScripts[0].GetData());
 			}
 
-			m_charicterScripts[0].Rest();
-			m_charicterScripts[1].Rest();
-
 			m_state = E_GameStates.ACTION_RESOLUSTION;
 		}
 		else if (m_state == E_GameStates.ACTION_RESOLUSTION)
 		{
 			if (!m_charicterScripts[0].GetData().isMoving() && !m_charicterScripts[1].GetData().isMoving())
 			{
+				m_charicterScripts[0].Rest();
+				m_charicterScripts[1].Rest();
+
 				m_state = E_GameStates.MOVE_SELECT;
 			}
 		}

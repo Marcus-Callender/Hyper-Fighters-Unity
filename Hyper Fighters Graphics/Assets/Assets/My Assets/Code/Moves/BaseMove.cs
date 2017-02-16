@@ -34,11 +34,6 @@ public class BaseMove : MonoBehaviour
 		m_me = gameObject.GetComponent<FighterData>();
 	}
 
-	void Update()
-	{
-
-	}
-
 	public virtual void Initialize()
 	{
 		m_me = gameObject.GetComponent<FighterData>();
@@ -77,7 +72,7 @@ public class LightAttack : BaseMove
 	{
 		if (enemyMove.GetMoveType() == E_MOVE_TYPE.L_ATTACK)
 		{
-			return E_RESULT.LOSE;
+			return E_RESULT.WIN;
 		}
 		else if (enemyMove.GetMoveType() == E_MOVE_TYPE.H_ATTACK)
 		{
@@ -98,7 +93,9 @@ public class LightAttack : BaseMove
 	public override void Win(BaseMove enemyMove, FighterData enemy)
 	{
 		enemy.AddToVelocity(1.0f, 1.0f);
-		enemy.setSprite(87);
+		enemy.setSprite(85);
+		
+		m_me.setSprite(20);
 	}
 
 	public override void Lose(BaseMove enemyMove, FighterData enemy)
@@ -123,7 +120,7 @@ public class HeavyAttack : BaseMove
 		}
 		else if (enemyMove.GetMoveType() == E_MOVE_TYPE.H_ATTACK)
 		{
-			return E_RESULT.LOSE;
+			return E_RESULT.WIN;
 		}
 		else if (enemyMove.GetMoveType() == E_MOVE_TYPE.THROW)
 		{
@@ -140,7 +137,8 @@ public class HeavyAttack : BaseMove
 	public override void Win(BaseMove enemyMove, FighterData enemy)
 	{
 		enemy.AddToVelocity(2.0f, 2.0f);
-		enemy.setSprite(87);
+		enemy.setSprite(85);
+		m_me.setSprite(35);
 	}
 
 	public override void Lose(BaseMove enemyMove, FighterData enemy)
@@ -178,16 +176,17 @@ public class Throw : BaseMove
 	public override void Win(BaseMove enemyMove, FighterData enemy)
 	{
 		enemy.AddToVelocity(1.5f, 1.5f);
-		enemy.setSprite(87);
+		enemy.setSprite(88);
+		m_me.setSprite(57);
 	}
 
 	public override void Lose(BaseMove enemyMove, FighterData enemy)
 	{
-
+		m_me.setSprite(84);
 	}
 }
 
-public class BLOCK : BaseMove
+public class Block : BaseMove
 {
 	void Start()
 	{
@@ -254,7 +253,7 @@ public class DODGE : BaseMove
 	public override void Win(BaseMove enemyMove, FighterData enemy)
 	{
 		m_me.AddToVelocity(2.0f, 0.0f);
-		m_me.setSprite(13);
+		m_me.setSprite(5);
 	}
 
 	public override void Lose(BaseMove enemyMove, FighterData enemy)
