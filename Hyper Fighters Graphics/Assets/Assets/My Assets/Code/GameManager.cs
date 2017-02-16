@@ -59,8 +59,34 @@ public class GameManager : MonoBehaviour
 		}
 		else if (m_state == E_GameStates.USE_ACTIONS)
 		{
-			m_charicterScripts[0].UseMove(m_charicterScripts[1].GetCurrentMove(), m_charicterScripts[1].GetData());
-			m_charicterScripts[1].UseMove(m_charicterScripts[0].GetCurrentMove(), m_charicterScripts[0].GetData());
+			E_RESULT res1 = m_charicterScripts[0].UseMove(m_charicterScripts[1].GetCurrentMove(), m_charicterScripts[1].GetData());
+			E_RESULT res2 = m_charicterScripts[1].UseMove(m_charicterScripts[0].GetCurrentMove(), m_charicterScripts[0].GetData());
+
+			if (res1 == res2)
+			{
+				if (res1 == E_RESULT.WIN || res1 == E_RESULT.SP_WIN)
+				{
+					m_charicterScripts[0].Win(m_charicterScripts[1].GetCurrentMove(), m_charicterScripts[1].GetData());
+					m_charicterScripts[1].Win(m_charicterScripts[0].GetCurrentMove(), m_charicterScripts[0].GetData());
+				}
+				else
+				{
+					m_charicterScripts[0].Lose(m_charicterScripts[1].GetCurrentMove(), m_charicterScripts[1].GetData());
+					m_charicterScripts[1].Lose(m_charicterScripts[0].GetCurrentMove(), m_charicterScripts[0].GetData());
+				}
+			}
+			else if (res1 > res2)
+			{
+				m_charicterScripts[0].Win(m_charicterScripts[1].GetCurrentMove(), m_charicterScripts[1].GetData());
+				m_charicterScripts[1].Lose(m_charicterScripts[0].GetCurrentMove(), m_charicterScripts[0].GetData());
+			}
+			else if (res1 < res2)
+			{
+				m_charicterScripts[0].Lose(m_charicterScripts[1].GetCurrentMove(), m_charicterScripts[1].GetData());
+				m_charicterScripts[1].Win(m_charicterScripts[0].GetCurrentMove(), m_charicterScripts[0].GetData());
+			}
+
+			m_state = E_GameStates.ACTION_RESOLUSTION;
 		}
 		else if (m_state == E_GameStates.ACTION_RESOLUSTION)
 		{

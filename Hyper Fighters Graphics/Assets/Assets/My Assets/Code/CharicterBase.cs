@@ -92,7 +92,7 @@ public class CharicterBase : MonoBehaviour
 
 	public bool SelectMove()
 	{
-		if (m_currentMove != -1)
+		if (m_currentMove == -1)
 		{
 			for (int z = 0; z < m_c_numInputs; z++)
 			{
@@ -111,6 +111,16 @@ public class CharicterBase : MonoBehaviour
 	public E_RESULT UseMove(BaseMove enemyMove, FighterData enemy)
 	{
 		return m_moves[m_currentMove].Use(enemyMove, enemy);
+	}
+
+	public void Win(BaseMove enemyMove, FighterData enemy)
+	{
+		m_moves[m_currentMove].Win(enemyMove, enemy);
+	}
+
+	public void Lose(BaseMove enemyMove, FighterData enemy)
+	{
+		m_moves[m_currentMove].Lose(enemyMove, enemy);
 	}
 
 	public void Rest()

@@ -27,11 +27,11 @@ public class BaseMove : MonoBehaviour
 	//double m_FocusGain;
 	protected string m_name;
 	protected E_MOVE_TYPE m_type;
-	//C_FighterData* m_pMe;
+	protected FighterData m_me;
 
 	void Start()
 	{
-		
+		m_me = gameObject.GetComponent<FighterData>();
 	}
 
 	void Update()
@@ -96,7 +96,7 @@ public class LightAttack : BaseMove
 
 	public override void Win(BaseMove enemyMove, FighterData enemy)
 	{
-
+		enemy.AddToVelocity(1.0f, 1.0f);
 	}
 
 	public override void Lose(BaseMove enemyMove, FighterData enemy)
@@ -136,7 +136,7 @@ public class HeavyAttack : BaseMove
 
 	public override void Win(BaseMove enemyMove, FighterData enemy)
 	{
-
+		enemy.AddToVelocity(2.0f, 2.0f);
 	}
 
 	public override void Lose(BaseMove enemyMove, FighterData enemy)
@@ -172,7 +172,7 @@ public class Throw : BaseMove
 
 	public override void Win(BaseMove enemyMove, FighterData enemy)
 	{
-
+		enemy.AddToVelocity(1.5f, 1.5f);
 	}
 
 	public override void Lose(BaseMove enemyMove, FighterData enemy)
@@ -208,7 +208,7 @@ public class BLOCK : BaseMove
 
 	public override void Win(BaseMove enemyMove, FighterData enemy)
 	{
-
+		m_me.AddToVelocity(1.0f, 1.0f);
 	}
 
 	public override void Lose(BaseMove enemyMove, FighterData enemy)
@@ -244,7 +244,7 @@ public class DODGE : BaseMove
 
 	public override void Win(BaseMove enemyMove, FighterData enemy)
 	{
-
+		m_me.AddToVelocity(2.0f, 0.0f);
 	}
 
 	public override void Lose(BaseMove enemyMove, FighterData enemy)
