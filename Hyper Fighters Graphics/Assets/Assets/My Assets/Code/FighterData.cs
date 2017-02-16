@@ -14,14 +14,55 @@ public class FighterData : MonoBehaviour
 	bool m_knockedDown;
 	//void* m_pStatus;
 	//C_Status* m_pStatuses[3];
+	float[] m_velocity = new float[2];
+	bool m_moving = false;
+	float m_friction = 0.5f;
+
+	// true means moving left false is moving right
+	bool m_moving_Left_Right;
 
 	void Start()
 	{
 
 	}
-	
+
 	void Update()
 	{
+		//this.transform.position -= this.transform.forward * m_velocity[1] * Time.deltaTime;
 
+		//m_velocity[1] -= m_friction * Time.deltaTime;
+
+		if (m_moving)
+		{
+			if (m_moving_Left_Right)
+			{
+				this.transform.position -= this.transform.right * m_velocity[0] * Time.deltaTime;
+			}
+			else
+			{
+				this.transform.position += this.transform.right * m_velocity[0] * Time.deltaTime;
+			}
+
+			m_velocity[0] -= m_friction * Time.deltaTime;
+
+			if (m_velocity[0] <= 0.0f)
+			{
+				m_velocity[0] = 0.0f;
+				m_moving = false;
+			}
+		}
+	}
+
+	public void AddToVelocity(float side, float back)
+	{
+		m_velocity[0] = side;
+		m_velocity[1] = back;
+		m_moving = true;
+		m_moving_Left_Right = Random.Range(0, 2) == 0;
+	}
+
+	public bool isMoving()
+	{
+		return m_moving;
 	}
 }

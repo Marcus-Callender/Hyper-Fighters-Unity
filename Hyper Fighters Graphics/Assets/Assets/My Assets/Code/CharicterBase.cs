@@ -8,6 +8,7 @@ public class CharicterBase : MonoBehaviour
 	KeyCode[] m_inputs = new KeyCode[m_c_numInputs];
 	string[] m_moveNames = new string[m_c_numInputs];
 	int m_currentMove = -1;
+	BaseMove[] m_moves = new BaseMove[m_c_numInputs];
 	
 	void Start()
 	{
@@ -97,8 +98,18 @@ public class CharicterBase : MonoBehaviour
 		return true;
 	}
 
+	public E_RESULT UseMove(BaseMove enemyMove, FighterData enemy)
+	{
+		return m_moves[m_currentMove].Use(enemyMove, enemy);
+	}
+
 	public void Rest()
 	{
 		m_currentMove = -1;
+	}
+
+	public BaseMove GetCurrentMove()
+	{
+		return m_moves[m_currentMove];
 	}
 }
