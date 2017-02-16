@@ -9,9 +9,12 @@ public class CharicterBase : MonoBehaviour
 	string[] m_moveNames = new string[m_c_numInputs];
 	int m_currentMove = -1;
 	BaseMove[] m_moves = new BaseMove[m_c_numInputs];
+	FighterData m_Data;
 	
 	void Start()
 	{
+		m_Data = gameObject.AddComponent<FighterData>();
+
 		m_moveNames[0] = "Light Attack";
 		m_moveNames[1] = "Heavy Attack";
 		m_moveNames[2] = "Throw";
@@ -25,6 +28,13 @@ public class CharicterBase : MonoBehaviour
 		m_inputs[3] = KeyCode.None;
 		m_inputs[4] = KeyCode.None;
 		m_inputs[5] = KeyCode.None;
+
+		m_moves[0] = gameObject.AddComponent<HeavyAttack>();
+		m_moves[1] = gameObject.AddComponent<LightAttack>();
+		m_moves[2] = gameObject.AddComponent<HeavyAttack>();
+		m_moves[3] = gameObject.AddComponent<Throw>();
+		m_moves[4] = gameObject.AddComponent<BLOCK>();
+		m_moves[5] = gameObject.AddComponent<DODGE>();
 	}
 	
 	void Update()
@@ -111,5 +121,10 @@ public class CharicterBase : MonoBehaviour
 	public BaseMove GetCurrentMove()
 	{
 		return m_moves[m_currentMove];
+	}
+
+	public FighterData GetData()
+	{
+		return m_Data;
 	}
 }

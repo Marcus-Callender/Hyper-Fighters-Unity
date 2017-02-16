@@ -59,11 +59,15 @@ public class GameManager : MonoBehaviour
 		}
 		else if (m_state == E_GameStates.USE_ACTIONS)
 		{
-			m_charicterScripts[0].UseMove(m_charicterScripts[1].GetCurrentMove(), m_charicterScripts)
+			m_charicterScripts[0].UseMove(m_charicterScripts[1].GetCurrentMove(), m_charicterScripts[1].GetData());
+			m_charicterScripts[1].UseMove(m_charicterScripts[0].GetCurrentMove(), m_charicterScripts[0].GetData());
 		}
 		else if (m_state == E_GameStates.ACTION_RESOLUSTION)
 		{
-
+			if (!m_charicterScripts[0].GetData().isMoving() && !m_charicterScripts[1].GetData().isMoving())
+			{
+				m_state = E_GameStates.MOVE_SELECT;
+			}
 		}
 	}
 }
