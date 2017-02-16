@@ -41,7 +41,7 @@ public class BaseMove : MonoBehaviour
 
 	public virtual void Initialize()
 	{
-
+		m_me = gameObject.GetComponent<FighterData>();
 	}
 
 	public virtual E_RESULT Use(BaseMove enemyMove, FighterData enemy)
@@ -69,6 +69,7 @@ public class LightAttack : BaseMove
 {
 	void Start()
 	{
+		base.Initialize();
 		m_type = E_MOVE_TYPE.L_ATTACK;
 	}
 
@@ -109,6 +110,7 @@ public class HeavyAttack : BaseMove
 {
 	void Start()
 	{
+		base.Initialize();
 		m_type = E_MOVE_TYPE.H_ATTACK;
 	}
 
@@ -149,6 +151,7 @@ public class Throw : BaseMove
 {
 	void Start()
 	{
+		base.Initialize();
 		m_type = E_MOVE_TYPE.THROW;
 	}
 
@@ -185,6 +188,7 @@ public class BLOCK : BaseMove
 {
 	void Start()
 	{
+		base.Initialize();
 		m_type = E_MOVE_TYPE.BLOCK;
 	}
 
@@ -221,6 +225,7 @@ public class DODGE : BaseMove
 {
 	void Start()
 	{
+		base.Initialize();
 		m_type = E_MOVE_TYPE.DODGE;
 	}
 

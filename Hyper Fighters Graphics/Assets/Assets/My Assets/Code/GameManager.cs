@@ -86,6 +86,9 @@ public class GameManager : MonoBehaviour
 				m_charicterScripts[1].Win(m_charicterScripts[0].GetCurrentMove(), m_charicterScripts[0].GetData());
 			}
 
+			m_charicterScripts[0].Rest();
+			m_charicterScripts[1].Rest();
+
 			m_state = E_GameStates.ACTION_RESOLUSTION;
 		}
 		else if (m_state == E_GameStates.ACTION_RESOLUSTION)

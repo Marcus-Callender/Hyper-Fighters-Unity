@@ -36,11 +36,11 @@ public class FighterData : MonoBehaviour
 		{
 			if (m_moving_Left_Right)
 			{
-				this.transform.position -= this.transform.right * m_velocity[0] * Time.deltaTime;
+				this.transform.position -= this.transform.forward * m_velocity[0] * Time.deltaTime;
 			}
 			else
 			{
-				this.transform.position += this.transform.right * m_velocity[0] * Time.deltaTime;
+				this.transform.position += this.transform.forward * m_velocity[0] * Time.deltaTime;
 			}
 
 			m_velocity[0] -= m_friction * Time.deltaTime;
