@@ -15,6 +15,8 @@ public class FighterBase : MonoBehaviour
 	Text m_healthUI;
 	Text m_moveUI;
 	Text m_hyperUI;
+
+	AnimationControler m_animations;
 	
 	void Start()
 	{
@@ -34,17 +36,17 @@ public class FighterBase : MonoBehaviour
 		m_inputs[4] = KeyCode.None;
 		m_inputs[5] = KeyCode.None;
 
-		m_moves[0] = gameObject.AddComponent<HeavyAttack>();
-		m_moves[1] = gameObject.AddComponent<LightAttack>();
-		m_moves[2] = gameObject.AddComponent<HeavyAttack>();
-		m_moves[3] = gameObject.AddComponent<Throw>();
-		m_moves[4] = gameObject.AddComponent<Block>();
-		m_moves[5] = gameObject.AddComponent<DODGE>();
+		m_moves[0] = gameObject.AddComponent<LightAttack>();
+		m_moves[1] = gameObject.AddComponent<HeavyAttack>();
+		m_moves[2] = gameObject.AddComponent<Throw>();
+		m_moves[3] = gameObject.AddComponent<Block>();
+		m_moves[4] = gameObject.AddComponent<DODGE>();
+		m_moves[5] = gameObject.AddComponent<HeavyAttack>();
 	}
 	
 	void Update()
 	{
-
+		
 	}
 
 	public void Initialize(int playerNum, Canvas UICanvas)
@@ -98,7 +100,33 @@ public class FighterBase : MonoBehaviour
 
 	public void WriteMoveUI()
 	{
+		string temp = "";
 
+		for (int z = 0; z < m_c_numInputs; z++)
+		{
+			temp += m_moveNames[z] + " : " + m_inputs[z] + "\n";
+		}
+
+		m_moveUI.text = temp;
+	}
+
+	public void RevealMovesUI()
+	{
+		string temp = "";
+
+		for (int z = 0; z < m_c_numInputs; z++)
+		{
+			if (z == m_currentMove)
+			{
+				temp += ">>" + m_moveNames[z] + " : " + m_inputs[z] + "<<\n";
+			}
+			else
+			{
+				temp += m_moveNames[z] + " : " + m_inputs[z] + "\n";
+			}
+		}
+
+		m_moveUI.text = temp;
 	}
 
 	public void CameraUpdateExample()

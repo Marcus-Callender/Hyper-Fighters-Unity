@@ -18,7 +18,7 @@ public class FighterData : MonoBehaviour
 	bool m_moving = false;
 	float m_friction = 0.5f;
 
-	// true means moving left false is moving right
+	// true means moving left, false is moving right
 	bool m_moving_Left_Right;
 
 	public Sprite[] m_sprites;

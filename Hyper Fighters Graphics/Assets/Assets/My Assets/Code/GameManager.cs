@@ -37,9 +37,6 @@ public class GameManager : MonoBehaviour
 		m_charicterScripts[0].Initialize(1, m_canvas);
 		m_charicterScripts[1].Initialize(2, m_canvas);
 
-		//m_charicters[0].transform.position = new Vector3(10.0f, 0.0f, 10.0f);
-		//m_charicters[1].transform.position = new Vector3(12.0f, 0.0f, 16.0f);
-
 		m_charicters[0].transform.position = new Vector3(5.0f, 0.0f, 0.0f);
 		m_charicters[1].transform.position = new Vector3(-5.0f, 0.0f, 0.0f);
 

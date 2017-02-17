@@ -21,14 +21,14 @@ public class PositionManager : MonoBehaviour
 		m_camera.transform.position = charicterMidpont;
 
 		m_camera.transform.LookAt(m_charicters[0].transform.position);
-		m_camera.transform.Rotate(0.0f, -90.0f, 0.0f);
+		m_camera.transform.Rotate(0.0f, 90.0f, 0.0f);
 
 		m_camera.transform.position -= m_camera.transform.forward * 15.0f;
 		m_camera.transform.position += m_camera.transform.up * 4.0f;
 
 		m_charicters[0].transform.rotation = m_camera.transform.rotation;
 		m_charicters[1].transform.rotation = m_camera.transform.rotation;
-		m_charicters[0].transform.Rotate(0.0f, 180f, 0.0f);
+		m_charicters[1].transform.Rotate(0.0f, 180f, 0.0f);
 	}
 
 	public void Initialize(GameObject char1, GameObject char2, GameObject camera)
