@@ -60,6 +60,9 @@ public class GameManager : MonoBehaviour
 					m_state = E_GameStates.MOVE_SELECT;
 				}
 			}
+
+			m_charicterScripts[0].WriteMoveUI();
+			m_charicterScripts[1].WriteMoveUI();
 		}
 		else if (m_state == E_GameStates.MOVE_SELECT)
 		{
@@ -67,6 +70,9 @@ public class GameManager : MonoBehaviour
 			{
 				m_state = E_GameStates.USE_ACTIONS;
 			}
+
+			m_charicterScripts[0].WriteMoveUI();
+			m_charicterScripts[1].WriteMoveUI();
 		}
 		else if (m_state == E_GameStates.USE_ACTIONS)
 		{
@@ -97,6 +103,9 @@ public class GameManager : MonoBehaviour
 				m_charicterScripts[1].Win(m_charicterScripts[0].GetCurrentMove(), m_charicterScripts[0].GetData());
 			}
 
+			m_charicterScripts[0].RevealMovesUI();
+			m_charicterScripts[1].RevealMovesUI();
+
 			m_state = E_GameStates.ACTION_RESOLUSTION;
 		}
 		else if (m_state == E_GameStates.ACTION_RESOLUSTION)
@@ -108,6 +117,9 @@ public class GameManager : MonoBehaviour
 
 				m_state = E_GameStates.CHARICTER_POSITIONING;
 			}
+
+			m_charicterScripts[0].RevealMovesUI();
+			m_charicterScripts[1].RevealMovesUI();
 		}
 		else if (m_state == E_GameStates.CHARICTER_POSITIONING)
 		{
@@ -115,6 +127,9 @@ public class GameManager : MonoBehaviour
 			{
 				m_state = E_GameStates.MOVE_SELECT;
 			}
+
+			m_charicterScripts[0].RevealMovesUI();
+			m_charicterScripts[1].RevealMovesUI();
 		}
 	}
 }
