@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FighterBase : MonoBehaviour
 {
@@ -11,9 +12,9 @@ public class FighterBase : MonoBehaviour
 	BaseMove[] m_moves = new BaseMove[m_c_numInputs];
 	FighterData m_Data;
 	int m_playerNum;
-	GUIText m_healthUI;
-	GUIText m_moveUI;
-	GUIText m_hyperUI;
+	Text m_healthUI;
+	Text m_moveUI;
+	Text m_hyperUI;
 	
 	void Start()
 	{
@@ -50,7 +51,7 @@ public class FighterBase : MonoBehaviour
 	{
 		m_playerNum = playerNum;
 
-		GUIText[] texts = UICanvas.GetComponents<GUIText>();
+		Text[] texts = UICanvas.GetComponentsInChildren<Text>();
 
 		for (int z = 0; z < texts.Length; z++)
 		{
@@ -62,12 +63,12 @@ public class FighterBase : MonoBehaviour
 			else if (texts[z].name == ("Player " + m_playerNum + " Hyper"))
 			{
 				m_hyperUI = texts[z];
-				m_healthUI.text = ("Player " + m_playerNum + " hyper!");
+				m_hyperUI.text = ("Player " + m_playerNum + " hyper!");
 			}
 			else if (texts[z].name == ("Player " + m_playerNum + " Moves"))
 			{
 				m_moveUI = texts[z];
-				m_healthUI.text = ("Player " + m_playerNum + " moves!");
+				m_moveUI.text = ("Player " + m_playerNum + " moves!");
 			}
 		}
 	}
