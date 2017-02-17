@@ -10,17 +10,21 @@ public class FighterBase : MonoBehaviour
 	int m_currentMove = -1;
 	BaseMove[] m_moves = new BaseMove[m_c_numInputs];
 	FighterData m_Data;
+	int m_playerNum;
+	GUIText m_healthUI;
+	GUIText m_moveUI;
+	GUIText m_hyperUI;
 	
 	void Start()
 	{
 		m_Data = gameObject.GetComponent<FighterData>();
 
-		m_moveNames[0] = "Light Attack";
-		m_moveNames[1] = "Heavy Attack";
+		m_moveNames[0] = "Light";
+		m_moveNames[1] = "Heavy";
 		m_moveNames[2] = "Throw";
 		m_moveNames[3] = "Block";
 		m_moveNames[4] = "Dodge";
-		m_moveNames[5] = "Hyper Move";
+		m_moveNames[5] = "Hyper";
 
 		m_inputs[0] = KeyCode.None;
 		m_inputs[1] = KeyCode.None;
@@ -40,6 +44,32 @@ public class FighterBase : MonoBehaviour
 	void Update()
 	{
 
+	}
+
+	public void Initialize(int playerNum, Canvas UICanvas)
+	{
+		m_playerNum = playerNum;
+
+		GUIText[] texts = UICanvas.GetComponents<GUIText>();
+
+		for (int z = 0; z < texts.Length; z++)
+		{
+			if (texts[z].name == ("Player " + m_playerNum + " Health"))
+			{
+				m_healthUI = texts[z];
+				m_healthUI.text = ("Player " + m_playerNum + " health!");
+			}
+			else if (texts[z].name == ("Player " + m_playerNum + " Hyper"))
+			{
+				m_hyperUI = texts[z];
+				m_healthUI.text = ("Player " + m_playerNum + " hyper!");
+			}
+			else if (texts[z].name == ("Player " + m_playerNum + " Moves"))
+			{
+				m_moveUI = texts[z];
+				m_healthUI.text = ("Player " + m_playerNum + " moves!");
+			}
+		}
 	}
 
 	public bool StartKeyAssign()
@@ -63,6 +93,11 @@ public class FighterBase : MonoBehaviour
 		}
 
 		return true;
+	}
+
+	public void WriteMoveUI()
+	{
+
 	}
 
 	public void CameraUpdateExample()

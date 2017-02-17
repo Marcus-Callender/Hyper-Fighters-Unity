@@ -7,7 +7,8 @@ enum E_GameStates
 	SETUP,
 	MOVE_SELECT,
 	USE_ACTIONS,
-	ACTION_RESOLUSTION
+	ACTION_RESOLUSTION,
+	CHARICTER_POSITIONING
 }
 
 public class GameManager : MonoBehaviour
@@ -17,12 +18,15 @@ public class GameManager : MonoBehaviour
 	private GameObject[] m_charicters = new GameObject[2];
 	private FighterBase[] m_charicterScripts = new FighterBase[2];
 	private CameraManager m_camera;
+	private Canvas m_canvas;
+	private PositionManager m_posManager;
 
 	private E_GameStates m_state = E_GameStates.SETUP;
 	
 	void Start()
 	{
 		m_camera = FindObjectOfType<CameraManager>();
+		m_canvas = FindObjectOfType<Canvas>();
 
 		m_charicters[0] = Instantiate(m_charicterPrefab);
 		m_charicters[1] = Instantiate(m_charicterPrefab);
@@ -30,12 +34,19 @@ public class GameManager : MonoBehaviour
 		m_charicterScripts[0] = m_charicters[0].GetComponent<FighterBase>();
 		m_charicterScripts[1] = m_charicters[1].GetComponent<FighterBase>();
 
-		m_charicters[0].transform.position = new Vector3(10.0f, 0.0f, 10.0f);
-		m_charicters[1].transform.position = new Vector3(12.0f, 0.0f, 16.0f);
+		m_charicterScripts[0].Initialize(1, m_canvas);
+		m_charicterScripts[1].Initialize(2, m_canvas);
+
+		//m_charicters[0].transform.position = new Vector3(10.0f, 0.0f, 10.0f);
+		//m_charicters[1].transform.position = new Vector3(12.0f, 0.0f, 16.0f);
+
+		m_charicters[0].transform.position = new Vector3(5.0f, 0.0f, 0.0f);
+		m_charicters[1].transform.position = new Vector3(-5.0f, 0.0f, 0.0f);
 
 		m_camera.Initialize(m_charicters[0], m_charicters[1]);
 
-		GetComponent<PositionManager>().Initialize(m_charicters[0], m_charicters[1], m_camera.gameObject);
+		m_posManager = GetComponent<PositionManager>();
+		m_posManager.Initialize(m_charicters[0], m_charicters[1], m_camera.gameObject);
 	}
 	
 	void Update()
@@ -95,6 +106,13 @@ public class GameManager : MonoBehaviour
 				m_charicterScripts[0].Rest();
 				m_charicterScripts[1].Rest();
 
+				m_state = E_GameStates.CHARICTER_POSITIONING;
+			}
+		}
+		else if (m_state == E_GameStates.CHARICTER_POSITIONING)
+		{
+			if (m_posManager.ResetCharicterDistance())
+			{
 				m_state = E_GameStates.MOVE_SELECT;
 			}
 		}

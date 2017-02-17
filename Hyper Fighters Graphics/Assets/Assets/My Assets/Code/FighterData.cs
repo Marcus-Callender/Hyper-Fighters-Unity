@@ -23,6 +23,7 @@ public class FighterData : MonoBehaviour
 
 	public Sprite[] m_sprites;
 	SpriteRenderer m_sprite;
+	private float m_movementSpeed = 1.0f;
 
 	void Start()
 	{
@@ -31,12 +32,10 @@ public class FighterData : MonoBehaviour
 
 	void Update()
 	{
-		//this.transform.position -= this.transform.forward * m_velocity[1] * Time.deltaTime;
-
-		//m_velocity[1] -= m_friction * Time.deltaTime;
-
 		if (m_moving)
 		{
+			this.transform.position -= this.transform.right * m_velocity[1] * Time.deltaTime;
+
 			if (m_moving_Left_Right)
 			{
 				this.transform.position -= this.transform.forward * m_velocity[0] * Time.deltaTime;
@@ -46,11 +45,21 @@ public class FighterData : MonoBehaviour
 				this.transform.position += this.transform.forward * m_velocity[0] * Time.deltaTime;
 			}
 
+			m_velocity[1] -= m_friction * Time.deltaTime;
 			m_velocity[0] -= m_friction * Time.deltaTime;
 
 			if (m_velocity[0] <= 0.0f)
 			{
 				m_velocity[0] = 0.0f;
+			}
+
+			if (m_velocity[1] <= 0.0f)
+			{
+				m_velocity[1] = 0.0f;
+			}
+
+			if ((m_velocity[0] == 0.0f) && (m_velocity[1] == 0.0f))
+			{
 				m_moving = false;
 				m_sprite.sprite = m_sprites[0];
 			}
@@ -68,6 +77,16 @@ public class FighterData : MonoBehaviour
 	public void setSprite(int id)
 	{
 		m_sprite.sprite = m_sprites[id];
+	}
+
+	public void WalkForward()
+	{
+		this.transform.position += this.transform.right * m_movementSpeed * Time.deltaTime;
+	}
+
+	public void WalkBackward()
+	{
+		this.transform.position -= this.transform.right * m_movementSpeed * Time.deltaTime;
 	}
 
 	public bool isMoving()
