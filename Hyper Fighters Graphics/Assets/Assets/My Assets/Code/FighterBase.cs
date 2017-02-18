@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-enum E_ANIMATIONS
+public enum E_ANIMATIONS
 {
 	IDLE,
 	WALK_FORWARD,
@@ -33,16 +33,10 @@ public class FighterBase : MonoBehaviour
 	Text m_healthUI;
 	Text m_moveUI;
 	Text m_hyperUI;
-
-	AnimationControler m_animations;
 	
 	void Start()
 	{
 		m_Data = gameObject.GetComponent<FighterData>();
-		m_animations = gameObject.AddComponent<AnimationControler>();
-		m_animations.F_initialize(gameObject.GetComponent<SpriteRenderer>());
-
-		InitializeAnimations();
 
 		m_moveNames[0] = "Light";
 		m_moveNames[1] = "Heavy";
@@ -95,16 +89,6 @@ public class FighterBase : MonoBehaviour
 				m_moveUI.text = ("Player " + m_playerNum + " moves!");
 			}
 		}
-	}
-
-	private void InitializeAnimations()
-	{
-		Animation[] animations = new Animation[(int)E_ANIMATIONS.TOTAL];
-
-		
-		animations[(int)E_ANIMATIONS.IDLE] = new Animation();
-		//animations[(int)E_ANIMATIONS.IDLE].AddKeyFrame(;
-
 	}
 
 	public bool StartKeyAssign()

@@ -25,13 +25,44 @@ public class FighterData : MonoBehaviour
 	SpriteRenderer m_sprite;
 	private float m_movementSpeed = 1.0f;
 
+	AnimationControler m_animationControler;
+
 	void Start()
 	{
 		m_sprite = gameObject.GetComponent<SpriteRenderer>();
+		m_animationControler = gameObject.AddComponent<AnimationControler>();
+		m_animationControler.F_initialize(gameObject.GetComponent<SpriteRenderer>());
+
+		InitializeAnimations();
+	}
+
+	private void InitializeAnimations()
+	{
+		Animation[] animations = new Animation[(int)E_ANIMATIONS.TOTAL];
+
+
+		animations[(int)E_ANIMATIONS.IDLE] = new Animation();
+		animations[(int)E_ANIMATIONS.IDLE].AddKeyFrame(m_sprites[0], 0.12f);
+		animations[(int)E_ANIMATIONS.IDLE].AddKeyFrame(m_sprites[1], 0.12f);
+		animations[(int)E_ANIMATIONS.IDLE].AddKeyFrame(m_sprites[2], 0.12f);
+		animations[(int)E_ANIMATIONS.IDLE].AddKeyFrame(m_sprites[3], 0.12f);
+		animations[(int)E_ANIMATIONS.IDLE].AddKeyFrame(m_sprites[4], 0.12f);
+		animations[(int)E_ANIMATIONS.IDLE].AddKeyFrame(m_sprites[3], 0.12f);
+		animations[(int)E_ANIMATIONS.IDLE].AddKeyFrame(m_sprites[2], 0.12f);
+		animations[(int)E_ANIMATIONS.IDLE].AddKeyFrame(m_sprites[1], 0.12f);
+		animations[(int)E_ANIMATIONS.IDLE].RepeatAnim();
+		m_animationControler.AddAnim(animations[(int)E_ANIMATIONS.IDLE]);
+
+
+		m_animationControler.SetAnim((int)E_ANIMATIONS.IDLE);
+		m_animationControler.F_play();
+
 	}
 
 	void Update()
 	{
+		m_animationControler.F_update(Time.deltaTime);
+
 		if (m_moving)
 		{
 			this.transform.position -= this.transform.right * m_velocity[1] * Time.deltaTime;

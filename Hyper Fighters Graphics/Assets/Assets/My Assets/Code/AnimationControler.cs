@@ -8,7 +8,7 @@ public class AnimationControler : MonoBehaviour
 
 	private Animation[] m_animations = new Animation[20];
 	private int m_numAnims = 0;
-	private int m_curretAnim = 0;
+	private int m_currentAnim = 0;
 	private int m_nextAnim = -1;
 
 	public void F_initialize(SpriteRenderer spriteRenderer)
@@ -18,38 +18,40 @@ public class AnimationControler : MonoBehaviour
 
 	public void AddAnim(Animation newAnim)
 	{
-		m_animations[m_curretAnim] = newAnim;
+		m_animations[m_currentAnim] = newAnim;
+
+		m_animations[m_currentAnim].Initialize(m_spriteRenderer);
 
 		m_numAnims++;
 	}
 
 	public void F_update(float deltaTime)
 	{
-		m_animations[m_curretAnim].F_update(deltaTime);
+		m_animations[m_currentAnim].F_update(deltaTime);
 	}
 
 	public void F_play()
 	{
-		m_animations[m_curretAnim].Play();
+		m_animations[m_currentAnim].Play();
 	}
 
 	public void MoveToNextAnim()
 	{
 		if (m_nextAnim != -1)
 		{
-			m_curretAnim = m_nextAnim;
+			m_currentAnim = m_nextAnim;
 			m_nextAnim = -1;
 		}
 	}
 
 	public bool F_getPlaying()
 	{
-		return m_animations[m_curretAnim].GetPlaying();
+		return m_animations[m_currentAnim].GetPlaying();
 	}
 
 	public void Stop()
 	{
-		m_animations[m_curretAnim].Stop();
+		m_animations[m_currentAnim].Stop();
 	}
 
 	public bool SetAnim(int z)
@@ -60,12 +62,12 @@ public class AnimationControler : MonoBehaviour
 			return false;
 		}
 
-		if (z != m_curretAnim)
+		if (z != m_currentAnim)
 		{
 			m_animations[z].Play();
 		}
 
-		m_curretAnim = z;
+		m_currentAnim = z;
 
 		return true;
 	}
@@ -85,12 +87,12 @@ public class AnimationControler : MonoBehaviour
 
 	public bool GetPlaying()
 	{
-		return m_animations[m_curretAnim].GetPlaying();
+		return m_animations[m_currentAnim].GetPlaying();
 	}
 
 	public void SetPause(bool pause)
 	{
-		m_animations[m_curretAnim].SetPause(pause);
+		m_animations[m_currentAnim].SetPause(pause);
 	}
 }
 
