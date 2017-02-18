@@ -102,8 +102,8 @@ public class Animation
 	private float m_currentAnimTime = 0.0f;
 	private int m_currentKey = 0;
 
-	public List<Sprite> m_sprites;
-	public List<float> m_displayTimes;
+	public Sprite[] m_sprites = new Sprite[16];
+	public float[] m_displayTimes = new float[16];
 	public int m_numberKeys = 0;
 
 	private bool m_repeat = false;
@@ -112,15 +112,12 @@ public class Animation
 	public void Initialize(SpriteRenderer spriteRenderer)
 	{
 		m_spriteRenderer = spriteRenderer;
-
-		m_sprites = new List<Sprite>();
-		m_displayTimes = new List<float>();
 	}
 
 	public void AddKeyFrame(Sprite sprite, float displayTime)
 	{
-		m_sprites.Add(sprite);
-		m_displayTimes.Add(displayTime);
+		m_sprites[m_numberKeys] = sprite;
+		m_displayTimes[m_numberKeys] = displayTime;
 		m_numberKeys++;
 	}
 
@@ -189,7 +186,7 @@ public class Animation
 	{
 		float time = 0.0f;
 
-		for (int z = 0; z < m_displayTimes.Count; z++)
+		for (int z = 0; z < m_numberKeys; z++)
 		{
 			time += m_displayTimes[z];
 		}
