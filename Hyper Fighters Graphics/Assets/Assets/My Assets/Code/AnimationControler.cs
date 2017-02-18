@@ -18,11 +18,23 @@ public class AnimationControler : MonoBehaviour
 
 	public void AddAnim(Animation newAnim)
 	{
-		m_animations[m_currentAnim] = newAnim;
+		for (int z = 0; z < 20; z++)
+		{
+			if (m_animations[z] == null)
+			{
+				m_animations[m_numAnims] = newAnim;
+				m_animations[m_numAnims].Initialize(m_spriteRenderer);
+				m_numAnims++;
 
-		m_animations[m_currentAnim].Initialize(m_spriteRenderer);
+				break;
+			}
+		}
 
-		m_numAnims++;
+		//m_animations[m_currentAnim] = newAnim;
+
+		//m_animations[m_currentAnim].Initialize(m_spriteRenderer);
+
+		//m_numAnims++;
 	}
 
 	public void F_update(float deltaTime)

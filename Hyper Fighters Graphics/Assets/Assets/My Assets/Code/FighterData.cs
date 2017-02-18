@@ -2,6 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum E_ANIMATIONS
+{
+	IDLE,
+	WALK_FORWARD,
+	WALK_BACKWARD,
+	HIT,
+	THROWN,
+
+	LIGHT,
+	HEAVY,
+	THROW,
+	BLOCK,
+	DODGE,
+	COUNTER,
+
+	TOTAL
+};
+
 public class FighterData : MonoBehaviour
 {
 	int m_hp;
@@ -40,7 +58,6 @@ public class FighterData : MonoBehaviour
 	{
 		Animation[] animations = new Animation[(int)E_ANIMATIONS.TOTAL];
 
-
 		animations[(int)E_ANIMATIONS.IDLE] = new Animation();
 		animations[(int)E_ANIMATIONS.IDLE].AddKeyFrame(m_sprites[0], 0.12f);
 		animations[(int)E_ANIMATIONS.IDLE].AddKeyFrame(m_sprites[1], 0.12f);
@@ -52,6 +69,20 @@ public class FighterData : MonoBehaviour
 		animations[(int)E_ANIMATIONS.IDLE].AddKeyFrame(m_sprites[1], 0.12f);
 		animations[(int)E_ANIMATIONS.IDLE].RepeatAnim();
 		m_animationControler.AddAnim(animations[(int)E_ANIMATIONS.IDLE]);
+
+		animations[(int)E_ANIMATIONS.WALK_FORWARD] = new Animation();
+		animations[(int)E_ANIMATIONS.WALK_FORWARD].AddKeyFrame(m_sprites[8], 0.12f);
+		animations[(int)E_ANIMATIONS.WALK_FORWARD].AddKeyFrame(m_sprites[7], 0.12f);
+		animations[(int)E_ANIMATIONS.WALK_FORWARD].AddKeyFrame(m_sprites[6], 0.12f);
+		animations[(int)E_ANIMATIONS.WALK_FORWARD].RepeatAnim();
+		m_animationControler.AddAnim(animations[(int)E_ANIMATIONS.WALK_FORWARD]);
+
+		animations[(int)E_ANIMATIONS.WALK_BACKWARD] = new Animation();
+		animations[(int)E_ANIMATIONS.WALK_BACKWARD].AddKeyFrame(m_sprites[6], 0.12f);
+		animations[(int)E_ANIMATIONS.WALK_BACKWARD].AddKeyFrame(m_sprites[7], 0.12f);
+		animations[(int)E_ANIMATIONS.WALK_BACKWARD].AddKeyFrame(m_sprites[8], 0.12f);
+		animations[(int)E_ANIMATIONS.WALK_BACKWARD].RepeatAnim();
+		m_animationControler.AddAnim(animations[(int)E_ANIMATIONS.WALK_BACKWARD]);
 
 
 		m_animationControler.SetAnim((int)E_ANIMATIONS.IDLE);
@@ -107,21 +138,35 @@ public class FighterData : MonoBehaviour
 
 	public void setSprite(int id)
 	{
-		m_sprite.sprite = m_sprites[id];
+		//m_sprite.sprite = m_sprites[id];
 	}
 
 	public void WalkForward()
 	{
 		this.transform.position += this.transform.right * m_movementSpeed * Time.deltaTime;
+
+		m_animationControler.SetAnim((int)E_ANIMATIONS.WALK_FORWARD);
 	}
 
 	public void WalkBackward()
 	{
 		this.transform.position -= this.transform.right * m_movementSpeed * Time.deltaTime;
+
+		m_animationControler.SetAnim((int)E_ANIMATIONS.WALK_BACKWARD);
 	}
 
 	public bool isMoving()
 	{
 		return m_moving;
+	}
+
+	public void SetAnimaton(E_ANIMATIONS z)
+	{
+		m_animationControler.SetAnim((int) z);
+	}
+
+	public void StartSeccondAnimation()
+	{
+		m_animationControler.MoveToNextAnim();
 	}
 }

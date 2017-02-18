@@ -3,24 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum E_ANIMATIONS
-{
-	IDLE,
-	WALK_FORWARD,
-	WALK_BACKWARD,
-	HIT,
-	THROWN,
-
-	LIGHT,
-	HEAVY,
-	THROW,
-	BLOCK,
-	DODGE,
-	COUNTER,
-
-	TOTAL
-};
-
 public class FighterBase : MonoBehaviour
 {
 	const int m_c_numInputs = 6;
@@ -186,6 +168,16 @@ public class FighterBase : MonoBehaviour
 		}
 
 		return true;
+	}
+
+	public void SetAnimation(E_ANIMATIONS z)
+	{
+		m_Data.SetAnimaton(z);
+	}
+
+	public void StartSeccondAnimation()
+	{
+
 	}
 
 	public E_RESULT UseMove(BaseMove enemyMove, FighterData enemy)

@@ -60,6 +60,9 @@ public class GameManager : MonoBehaviour
 
 			m_charicterScripts[0].WriteMoveUI();
 			m_charicterScripts[1].WriteMoveUI();
+
+			m_charicterScripts[0].SetAnimation(E_ANIMATIONS.IDLE);
+			m_charicterScripts[1].SetAnimation(E_ANIMATIONS.IDLE);
 		}
 		else if (m_state == E_GameStates.MOVE_SELECT)
 		{
@@ -70,6 +73,9 @@ public class GameManager : MonoBehaviour
 
 			m_charicterScripts[0].WriteMoveUI();
 			m_charicterScripts[1].WriteMoveUI();
+
+			m_charicterScripts[0].SetAnimation(E_ANIMATIONS.IDLE);
+			m_charicterScripts[1].SetAnimation(E_ANIMATIONS.IDLE);
 		}
 		else if (m_state == E_GameStates.USE_ACTIONS)
 		{
