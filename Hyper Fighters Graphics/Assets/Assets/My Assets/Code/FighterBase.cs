@@ -20,7 +20,6 @@ public class FighterBase : MonoBehaviour
 	{
 		m_Data = gameObject.GetComponent<FighterData>();
 		m_Data.Initialize();
-		//m_Data.InitializeAnimations();
 
 		m_moveNames[0] = "Light";
 		m_moveNames[1] = "Heavy";
@@ -44,6 +43,7 @@ public class FighterBase : MonoBehaviour
 		m_moves[5] = gameObject.AddComponent<HeavyAttack>();
 
 		m_moves[0].SetAnimation(m_Data.GetAnimationControler(), m_Data.GetSprites());
+		m_moves[1].SetAnimation(m_Data.GetAnimationControler(), m_Data.GetSprites());
 	}
 	
 	void Update()
@@ -83,7 +83,7 @@ public class FighterBase : MonoBehaviour
 		{
 			if (m_inputs[z] == KeyCode.None)
 			{
-				Debug.Log("Please enter a key for " + m_moveNames[z] + ".");
+				//Debug.Log("Please enter a key for " + m_moveNames[z] + ".");
 
 				foreach (KeyCode key in System.Enum.GetValues(typeof(KeyCode)))
 				{

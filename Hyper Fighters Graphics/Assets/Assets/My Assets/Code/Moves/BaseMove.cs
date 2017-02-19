@@ -158,11 +158,49 @@ public class HeavyAttack : BaseMove
 		enemy.AddToVelocity(2.0f, 2.0f);
 		enemy.setSprite(85);
 		m_me.setSprite(35);
+
+		enemy.SetAnimaton(E_ANIMATIONS.HIT);
+		m_me.SetAnimaton(E_ANIMATIONS.HEAVY);
+
+		m_me.AddToVelocity(0.0f, -2.0f);
 	}
 
 	public override void Lose(BaseMove enemyMove, FighterData enemy)
 	{
 
+	}
+
+	public override void SetAnimation(AnimationControler animCon, Sprite[] sprites)
+	{
+		Animation anim = new Animation();
+
+		anim.AddKeyFrame(sprites[29], 0.12f);
+		anim.AddKeyFrame(sprites[30], 0.12f);
+		anim.AddKeyFrame(sprites[31], 0.12f);
+		anim.AddKeyFrame(sprites[33], 0.12f);
+
+		anim.AddKeyFrame(sprites[34], 0.12f);
+		anim.AddKeyFrame(sprites[35], 0.12f);
+		anim.AddKeyFrame(sprites[36], 0.12f);
+
+		anim.AddKeyFrame(sprites[34], 0.12f);
+		anim.AddKeyFrame(sprites[35], 0.12f);
+		anim.AddKeyFrame(sprites[36], 0.12f);
+
+		anim.AddKeyFrame(sprites[34], 0.12f);
+		anim.AddKeyFrame(sprites[35], 0.12f);
+		anim.AddKeyFrame(sprites[36], 0.12f);
+
+		anim.AddKeyFrame(sprites[34], 0.12f);
+		anim.AddKeyFrame(sprites[35], 0.12f);
+		anim.AddKeyFrame(sprites[36], 0.12f);
+
+		anim.AddKeyFrame(sprites[34], 0.12f);
+		anim.AddKeyFrame(sprites[35], 0.12f);
+		anim.AddKeyFrame(sprites[36], 0.12f);
+		//anim.RepeatAnim();
+
+		animCon.AddAnim(anim);
 	}
 }
 

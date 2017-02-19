@@ -7,6 +7,10 @@ public class PositionManager : MonoBehaviour
 	private GameObject[] m_charicters = new GameObject[2];
 	private FighterData[] m_charicterData = new FighterData[2];
 	private GameObject m_camera;
+
+	private bool m_charicterDistanceCheckStart = true;
+	private bool m_charictersClose = false;
+	private bool m_charictersFar = false;
 	
 	void Start()
 	{
@@ -39,6 +43,63 @@ public class PositionManager : MonoBehaviour
 
 		m_charicterData[0] = m_charicters[0].GetComponent<FighterData>();
 		m_charicterData[1] = m_charicters[1].GetComponent<FighterData>();
+	}
+
+	private float GetDistance()
+	{
+		Vector3 char1Pos = m_charicters[0].transform.position;
+		Vector3 char2Pos = m_charicters[1].transform.position;
+
+		return Mathf.Sqrt(Mathf.Pow((char1Pos.x - char2Pos.x), 2.0f) + Mathf.Pow((char1Pos.z - char2Pos.z), 2.0f));
+	}
+
+	public bool CharicterDistanceCheck()
+	{
+		if (m_charicterDistanceCheckStart)
+		{
+			StartCharicterDistanceCheck();
+			m_charicterDistanceCheckStart = false;
+		}
+
+		if (m_charictersClose)
+		{
+			m_charicterData[0].WalkBackward();
+			m_charicterData[1].WalkBackward();
+
+			if (GetDistance() < 12.0f)
+			{
+				return false;
+			}
+		}
+		else if (m_charictersFar)
+		{
+			m_charicterData[0].WalkForward();
+			m_charicterData[1].WalkForward();
+
+			if (GetDistance() > 8.0f)
+			{
+				return false;
+			}
+		}
+
+		m_charictersClose = false;
+		m_charictersFar = false;
+		m_charicterDistanceCheckStart = true;
+		return true;
+	}
+
+	private void StartCharicterDistanceCheck()
+	{
+		float distance = GetDistance();
+
+		if (distance > 12.0f)
+		{
+			m_charictersFar = true;
+		}
+		else if (distance < 8.0f)
+		{
+			m_charictersClose = true;
+		}
 	}
 
 	public bool ResetCharicterDistance()

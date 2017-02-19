@@ -116,8 +116,8 @@ public class Animation
 	private float m_currentAnimTime = 0.0f;
 	private int m_currentKey = 0;
 
-	public Sprite[] m_sprites = new Sprite[16];
-	public float[] m_displayTimes = new float[16];
+	public Sprite[] m_sprites = new Sprite[20];
+	public float[] m_displayTimes = new float[20];
 	public int m_numberKeys = 0;
 
 	private bool m_repeat = false;

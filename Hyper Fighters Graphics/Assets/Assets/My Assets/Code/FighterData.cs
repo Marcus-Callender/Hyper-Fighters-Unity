@@ -34,14 +34,14 @@ public class FighterData : MonoBehaviour
 	//C_Status* m_pStatuses[3];
 	float[] m_velocity = new float[2];
 	bool m_moving = false;
-	float m_friction = 0.5f;
+	float m_friction = 1.0f;
 
 	// true means moving left, false is moving right
 	bool m_moving_Left_Right;
 
 	public Sprite[] m_sprites;
 	SpriteRenderer m_sprite;
-	private float m_movementSpeed = 1.0f;
+	private float m_movementSpeed = 1.5f;
 
 	AnimationControler m_animationControler;
 
@@ -63,7 +63,7 @@ public class FighterData : MonoBehaviour
 		InitializeAnimations();
 	}
 
-	public void InitializeAnimations()
+	private void InitializeAnimations()
 	{
 		Animation[] animations = new Animation[(int)E_ANIMATIONS.TOTAL];
 
