@@ -54,6 +54,11 @@ public class BaseMove : MonoBehaviour
 
 	}
 
+	public virtual void SetAnimation(AnimationControler animCon, Sprite[] sprites)
+	{
+		
+	}
+
 	public E_MOVE_TYPE GetMoveType()
 	{
 		return m_type;
@@ -94,13 +99,27 @@ public class LightAttack : BaseMove
 	{
 		enemy.AddToVelocity(1.0f, 1.0f);
 		enemy.setSprite(85);
+		enemy.SetAnimaton(E_ANIMATIONS.HIT);
 		
 		m_me.setSprite(20);
+		m_me.SetAnimaton(E_ANIMATIONS.LIGHT);
 	}
 
 	public override void Lose(BaseMove enemyMove, FighterData enemy)
 	{
 
+	}
+
+	public override void SetAnimation(AnimationControler animCon, Sprite[] sprites)
+	{
+		Animation anim = new Animation();
+
+		anim.AddKeyFrame(sprites[18], 0.12f);
+		anim.AddKeyFrame(sprites[19], 0.12f);
+		anim.AddKeyFrame(sprites[20], 0.72f);
+		//anim.RepeatAnim();
+
+		animCon.AddAnim(anim);
 	}
 }
 

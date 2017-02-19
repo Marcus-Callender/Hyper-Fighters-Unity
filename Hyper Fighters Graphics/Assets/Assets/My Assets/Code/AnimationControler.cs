@@ -191,8 +191,8 @@ public class Animation
 	{
 		m_currentAnimTime = 0.0f;
 		m_playing = false;
-		m_spriteRenderer.sprite = null;
-		m_spriteRenderer.enabled = false;
+		//m_spriteRenderer.sprite = null;
+		//m_spriteRenderer.enabled = false;
 		m_currentKey = 0;
 	}
 

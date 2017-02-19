@@ -47,6 +47,15 @@ public class FighterData : MonoBehaviour
 
 	void Start()
 	{
+		//m_sprite = gameObject.GetComponent<SpriteRenderer>();
+		//m_animationControler = gameObject.AddComponent<AnimationControler>();
+		//m_animationControler.F_initialize(gameObject.GetComponent<SpriteRenderer>());
+
+		//InitializeAnimations();
+	}
+
+	public void Initialize()
+	{
 		m_sprite = gameObject.GetComponent<SpriteRenderer>();
 		m_animationControler = gameObject.AddComponent<AnimationControler>();
 		m_animationControler.F_initialize(gameObject.GetComponent<SpriteRenderer>());
@@ -54,7 +63,7 @@ public class FighterData : MonoBehaviour
 		InitializeAnimations();
 	}
 
-	private void InitializeAnimations()
+	public void InitializeAnimations()
 	{
 		Animation[] animations = new Animation[(int)E_ANIMATIONS.TOTAL];
 
@@ -71,6 +80,7 @@ public class FighterData : MonoBehaviour
 		m_animationControler.AddAnim(animations[(int)E_ANIMATIONS.IDLE]);
 
 		animations[(int)E_ANIMATIONS.WALK_FORWARD] = new Animation();
+		animations[(int)E_ANIMATIONS.WALK_FORWARD].AddKeyFrame(m_sprites[9], 0.12f);
 		animations[(int)E_ANIMATIONS.WALK_FORWARD].AddKeyFrame(m_sprites[8], 0.12f);
 		animations[(int)E_ANIMATIONS.WALK_FORWARD].AddKeyFrame(m_sprites[7], 0.12f);
 		animations[(int)E_ANIMATIONS.WALK_FORWARD].AddKeyFrame(m_sprites[6], 0.12f);
@@ -81,9 +91,21 @@ public class FighterData : MonoBehaviour
 		animations[(int)E_ANIMATIONS.WALK_BACKWARD].AddKeyFrame(m_sprites[6], 0.12f);
 		animations[(int)E_ANIMATIONS.WALK_BACKWARD].AddKeyFrame(m_sprites[7], 0.12f);
 		animations[(int)E_ANIMATIONS.WALK_BACKWARD].AddKeyFrame(m_sprites[8], 0.12f);
+		animations[(int)E_ANIMATIONS.WALK_BACKWARD].AddKeyFrame(m_sprites[9], 0.12f);
 		animations[(int)E_ANIMATIONS.WALK_BACKWARD].RepeatAnim();
 		m_animationControler.AddAnim(animations[(int)E_ANIMATIONS.WALK_BACKWARD]);
 
+		animations[(int)E_ANIMATIONS.HIT] = new Animation();
+		animations[(int)E_ANIMATIONS.HIT].AddKeyFrame(m_sprites[85], 0.12f);
+		animations[(int)E_ANIMATIONS.HIT].RepeatAnim();
+		m_animationControler.AddAnim(animations[(int)E_ANIMATIONS.HIT]);
+
+		animations[(int)E_ANIMATIONS.THROWN] = new Animation();
+		animations[(int)E_ANIMATIONS.THROWN].AddKeyFrame(m_sprites[86], 1.0f);
+		animations[(int)E_ANIMATIONS.THROWN].AddKeyFrame(m_sprites[96], 1.0f);
+		animations[(int)E_ANIMATIONS.THROWN].AddKeyFrame(m_sprites[89], 0.5f);
+		animations[(int)E_ANIMATIONS.THROWN].AddKeyFrame(m_sprites[90], 0.5f);
+		m_animationControler.AddAnim(animations[(int)E_ANIMATIONS.THROWN]);
 
 		m_animationControler.SetAnim((int)E_ANIMATIONS.IDLE);
 		m_animationControler.F_play();
@@ -168,5 +190,15 @@ public class FighterData : MonoBehaviour
 	public void StartSeccondAnimation()
 	{
 		m_animationControler.MoveToNextAnim();
+	}
+
+	public AnimationControler GetAnimationControler()
+	{
+		return m_animationControler;
+	}
+
+	public Sprite[] GetSprites()
+	{
+		return m_sprites;
 	}
 }
