@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
 	private CameraManager m_camera;
 	private Canvas m_canvas;
 	private PositionManager m_posManager;
+	private InputTracker m_inputTracker;
 
 	private E_GameStates m_state = E_GameStates.SETUP;
 	
@@ -27,6 +28,7 @@ public class GameManager : MonoBehaviour
 	{
 		m_camera = FindObjectOfType<CameraManager>();
 		m_canvas = FindObjectOfType<Canvas>();
+		m_inputTracker = gameObject.AddComponent<InputTracker>();
 
 		m_charicters[0] = Instantiate(m_charicterPrefab);
 		m_charicters[1] = Instantiate(m_charicterPrefab);
@@ -34,8 +36,8 @@ public class GameManager : MonoBehaviour
 		m_charicterScripts[0] = m_charicters[0].GetComponent<FighterBase>();
 		m_charicterScripts[1] = m_charicters[1].GetComponent<FighterBase>();
 
-		m_charicterScripts[0].Initialize(1, m_canvas);
-		m_charicterScripts[1].Initialize(2, m_canvas);
+		m_charicterScripts[0].Initialize(1, m_canvas, m_inputTracker);
+		m_charicterScripts[1].Initialize(2, m_canvas, m_inputTracker);
 
 		m_charicters[0].transform.position = new Vector3(5.0f, 0.0f, 0.0f);
 		m_charicters[1].transform.position = new Vector3(-5.0f, 0.0f, 0.0f);

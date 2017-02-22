@@ -15,6 +15,7 @@ public class FighterBase : MonoBehaviour
 	Text m_healthUI;
 	Text m_moveUI;
 	Text m_hyperUI;
+	InputTracker m_inputTracker;
 	
 	void Start()
 	{
@@ -51,11 +52,13 @@ public class FighterBase : MonoBehaviour
 		
 	}
 
-	public void Initialize(int playerNum, Canvas UICanvas)
+	public void Initialize(int playerNum, Canvas UICanvas, InputTracker refInputTracker)
 	{
 		m_playerNum = playerNum;
 
 		Text[] texts = UICanvas.GetComponentsInChildren<Text>();
+
+		m_inputTracker = refInputTracker;
 
 		for (int z = 0; z < texts.Length; z++)
 		{
@@ -89,7 +92,10 @@ public class FighterBase : MonoBehaviour
 				{
 					if (Input.GetKeyDown(key))
 					{
-						m_inputs[z] = key;
+						if (m_inputTracker.IsKeyInUse(key))
+						{
+							m_inputs[z] = key;
+						}
 					}
 				}
 
@@ -212,5 +218,10 @@ public class FighterBase : MonoBehaviour
 	public FighterData GetData()
 	{
 		return m_Data;
+	}
+
+	public KeyCode[] GetKeys()
+	{
+		return m_inputs;
 	}
 }
