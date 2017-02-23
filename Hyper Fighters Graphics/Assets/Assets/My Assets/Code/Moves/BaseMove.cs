@@ -419,11 +419,9 @@ public class Block : BaseMove
 
 	public override bool Update2(E_RESULT myResult, E_RESULT otherResult, FighterData enemy)
 	{
-		if (otherResult == E_RESULT.WIN || otherResult == E_RESULT.SP_WIN)
+		if (myResult == E_RESULT.WIN || myResult == E_RESULT.SP_WIN)
 		{
-			m_me.SetVelocity(1.0f, 1.0f);
-
-			if (!enemy.isMoving())
+			if (!m_me.isMoving())
 			{
 				return true;
 			}
