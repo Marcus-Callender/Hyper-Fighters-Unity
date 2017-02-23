@@ -241,6 +241,17 @@ public class Throw : BaseMove
 	{
 		m_me.setSprite(84);
 	}
+
+	//public override void SetAnimation(AnimationControler animCon, Sprite[] sprites)
+	//{
+	//	Animation anim = new Animation();
+
+	//	anim.AddKeyFrame(sprites[18], 0.12f);
+	//	anim.AddKeyFrame(sprites[19], 0.12f);
+	//	anim.AddKeyFrame(sprites[20], 0.72f);
+
+	//	animCon.AddAnim(anim);
+	//}
 }
 
 public class Block : BaseMove

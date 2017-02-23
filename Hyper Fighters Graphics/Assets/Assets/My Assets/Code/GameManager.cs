@@ -6,9 +6,10 @@ enum E_GameStates
 {
 	SETUP,
 	MOVE_SELECT,
-	USE_ACTIONS,
-	ACTION_RESOLUSTION,
-	CHARICTER_POSITIONING
+	GET_RESULT,
+	USE_ACTIONS1,
+	USE_ACTIONS2,
+	RESET
 }
 
 public class GameManager : MonoBehaviour
@@ -70,7 +71,7 @@ public class GameManager : MonoBehaviour
 		{
 			if (m_charicterScripts[0].SelectMove() && m_charicterScripts[1].SelectMove())
 			{
-				m_state = E_GameStates.USE_ACTIONS;
+				m_state = E_GameStates.GET_RESULT;
 			}
 
 			m_charicterScripts[0].WriteMoveUI();
@@ -79,7 +80,7 @@ public class GameManager : MonoBehaviour
 			m_charicterScripts[0].SetAnimation(E_ANIMATIONS.IDLE);
 			m_charicterScripts[1].SetAnimation(E_ANIMATIONS.IDLE);
 		}
-		else if (m_state == E_GameStates.USE_ACTIONS)
+		else if (m_state == E_GameStates.GET_RESULT)
 		{
 			E_RESULT res1 = m_charicterScripts[0].UseMove(m_charicterScripts[1].GetCurrentMove(), m_charicterScripts[1].GetData());
 			E_RESULT res2 = m_charicterScripts[1].UseMove(m_charicterScripts[0].GetCurrentMove(), m_charicterScripts[0].GetData());
@@ -111,22 +112,26 @@ public class GameManager : MonoBehaviour
 			m_charicterScripts[0].RevealMovesUI();
 			m_charicterScripts[1].RevealMovesUI();
 
-			m_state = E_GameStates.ACTION_RESOLUSTION;
+			m_state = E_GameStates.USE_ACTIONS1;
 		}
-		else if (m_state == E_GameStates.ACTION_RESOLUSTION)
+		else if (m_state == E_GameStates.USE_ACTIONS1)
+		{
+			m_state = E_GameStates.USE_ACTIONS2;
+		}
+		else if (m_state == E_GameStates.USE_ACTIONS2)
 		{
 			if (!m_charicterScripts[0].GetData().isMoving() && !m_charicterScripts[1].GetData().isMoving())
 			{
 				m_charicterScripts[0].Rest();
 				m_charicterScripts[1].Rest();
 
-				m_state = E_GameStates.CHARICTER_POSITIONING;
+				m_state = E_GameStates.RESET;
 			}
 
 			m_charicterScripts[0].RevealMovesUI();
 			m_charicterScripts[1].RevealMovesUI();
 		}
-		else if (m_state == E_GameStates.CHARICTER_POSITIONING)
+		else if (m_state == E_GameStates.RESET)
 		{
 			if (m_posManager.ResetCharicterDistance())
 			{
