@@ -9,6 +9,7 @@ public enum E_ANIMATIONS
 	WALK_BACKWARD,
 	HIT,
 	THROWN,
+	THROW_REJECT,
 
 	LIGHT,
 	HEAVY,
@@ -96,8 +97,7 @@ public class FighterData : MonoBehaviour
 		m_animationControler.AddAnim(animations[(int)E_ANIMATIONS.WALK_BACKWARD]);
 
 		animations[(int)E_ANIMATIONS.HIT] = new Animation();
-		animations[(int)E_ANIMATIONS.HIT].AddKeyFrame(m_sprites[85], 0.12f);
-		animations[(int)E_ANIMATIONS.HIT].RepeatAnim();
+		animations[(int)E_ANIMATIONS.HIT].AddKeyFrame(m_sprites[85], 1.0f);
 		m_animationControler.AddAnim(animations[(int)E_ANIMATIONS.HIT]);
 
 		animations[(int)E_ANIMATIONS.THROWN] = new Animation();
@@ -106,6 +106,10 @@ public class FighterData : MonoBehaviour
 		animations[(int)E_ANIMATIONS.THROWN].AddKeyFrame(m_sprites[89], 0.5f);
 		animations[(int)E_ANIMATIONS.THROWN].AddKeyFrame(m_sprites[90], 0.5f);
 		m_animationControler.AddAnim(animations[(int)E_ANIMATIONS.THROWN]);
+
+		animations[(int)E_ANIMATIONS.THROW_REJECT] = new Animation();
+		animations[(int)E_ANIMATIONS.THROW_REJECT].AddKeyFrame(m_sprites[84], 1.0f);
+		m_animationControler.AddAnim(animations[(int)E_ANIMATIONS.THROW_REJECT]);
 
 		m_animationControler.SetAnim((int)E_ANIMATIONS.IDLE);
 		m_animationControler.F_play();

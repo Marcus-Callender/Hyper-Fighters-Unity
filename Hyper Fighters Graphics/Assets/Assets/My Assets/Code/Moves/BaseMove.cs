@@ -239,6 +239,33 @@ public class HeavyAttack : BaseMove
 
 		animCon.AddAnim(anim);
 	}
+
+	public override bool Update1(FighterData enemy)
+	{
+		m_me.SetAnimaton(E_ANIMATIONS.HEAVY);
+
+		if (!m_me.IsAnimating())
+		{
+			return true;
+		}
+
+		return false;
+	}
+
+	public override bool Update2(E_RESULT myResult, E_RESULT otherResult, FighterData enemy)
+	{
+		if (otherResult == E_RESULT.LOSE || otherResult == E_RESULT.SP_LOSE)
+		{
+			enemy.SetAnimaton(E_ANIMATIONS.HIT);
+
+			if (!enemy.IsAnimating())
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
 }
 
 public class Throw : BaseMove
@@ -292,6 +319,43 @@ public class Throw : BaseMove
 
 		animCon.AddAnim(anim);
 	}
+
+	public override bool Update1(FighterData enemy)
+	{
+		m_me.SetAnimaton(E_ANIMATIONS.THROW);
+
+		if (!m_me.IsAnimating())
+		{
+			return true;
+		}
+
+		return false;
+	}
+
+	public override bool Update2(E_RESULT myResult, E_RESULT otherResult, FighterData enemy)
+	{
+		if (otherResult == E_RESULT.WIN || otherResult == E_RESULT.SP_WIN)
+		{
+			enemy.SetAnimaton(E_ANIMATIONS.THROWN);
+
+			if (!enemy.IsAnimating())
+			{
+				return true;
+			}
+		}
+		else if (myResult == E_RESULT.LOSE && myResult == E_RESULT.LOSE)
+		{
+			m_me.SetAnimaton(E_ANIMATIONS.THROW_REJECT);
+			m_me.AddToVelocity(0.5f, 1.0f);
+
+			if (!m_me.IsAnimating())
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
 }
 
 public class Block : BaseMove
@@ -336,9 +400,36 @@ public class Block : BaseMove
 	{
 		Animation anim = new Animation();
 
-		anim.AddKeyFrame(sprites[13], 1.0f);
+		anim.AddKeyFrame(sprites[13], 1.5f);
 
 		animCon.AddAnim(anim);
+	}
+
+	public override bool Update1(FighterData enemy)
+	{
+		m_me.SetAnimaton(E_ANIMATIONS.BLOCK);
+
+		if (!m_me.IsAnimating())
+		{
+			return true;
+		}
+
+		return false;
+	}
+
+	public override bool Update2(E_RESULT myResult, E_RESULT otherResult, FighterData enemy)
+	{
+		if (otherResult == E_RESULT.WIN || otherResult == E_RESULT.SP_WIN)
+		{
+			m_me.AddToVelocity(1.0f, 1.0f);
+
+			if (!enemy.isMoving())
+			{
+				return true;
+			}
+		}
+
+		return false;
 	}
 }
 
@@ -387,5 +478,32 @@ public class DODGE : BaseMove
 		anim.AddKeyFrame(sprites[5], 1.0f);
 
 		animCon.AddAnim(anim);
+	}
+
+	public override bool Update1(FighterData enemy)
+	{
+		m_me.SetAnimaton(E_ANIMATIONS.DODGE);
+
+		if (!m_me.IsAnimating())
+		{
+			return true;
+		}
+
+		return false;
+	}
+
+	public override bool Update2(E_RESULT myResult, E_RESULT otherResult, FighterData enemy)
+	{
+		if (otherResult == E_RESULT.WIN || otherResult == E_RESULT.SP_WIN)
+		{
+			enemy.SetAnimaton(E_ANIMATIONS.LIGHT);
+
+			if (!m_me.IsAnimating())
+			{
+				return true;
+			}
+		}
+
+		return false;
 	}
 }
