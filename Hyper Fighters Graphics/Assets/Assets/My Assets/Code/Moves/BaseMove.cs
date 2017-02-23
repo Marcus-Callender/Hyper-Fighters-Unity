@@ -107,7 +107,7 @@ public class LightAttack : BaseMove
 
 	public override void Win(BaseMove enemyMove, FighterData enemy)
 	{
-		enemy.AddToVelocity(1.0f, 1.0f);
+		enemy.SetVelocity(1.0f, 1.0f);
 		enemy.setSprite(85);
 		enemy.SetAnimaton(E_ANIMATIONS.HIT);
 		
@@ -146,7 +146,7 @@ public class LightAttack : BaseMove
 
 	public override bool Update2(E_RESULT myResult, E_RESULT otherResult, FighterData enemy)
 	{
-		if (otherResult == E_RESULT.LOSE || otherResult == E_RESULT.SP_LOSE)
+		if (myResult == E_RESULT.WIN || myResult == E_RESULT.SP_WIN)
 		{
 			enemy.SetAnimaton(E_ANIMATIONS.HIT);
 
@@ -192,14 +192,14 @@ public class HeavyAttack : BaseMove
 
 	public override void Win(BaseMove enemyMove, FighterData enemy)
 	{
-		enemy.AddToVelocity(2.0f, 2.0f);
+		enemy.SetVelocity(2.0f, 2.0f);
 		enemy.setSprite(85);
 		m_me.setSprite(35);
 
 		enemy.SetAnimaton(E_ANIMATIONS.HIT);
 		m_me.SetAnimaton(E_ANIMATIONS.HEAVY);
 
-		m_me.AddToVelocity(0.0f, -2.0f);
+		m_me.SetVelocity(0.0f, -2.0f);
 	}
 
 	public override void Lose(BaseMove enemyMove, FighterData enemy)
@@ -235,7 +235,6 @@ public class HeavyAttack : BaseMove
 		anim.AddKeyFrame(sprites[34], 0.12f);
 		anim.AddKeyFrame(sprites[35], 0.12f);
 		anim.AddKeyFrame(sprites[36], 0.12f);
-		//anim.RepeatAnim();
 
 		animCon.AddAnim(anim);
 	}
@@ -254,9 +253,10 @@ public class HeavyAttack : BaseMove
 
 	public override bool Update2(E_RESULT myResult, E_RESULT otherResult, FighterData enemy)
 	{
-		if (otherResult == E_RESULT.LOSE || otherResult == E_RESULT.SP_LOSE)
+		if (myResult == E_RESULT.WIN || myResult == E_RESULT.SP_WIN)
 		{
 			enemy.SetAnimaton(E_ANIMATIONS.HIT);
+			enemy.SetVelocity(1.0f, 1.0f);
 
 			if (!enemy.IsAnimating())
 			{
@@ -296,7 +296,7 @@ public class Throw : BaseMove
 
 	public override void Win(BaseMove enemyMove, FighterData enemy)
 	{
-		enemy.AddToVelocity(1.5f, 1.5f);
+		enemy.SetVelocity(1.5f, 1.5f);
 		enemy.setSprite(88);
 		m_me.setSprite(57);
 		m_me.SetAnimaton(E_ANIMATIONS.THROW);
@@ -346,7 +346,7 @@ public class Throw : BaseMove
 		else if (myResult == E_RESULT.LOSE && myResult == E_RESULT.LOSE)
 		{
 			m_me.SetAnimaton(E_ANIMATIONS.THROW_REJECT);
-			m_me.AddToVelocity(0.5f, 1.0f);
+			m_me.SetVelocity(0.5f, 1.0f);
 
 			if (!m_me.IsAnimating())
 			{
@@ -386,7 +386,7 @@ public class Block : BaseMove
 
 	public override void Win(BaseMove enemyMove, FighterData enemy)
 	{
-		m_me.AddToVelocity(1.0f, 1.0f);
+		m_me.SetVelocity(1.0f, 1.0f);
 		m_me.setSprite(13);
 		m_me.SetAnimaton(E_ANIMATIONS.BLOCK);
 	}
@@ -421,12 +421,16 @@ public class Block : BaseMove
 	{
 		if (otherResult == E_RESULT.WIN || otherResult == E_RESULT.SP_WIN)
 		{
-			m_me.AddToVelocity(1.0f, 1.0f);
+			m_me.SetVelocity(1.0f, 1.0f);
 
 			if (!enemy.isMoving())
 			{
 				return true;
 			}
+		}
+		else if (myResult == E_RESULT.LOSE && otherResult == E_RESULT.LOSE)
+		{
+			return true;
 		}
 
 		return false;
@@ -461,14 +465,14 @@ public class DODGE : BaseMove
 
 	public override void Win(BaseMove enemyMove, FighterData enemy)
 	{
-		m_me.AddToVelocity(2.0f, 0.0f);
+		m_me.SetVelocity(2.0f, 0.0f);
 		m_me.setSprite(5);
 		m_me.SetAnimaton(E_ANIMATIONS.DODGE);
 	}
 
 	public override void Lose(BaseMove enemyMove, FighterData enemy)
 	{
-
+		m_me.SetVelocity(2.0f, 0.0f);
 	}
 
 	public override void SetAnimation(AnimationControler animCon, Sprite[] sprites)
@@ -502,6 +506,10 @@ public class DODGE : BaseMove
 			{
 				return true;
 			}
+		}
+		else if (myResult == E_RESULT.LOSE && otherResult == E_RESULT.LOSE)
+		{
+			return true;
 		}
 
 		return false;

@@ -9,7 +9,8 @@ enum E_GameStates
 	GET_RESULT,
 	USE_ACTIONS1,
 	USE_ACTIONS2,
-	RESET
+	RESET,
+	RESET_DISTANCE
 }
 
 public class GameManager : MonoBehaviour
@@ -22,6 +23,7 @@ public class GameManager : MonoBehaviour
 	private Canvas m_canvas;
 	private PositionManager m_posManager;
 	private InputTracker m_inputTracker;
+	private E_RESULT[] m_results = new E_RESULT[2];
 
 	private E_GameStates m_state = E_GameStates.SETUP;
 	
@@ -84,12 +86,12 @@ public class GameManager : MonoBehaviour
 		}
 		else if (m_state == E_GameStates.GET_RESULT)
 		{
-			E_RESULT res1 = m_charicterScripts[0].UseMove(m_charicterScripts[1].GetCurrentMove(), m_charicterScripts[1].GetData());
-			E_RESULT res2 = m_charicterScripts[1].UseMove(m_charicterScripts[0].GetCurrentMove(), m_charicterScripts[0].GetData());
+			m_results[0] = m_charicterScripts[0].UseMove(m_charicterScripts[1].GetCurrentMove(), m_charicterScripts[1].GetData());
+			m_results[1] = m_charicterScripts[1].UseMove(m_charicterScripts[0].GetCurrentMove(), m_charicterScripts[0].GetData());
 
-			if (res1 == res2)
+			if (m_results[0] == m_results[1])
 			{
-				if (res1 == E_RESULT.WIN || res1 == E_RESULT.SP_WIN)
+				if (m_results[0] == E_RESULT.WIN || m_results[0] == E_RESULT.SP_WIN)
 				{
 					m_charicterScripts[0].Win(m_charicterScripts[1].GetCurrentMove(), m_charicterScripts[1].GetData());
 					m_charicterScripts[1].Win(m_charicterScripts[0].GetCurrentMove(), m_charicterScripts[0].GetData());
@@ -100,12 +102,12 @@ public class GameManager : MonoBehaviour
 					m_charicterScripts[1].Lose(m_charicterScripts[0].GetCurrentMove(), m_charicterScripts[0].GetData());
 				}
 			}
-			else if (res1 > res2)
+			else if (m_results[0] > m_results[1])
 			{
 				m_charicterScripts[1].Lose(m_charicterScripts[0].GetCurrentMove(), m_charicterScripts[0].GetData());
 				m_charicterScripts[0].Win(m_charicterScripts[1].GetCurrentMove(), m_charicterScripts[1].GetData());
 			}
-			else if (res1 < res2)
+			else if (m_results[0] < m_results[1])
 			{
 				m_charicterScripts[0].Lose(m_charicterScripts[1].GetCurrentMove(), m_charicterScripts[1].GetData());
 				m_charicterScripts[1].Win(m_charicterScripts[0].GetCurrentMove(), m_charicterScripts[0].GetData());
@@ -118,22 +120,36 @@ public class GameManager : MonoBehaviour
 		}
 		else if (m_state == E_GameStates.USE_ACTIONS1)
 		{
-			m_state = E_GameStates.USE_ACTIONS2;
+			bool temp = m_charicterScripts[1].MoveUpdate1(m_charicterScripts[0].GetData());
+
+			if (m_charicterScripts[0].MoveUpdate1(m_charicterScripts[1].GetData()) || temp)
+			{
+				m_state = E_GameStates.USE_ACTIONS2;
+			}
 		}
 		else if (m_state == E_GameStates.USE_ACTIONS2)
+		{
+			bool temp = m_charicterScripts[1].MoveUpdate2(m_results[1], m_results[0], m_charicterScripts[0].GetData());
+
+			if (m_charicterScripts[0].MoveUpdate2(m_results[0], m_results[1], m_charicterScripts[1].GetData()) || temp)
+			{
+				m_state = E_GameStates.RESET;
+			}
+		}
+		else if (m_state == E_GameStates.RESET)
 		{
 			if (!m_charicterScripts[0].GetData().isMoving() && !m_charicterScripts[1].GetData().isMoving())
 			{
 				m_charicterScripts[0].Rest();
 				m_charicterScripts[1].Rest();
 
-				m_state = E_GameStates.RESET;
+				m_state = E_GameStates.RESET_DISTANCE;
 			}
 
 			m_charicterScripts[0].RevealMovesUI();
 			m_charicterScripts[1].RevealMovesUI();
 		}
-		else if (m_state == E_GameStates.RESET)
+		else if (m_state == E_GameStates.RESET_DISTANCE)
 		{
 			if (m_posManager.ResetCharicterDistance())
 			{

@@ -184,6 +184,16 @@ public class FighterBase : MonoBehaviour
 		return true;
 	}
 
+	public bool MoveUpdate1(FighterData enemy)
+	{
+		return m_moves[m_currentMove].Update1(enemy);
+	}
+
+	public bool MoveUpdate2(E_RESULT myResult, E_RESULT otherResult, FighterData enemy)
+	{
+		return m_moves[m_currentMove].Update2(myResult, otherResult, enemy);
+	}
+
 	public void SetAnimation(E_ANIMATIONS z)
 	{
 		m_Data.SetAnimaton(z);

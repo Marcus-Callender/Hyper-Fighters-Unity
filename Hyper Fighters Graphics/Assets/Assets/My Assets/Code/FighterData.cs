@@ -154,7 +154,7 @@ public class FighterData : MonoBehaviour
 		}
 	}
 
-	public void AddToVelocity(float side, float back)
+	public void SetVelocity(float side, float back)
 	{
 		m_velocity[0] = side;
 		m_velocity[1] = back;
