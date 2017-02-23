@@ -45,6 +45,10 @@ public class FighterBase : MonoBehaviour
 
 		m_moves[0].SetAnimation(m_Data.GetAnimationControler(), m_Data.GetSprites());
 		m_moves[1].SetAnimation(m_Data.GetAnimationControler(), m_Data.GetSprites());
+		m_moves[2].SetAnimation(m_Data.GetAnimationControler(), m_Data.GetSprites());
+		m_moves[3].SetAnimation(m_Data.GetAnimationControler(), m_Data.GetSprites());
+		m_moves[4].SetAnimation(m_Data.GetAnimationControler(), m_Data.GetSprites());
+		m_moves[5].SetAnimation(m_Data.GetAnimationControler(), m_Data.GetSprites());
 	}
 	
 	void Update()

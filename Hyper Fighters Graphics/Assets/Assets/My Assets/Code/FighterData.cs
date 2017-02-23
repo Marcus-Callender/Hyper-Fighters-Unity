@@ -177,6 +177,11 @@ public class FighterData : MonoBehaviour
 		m_animationControler.SetAnim((int)E_ANIMATIONS.WALK_BACKWARD);
 	}
 
+	public bool IsAnimating()
+	{
+		return m_animationControler.GetPlaying();
+	}
+
 	public bool isMoving()
 	{
 		return m_moving;
