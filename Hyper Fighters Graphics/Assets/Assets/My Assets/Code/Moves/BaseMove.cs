@@ -59,6 +59,16 @@ public class BaseMove : MonoBehaviour
 		
 	}
 
+	public virtual bool Update1()
+	{
+		return true;
+	}
+
+	public virtual bool Update2()
+	{
+		return true;
+	}
+
 	public E_MOVE_TYPE GetMoveType()
 	{
 		return m_type;

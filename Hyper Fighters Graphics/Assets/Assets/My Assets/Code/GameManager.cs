@@ -69,7 +69,9 @@ public class GameManager : MonoBehaviour
 		}
 		else if (m_state == E_GameStates.MOVE_SELECT)
 		{
-			if (m_charicterScripts[0].SelectMove() && m_charicterScripts[1].SelectMove())
+			bool temp = m_charicterScripts[1].SelectMove();
+
+			if (m_charicterScripts[0].SelectMove() && temp)
 			{
 				m_state = E_GameStates.GET_RESULT;
 			}
