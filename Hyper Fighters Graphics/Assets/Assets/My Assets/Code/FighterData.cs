@@ -162,11 +162,6 @@ public class FighterData : MonoBehaviour
 		m_moving_Left_Right = Random.Range(0, 2) == 0;
 	}
 
-	public void setSprite(int id)
-	{
-		//m_sprite.sprite = m_sprites[id];
-	}
-
 	public void WalkForward()
 	{
 		this.transform.position += this.transform.right * m_movementSpeed * Time.deltaTime;
