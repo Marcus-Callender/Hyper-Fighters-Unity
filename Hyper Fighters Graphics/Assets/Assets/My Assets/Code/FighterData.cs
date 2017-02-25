@@ -61,6 +61,8 @@ public class FighterData : MonoBehaviour
 		m_animationControler = gameObject.AddComponent<AnimationControler>();
 		m_animationControler.F_initialize(gameObject.GetComponent<SpriteRenderer>());
 
+		m_hp = 100;
+
 		InitializeAnimations();
 	}
 
@@ -175,6 +177,16 @@ public class FighterData : MonoBehaviour
 		this.transform.position -= this.transform.right * m_movementSpeed * Time.deltaTime;
 
 		m_animationControler.SetAnim((int)E_ANIMATIONS.WALK_BACKWARD);
+	}
+
+	public void takeDamage(int ammount)
+	{
+		m_hp -= ammount;
+	}
+
+	public string GetHpUIString()
+	{
+		return "Health: " + m_hp;
 	}
 
 	public bool IsAnimating()

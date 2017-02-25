@@ -53,7 +53,7 @@ public class FighterBase : MonoBehaviour
 	
 	void Update()
 	{
-		
+		RenderNameUI();
 	}
 
 	public void Initialize(int playerNum, Canvas UICanvas, InputTracker refInputTracker)
@@ -139,6 +139,11 @@ public class FighterBase : MonoBehaviour
 		}
 
 		m_moveUI.text = temp;
+	}
+
+	public void RenderNameUI()
+	{
+		m_healthUI.text = m_Data.GetHpUIString();
 	}
 
 	public void CameraUpdateExample()
