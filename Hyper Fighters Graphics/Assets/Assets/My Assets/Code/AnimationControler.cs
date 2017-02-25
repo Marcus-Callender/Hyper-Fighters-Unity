@@ -29,12 +29,6 @@ public class AnimationControler : MonoBehaviour
 				break;
 			}
 		}
-
-		//m_animations[m_currentAnim] = newAnim;
-
-		//m_animations[m_currentAnim].Initialize(m_spriteRenderer);
-
-		//m_numAnims++;
 	}
 
 	public void F_update(float deltaTime)
@@ -76,6 +70,7 @@ public class AnimationControler : MonoBehaviour
 
 		if (z != m_currentAnim)
 		{
+			Debug.Log("Anim changed from " + (E_ANIMATIONS)m_currentAnim + " to " + (E_ANIMATIONS)z);
 			m_animations[z].Play();
 		}
 
@@ -191,8 +186,6 @@ public class Animation
 	{
 		m_currentAnimTime = 0.0f;
 		m_playing = false;
-		//m_spriteRenderer.sprite = null;
-		//m_spriteRenderer.enabled = false;
 		m_currentKey = 0;
 	}
 

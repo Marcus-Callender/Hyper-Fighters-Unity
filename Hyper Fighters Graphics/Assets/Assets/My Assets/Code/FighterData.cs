@@ -98,6 +98,7 @@ public class FighterData : MonoBehaviour
 
 		animations[(int)E_ANIMATIONS.HIT] = new Animation();
 		animations[(int)E_ANIMATIONS.HIT].AddKeyFrame(m_sprites[85], 1.0f);
+		animations[(int)E_ANIMATIONS.HIT].AddKeyFrame(m_sprites[85], 0.1f);
 		m_animationControler.AddAnim(animations[(int)E_ANIMATIONS.HIT]);
 
 		animations[(int)E_ANIMATIONS.THROWN] = new Animation();

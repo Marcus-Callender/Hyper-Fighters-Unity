@@ -191,10 +191,10 @@ public class HeavyAttack : BaseMove
 
 	public override void Win(BaseMove enemyMove, FighterData enemy)
 	{
-		enemy.SetVelocity(2.0f, 2.0f);
-
-		enemy.SetAnimaton(E_ANIMATIONS.HIT);
-		m_me.SetAnimaton(E_ANIMATIONS.HEAVY);
+		//enemy.SetVelocity(2.0f, 2.0f);
+		//
+		//enemy.SetAnimaton(E_ANIMATIONS.HIT);
+		//m_me.SetAnimaton(E_ANIMATIONS.HEAVY);
 
 		m_me.SetVelocity(0.0f, -2.0f);
 	}
@@ -239,8 +239,8 @@ public class HeavyAttack : BaseMove
 	public override bool Update1(FighterData enemy)
 	{
 		m_me.SetAnimaton(E_ANIMATIONS.HEAVY);
-		m_me.SetVelocity(0.0f, -1.0f);
-		enemy.SetVelocity(0.0f, 1.0f);
+		//m_me.SetVelocity(0.0f, -1.0f);
+		//enemy.SetVelocity(0.0f, 1.0f);
 
 		if (!m_me.IsAnimating())
 		{
@@ -339,7 +339,7 @@ public class Throw : BaseMove
 				return true;
 			}
 		}
-		else if (myResult == E_RESULT.LOSE && myResult == E_RESULT.LOSE)
+		else if (myResult == E_RESULT.LOSE && otherResult == E_RESULT.LOSE)
 		{
 			m_me.SetAnimaton(E_ANIMATIONS.THROW_REJECT);
 			m_me.SetVelocity(0.0f, 1.0f);
@@ -492,7 +492,8 @@ public class DODGE : BaseMove
 	{
 		if (myResult == E_RESULT.WIN || myResult == E_RESULT.SP_WIN)
 		{
-			enemy.SetAnimaton(E_ANIMATIONS.LIGHT);
+			m_me.SetAnimaton(E_ANIMATIONS.LIGHT);
+			enemy.SetAnimaton(E_ANIMATIONS.HIT);
 
 			if (!m_me.IsAnimating())
 			{
