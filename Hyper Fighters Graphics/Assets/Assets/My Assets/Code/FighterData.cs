@@ -62,61 +62,60 @@ public class FighterData : MonoBehaviour
 		m_animationControler.F_initialize(gameObject.GetComponent<SpriteRenderer>());
 
 		m_hp = 100;
+		m_focus = 0;
+		m_maxFocus = 100;
 
 		InitializeAnimations();
 	}
 
 	private void InitializeAnimations()
 	{
-		Animation[] animations = new Animation[(int)E_ANIMATIONS.TOTAL];
+		Animation idleAnim = new Animation();
+		idleAnim.AddKeyFrame(m_sprites[0], 0.12f);
+		idleAnim.AddKeyFrame(m_sprites[1], 0.12f);
+		idleAnim.AddKeyFrame(m_sprites[2], 0.12f);
+		idleAnim.AddKeyFrame(m_sprites[3], 0.12f);
+		idleAnim.AddKeyFrame(m_sprites[4], 0.12f);
+		idleAnim.AddKeyFrame(m_sprites[3], 0.12f);
+		idleAnim.AddKeyFrame(m_sprites[2], 0.12f);
+		idleAnim.AddKeyFrame(m_sprites[1], 0.12f);
+		idleAnim.RepeatAnim();
+		m_animationControler.AddAnim(idleAnim);
 
-		animations[(int)E_ANIMATIONS.IDLE] = new Animation();
-		animations[(int)E_ANIMATIONS.IDLE].AddKeyFrame(m_sprites[0], 0.12f);
-		animations[(int)E_ANIMATIONS.IDLE].AddKeyFrame(m_sprites[1], 0.12f);
-		animations[(int)E_ANIMATIONS.IDLE].AddKeyFrame(m_sprites[2], 0.12f);
-		animations[(int)E_ANIMATIONS.IDLE].AddKeyFrame(m_sprites[3], 0.12f);
-		animations[(int)E_ANIMATIONS.IDLE].AddKeyFrame(m_sprites[4], 0.12f);
-		animations[(int)E_ANIMATIONS.IDLE].AddKeyFrame(m_sprites[3], 0.12f);
-		animations[(int)E_ANIMATIONS.IDLE].AddKeyFrame(m_sprites[2], 0.12f);
-		animations[(int)E_ANIMATIONS.IDLE].AddKeyFrame(m_sprites[1], 0.12f);
-		animations[(int)E_ANIMATIONS.IDLE].RepeatAnim();
-		m_animationControler.AddAnim(animations[(int)E_ANIMATIONS.IDLE]);
+		Animation walkForwardAnim = new Animation();
+		walkForwardAnim.AddKeyFrame(m_sprites[9], 0.12f);
+		walkForwardAnim.AddKeyFrame(m_sprites[8], 0.12f);
+		walkForwardAnim.AddKeyFrame(m_sprites[7], 0.12f);
+		walkForwardAnim.AddKeyFrame(m_sprites[6], 0.12f);
+		walkForwardAnim.RepeatAnim();
+		m_animationControler.AddAnim(walkForwardAnim);
 
-		animations[(int)E_ANIMATIONS.WALK_FORWARD] = new Animation();
-		animations[(int)E_ANIMATIONS.WALK_FORWARD].AddKeyFrame(m_sprites[9], 0.12f);
-		animations[(int)E_ANIMATIONS.WALK_FORWARD].AddKeyFrame(m_sprites[8], 0.12f);
-		animations[(int)E_ANIMATIONS.WALK_FORWARD].AddKeyFrame(m_sprites[7], 0.12f);
-		animations[(int)E_ANIMATIONS.WALK_FORWARD].AddKeyFrame(m_sprites[6], 0.12f);
-		animations[(int)E_ANIMATIONS.WALK_FORWARD].RepeatAnim();
-		m_animationControler.AddAnim(animations[(int)E_ANIMATIONS.WALK_FORWARD]);
+		Animation walkBackwardAnim = new Animation();
+		walkBackwardAnim.AddKeyFrame(m_sprites[6], 0.12f);
+		walkBackwardAnim.AddKeyFrame(m_sprites[7], 0.12f);
+		walkBackwardAnim.AddKeyFrame(m_sprites[8], 0.12f);
+		walkBackwardAnim.AddKeyFrame(m_sprites[9], 0.12f);
+		walkBackwardAnim.RepeatAnim();
+		m_animationControler.AddAnim(walkBackwardAnim);
 
-		animations[(int)E_ANIMATIONS.WALK_BACKWARD] = new Animation();
-		animations[(int)E_ANIMATIONS.WALK_BACKWARD].AddKeyFrame(m_sprites[6], 0.12f);
-		animations[(int)E_ANIMATIONS.WALK_BACKWARD].AddKeyFrame(m_sprites[7], 0.12f);
-		animations[(int)E_ANIMATIONS.WALK_BACKWARD].AddKeyFrame(m_sprites[8], 0.12f);
-		animations[(int)E_ANIMATIONS.WALK_BACKWARD].AddKeyFrame(m_sprites[9], 0.12f);
-		animations[(int)E_ANIMATIONS.WALK_BACKWARD].RepeatAnim();
-		m_animationControler.AddAnim(animations[(int)E_ANIMATIONS.WALK_BACKWARD]);
+		Animation hitAnim = new Animation();
+		hitAnim.AddKeyFrame(m_sprites[85], 1.0f);
+		hitAnim.AddKeyFrame(m_sprites[85], 0.1f);
+		m_animationControler.AddAnim(hitAnim);
 
-		animations[(int)E_ANIMATIONS.HIT] = new Animation();
-		animations[(int)E_ANIMATIONS.HIT].AddKeyFrame(m_sprites[85], 1.0f);
-		animations[(int)E_ANIMATIONS.HIT].AddKeyFrame(m_sprites[85], 0.1f);
-		m_animationControler.AddAnim(animations[(int)E_ANIMATIONS.HIT]);
+		Animation ThrownAnim = new Animation();
+		ThrownAnim.AddKeyFrame(m_sprites[86], 1.0f);
+		ThrownAnim.AddKeyFrame(m_sprites[96], 1.0f);
+		ThrownAnim.AddKeyFrame(m_sprites[89], 0.5f);
+		ThrownAnim.AddKeyFrame(m_sprites[90], 0.5f);
+		m_animationControler.AddAnim(ThrownAnim);
 
-		animations[(int)E_ANIMATIONS.THROWN] = new Animation();
-		animations[(int)E_ANIMATIONS.THROWN].AddKeyFrame(m_sprites[86], 1.0f);
-		animations[(int)E_ANIMATIONS.THROWN].AddKeyFrame(m_sprites[96], 1.0f);
-		animations[(int)E_ANIMATIONS.THROWN].AddKeyFrame(m_sprites[89], 0.5f);
-		animations[(int)E_ANIMATIONS.THROWN].AddKeyFrame(m_sprites[90], 0.5f);
-		m_animationControler.AddAnim(animations[(int)E_ANIMATIONS.THROWN]);
-
-		animations[(int)E_ANIMATIONS.THROW_REJECT] = new Animation();
-		animations[(int)E_ANIMATIONS.THROW_REJECT].AddKeyFrame(m_sprites[84], 1.0f);
-		m_animationControler.AddAnim(animations[(int)E_ANIMATIONS.THROW_REJECT]);
+		Animation ThrowRejectAnim = new Animation();
+		ThrowRejectAnim.AddKeyFrame(m_sprites[84], 1.0f);
+		m_animationControler.AddAnim(ThrowRejectAnim);
 
 		m_animationControler.SetAnim((int)E_ANIMATIONS.IDLE);
 		m_animationControler.F_play();
-
 	}
 
 	void Update()
@@ -182,11 +181,28 @@ public class FighterData : MonoBehaviour
 	public void takeDamage(int ammount)
 	{
 		m_hp -= ammount;
+
+		gainFocus((int)(ammount * 0.3f));
+	}
+
+	public void gainFocus(int ammount)
+	{
+		m_focus += ammount;
+
+		if (m_focus > m_maxFocus)
+		{
+			m_focus = m_maxFocus;
+		}
 	}
 
 	public string GetHpUIString()
 	{
 		return "Health: " + m_hp;
+	}
+
+	public string GetFocusUIString()
+	{
+		return "Focus: " + m_focus + "/" + m_maxFocus;
 	}
 
 	public bool IsAnimating()

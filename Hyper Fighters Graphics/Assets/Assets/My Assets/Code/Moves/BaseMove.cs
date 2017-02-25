@@ -21,11 +21,11 @@ public enum E_RESULT
 
 public class BaseMove : MonoBehaviour
 {
-	//int m_damage;
+	protected int m_damage;
 	//float m_speed;
 	//bool m_knockDown;
 	//double m_FocusGain;
-	protected string m_name;
+	//protected string m_name;
 	protected E_MOVE_TYPE m_type;
 	protected FighterData m_me;
 
@@ -37,6 +37,11 @@ public class BaseMove : MonoBehaviour
 	public virtual void Initialize()
 	{
 		m_me = gameObject.GetComponent<FighterData>();
+	}
+
+	public void SetValues(int damage)
+	{
+		m_damage = damage;
 	}
 
 	public virtual E_RESULT Use(BaseMove enemyMove, FighterData enemy)
@@ -108,11 +113,10 @@ public class LightAttack : BaseMove
 	public override void Win(BaseMove enemyMove, FighterData enemy)
 	{
 		enemy.SetVelocity(1.0f, 1.0f);
-		//enemy.setSprite(85);
-		//enemy.SetAnimaton(E_ANIMATIONS.HIT);
-		
-		//m_me.setSprite(20);
+
 		m_me.SetAnimaton(E_ANIMATIONS.LIGHT);
+
+		enemy.takeDamage(m_damage);
 	}
 
 	public override void Lose(BaseMove enemyMove, FighterData enemy)
@@ -191,12 +195,9 @@ public class HeavyAttack : BaseMove
 
 	public override void Win(BaseMove enemyMove, FighterData enemy)
 	{
-		//enemy.SetVelocity(2.0f, 2.0f);
-		//
-		//enemy.SetAnimaton(E_ANIMATIONS.HIT);
-		//m_me.SetAnimaton(E_ANIMATIONS.HEAVY);
-
 		m_me.SetVelocity(0.0f, -2.0f);
+
+		enemy.takeDamage(m_damage);
 	}
 
 	public override void Lose(BaseMove enemyMove, FighterData enemy)
@@ -298,6 +299,8 @@ public class Throw : BaseMove
 		enemy.SetVelocity(1.5f, 1.5f);
 		m_me.SetAnimaton(E_ANIMATIONS.THROW);
 		enemy.SetAnimaton(E_ANIMATIONS.THROWN);
+
+		enemy.takeDamage(m_damage);
 	}
 
 	public override void Lose(BaseMove enemyMove, FighterData enemy)
@@ -460,6 +463,8 @@ public class DODGE : BaseMove
 	{
 		m_me.SetVelocity(2.0f, 0.0f);
 		m_me.SetAnimaton(E_ANIMATIONS.DODGE);
+
+		enemy.takeDamage(m_damage);
 	}
 
 	public override void Lose(BaseMove enemyMove, FighterData enemy)

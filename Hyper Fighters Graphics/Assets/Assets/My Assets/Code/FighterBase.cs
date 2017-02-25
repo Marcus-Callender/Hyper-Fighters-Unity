@@ -49,6 +49,13 @@ public class FighterBase : MonoBehaviour
 		m_moves[3].SetAnimation(m_Data.GetAnimationControler(), m_Data.GetSprites());
 		m_moves[4].SetAnimation(m_Data.GetAnimationControler(), m_Data.GetSprites());
 		m_moves[5].SetAnimation(m_Data.GetAnimationControler(), m_Data.GetSprites());
+
+		m_moves[0].SetValues(15);
+		m_moves[1].SetValues(23);
+		m_moves[2].SetValues(25);
+		m_moves[3].SetValues(0);
+		m_moves[4].SetValues(17);
+		m_moves[5].SetValues(45);
 	}
 	
 	void Update()
@@ -69,7 +76,6 @@ public class FighterBase : MonoBehaviour
 			if (texts[z].name == ("Player " + m_playerNum + " Health"))
 			{
 				m_healthUI = texts[z];
-				m_healthUI.text = ("Player " + m_playerNum + " health!");
 			}
 			else if (texts[z].name == ("Player " + m_playerNum + " Hyper"))
 			{
@@ -79,7 +85,6 @@ public class FighterBase : MonoBehaviour
 			else if (texts[z].name == ("Player " + m_playerNum + " Moves"))
 			{
 				m_moveUI = texts[z];
-				m_moveUI.text = ("Player " + m_playerNum + " moves!");
 			}
 		}
 	}
