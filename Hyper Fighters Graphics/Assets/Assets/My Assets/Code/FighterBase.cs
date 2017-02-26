@@ -186,6 +186,15 @@ public class FighterBase : MonoBehaviour
 				if (Input.GetKeyDown(m_inputs[z]))
 				{
 					m_currentMove = z;
+
+					// if the move is the charicters hyper move
+					if (z == 5)
+					{
+						if (!m_Data.CanUseHyper())
+						{
+							m_currentMove = -1;
+						}
+					}
 				}
 			}
 
@@ -233,6 +242,7 @@ public class FighterBase : MonoBehaviour
 	public void Rest()
 	{
 		m_currentMove = -1;
+		m_Data.Rest();
 	}
 
 	public BaseMove GetCurrentMove()

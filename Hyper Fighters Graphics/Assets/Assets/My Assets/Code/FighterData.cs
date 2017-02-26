@@ -208,7 +208,6 @@ public class FighterData : MonoBehaviour
 
 	public string GetHpUIString()
 	{
-		//return "Health: " + m_timer.Interpolate(m_hp, m_previousHP);
 		return "Health: " + m_timer.Interpolate(m_previousHP, m_hp);
 	}
 
@@ -221,6 +220,18 @@ public class FighterData : MonoBehaviour
 	{
 		m_previousHP = m_hp;
 		m_previousFocus = m_focus;
+	}
+
+	public bool CanUseHyper()
+	{
+		if (m_focus == 100)
+		{
+			m_previousFocus = m_focus;
+			m_focus = 0;
+			return true;
+		}
+
+		return false;
 	}
 
 	public bool IsAnimating()
