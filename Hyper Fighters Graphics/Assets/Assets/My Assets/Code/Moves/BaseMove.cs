@@ -24,7 +24,7 @@ public class BaseMove : MonoBehaviour
 	protected int m_damage;
 	//float m_speed;
 	//bool m_knockDown;
-	//double m_FocusGain;
+	protected int m_focusGain;
 	//protected string m_name;
 	protected E_MOVE_TYPE m_type;
 	protected FighterData m_me;
@@ -39,9 +39,10 @@ public class BaseMove : MonoBehaviour
 		m_me = gameObject.GetComponent<FighterData>();
 	}
 
-	public void SetValues(int damage)
+	public void SetValues(int damage, int focusGain)
 	{
 		m_damage = damage;
+		m_focusGain = focusGain;
 	}
 
 	public virtual E_RESULT Use(BaseMove enemyMove, FighterData enemy)
@@ -77,6 +78,11 @@ public class BaseMove : MonoBehaviour
 	public E_MOVE_TYPE GetMoveType()
 	{
 		return m_type;
+	}
+
+	public int GetDamage()
+	{
+		return m_damage;
 	}
 }
 
@@ -117,6 +123,7 @@ public class LightAttack : BaseMove
 		m_me.SetAnimaton(E_ANIMATIONS.LIGHT);
 
 		enemy.takeDamage(m_damage);
+		m_me.gainFocus(m_focusGain);
 	}
 
 	public override void Lose(BaseMove enemyMove, FighterData enemy)
@@ -198,6 +205,7 @@ public class HeavyAttack : BaseMove
 		m_me.SetVelocity(0.0f, -2.0f);
 
 		enemy.takeDamage(m_damage);
+		m_me.gainFocus(m_focusGain);
 	}
 
 	public override void Lose(BaseMove enemyMove, FighterData enemy)
@@ -301,6 +309,7 @@ public class Throw : BaseMove
 		enemy.SetAnimaton(E_ANIMATIONS.THROWN);
 
 		enemy.takeDamage(m_damage);
+		m_me.gainFocus(m_focusGain);
 	}
 
 	public override void Lose(BaseMove enemyMove, FighterData enemy)
@@ -387,6 +396,7 @@ public class Block : BaseMove
 	{
 		m_me.SetVelocity(1.0f, 1.0f);
 		m_me.SetAnimaton(E_ANIMATIONS.BLOCK);
+		m_me.gainFocus((int)(enemyMove.GetDamage() * 2.0f));
 	}
 
 	public override void Lose(BaseMove enemyMove, FighterData enemy)
@@ -465,6 +475,7 @@ public class DODGE : BaseMove
 		m_me.SetAnimaton(E_ANIMATIONS.DODGE);
 
 		enemy.takeDamage(m_damage);
+		m_me.gainFocus(m_focusGain);
 	}
 
 	public override void Lose(BaseMove enemyMove, FighterData enemy)

@@ -45,6 +45,7 @@ public class FighterData : MonoBehaviour
 	private float m_movementSpeed = 1.5f;
 
 	AnimationControler m_animationControler;
+	Timer m_timer;
 
 	void Start()
 	{
@@ -64,6 +65,12 @@ public class FighterData : MonoBehaviour
 		m_hp = 100;
 		m_focus = 0;
 		m_maxFocus = 100;
+
+		m_previousHP = m_hp;
+		m_previousFocus = m_focus;
+
+		m_timer = gameObject.AddComponent<Timer>();
+		m_timer.Initialize(2.0f);
 
 		InitializeAnimations();
 	}
@@ -180,6 +187,7 @@ public class FighterData : MonoBehaviour
 
 	public void takeDamage(int ammount)
 	{
+		m_previousHP = m_hp;
 		m_hp -= ammount;
 
 		gainFocus((int)(ammount * 0.3f));
@@ -187,7 +195,10 @@ public class FighterData : MonoBehaviour
 
 	public void gainFocus(int ammount)
 	{
+		m_previousFocus = m_focus;
 		m_focus += ammount;
+
+		m_timer.Play();
 
 		if (m_focus > m_maxFocus)
 		{
@@ -197,12 +208,12 @@ public class FighterData : MonoBehaviour
 
 	public string GetHpUIString()
 	{
-		return "Health: " + m_hp;
+		return "Health: " + m_timer.Interpolate(m_hp, m_previousHP);
 	}
 
 	public string GetFocusUIString()
 	{
-		return "Focus: " + m_focus + "/" + m_maxFocus;
+		return "Focus: " + m_timer.Interpolate(m_previousFocus, m_focus) + "/" + m_maxFocus;
 	}
 
 	public bool IsAnimating()

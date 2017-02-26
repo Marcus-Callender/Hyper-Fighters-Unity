@@ -50,12 +50,12 @@ public class FighterBase : MonoBehaviour
 		m_moves[4].SetAnimation(m_Data.GetAnimationControler(), m_Data.GetSprites());
 		m_moves[5].SetAnimation(m_Data.GetAnimationControler(), m_Data.GetSprites());
 
-		m_moves[0].SetValues(15);
-		m_moves[1].SetValues(23);
-		m_moves[2].SetValues(25);
-		m_moves[3].SetValues(0);
-		m_moves[4].SetValues(17);
-		m_moves[5].SetValues(45);
+		m_moves[0].SetValues(15, 8);
+		m_moves[1].SetValues(23, 13);
+		m_moves[2].SetValues(25, 18);
+		m_moves[3].SetValues(0, 0);
+		m_moves[4].SetValues(17, 5);
+		m_moves[5].SetValues(45, 12);
 	}
 	
 	void Update()
@@ -149,6 +149,7 @@ public class FighterBase : MonoBehaviour
 	public void RenderNameUI()
 	{
 		m_healthUI.text = m_Data.GetHpUIString();
+		m_hyperUI.text = m_Data.GetFocusUIString();
 	}
 
 	public void CameraUpdateExample()
