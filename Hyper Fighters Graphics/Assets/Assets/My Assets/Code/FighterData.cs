@@ -208,12 +208,19 @@ public class FighterData : MonoBehaviour
 
 	public string GetHpUIString()
 	{
-		return "Health: " + m_timer.Interpolate(m_hp, m_previousHP);
+		//return "Health: " + m_timer.Interpolate(m_hp, m_previousHP);
+		return "Health: " + m_timer.Interpolate(m_previousHP, m_hp);
 	}
 
 	public string GetFocusUIString()
 	{
 		return "Focus: " + m_timer.Interpolate(m_previousFocus, m_focus) + "/" + m_maxFocus;
+	}
+
+	public void Rest()
+	{
+		m_previousHP = m_hp;
+		m_previousFocus = m_focus;
 	}
 
 	public bool IsAnimating()
