@@ -335,12 +335,19 @@ public class Throw : BaseMove
 
 	public override bool Update1(FighterData enemy)
 	{
-		m_me.SetAnimaton(E_ANIMATIONS.THROW);
+		//m_me.SetAnimaton(E_ANIMATIONS.THROW);
 
-		if (!m_me.IsAnimating())
+		//if (!m_me.IsAnimating())
+		//{
+		//	m_me.SetAnimaton(E_ANIMATIONS.IDLE);
+		//	m_timeInUpdate2 = 0.0f;
+		//	return true;
+		//}
+
+		m_me.WalkForward();
+
+		if (m_me.DistanceFromEnemy(enemy) < 5.0f)
 		{
-			m_me.SetAnimaton(E_ANIMATIONS.IDLE);
-			m_timeInUpdate2 = 0.0f;
 			return true;
 		}
 

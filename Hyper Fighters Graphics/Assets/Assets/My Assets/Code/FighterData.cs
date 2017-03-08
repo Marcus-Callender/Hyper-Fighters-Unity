@@ -255,6 +255,14 @@ public class FighterData : MonoBehaviour
 		return false;
 	}
 
+	public float DistanceFromEnemy(FighterData enemy)
+	{
+		Vector3 thisPos = gameObject.transform.position;
+		Vector3 enemyPos = enemy.transform.position;
+
+		return Mathf.Sqrt(Mathf.Pow((thisPos.x - enemyPos.x), 2.0f) + Mathf.Pow((thisPos.z - enemyPos.z), 2.0f));
+	}
+
 	public bool IsAnimating()
 	{
 		return m_animationControler.GetPlaying();
