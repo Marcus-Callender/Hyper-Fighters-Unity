@@ -47,6 +47,8 @@ public class FighterData : MonoBehaviour
 	AnimationControler m_animationControler;
 	Timer m_timer;
 
+	bool m_wasPositionManipulated = false;
+
 	void Start()
 	{
 		//m_sprite = gameObject.GetComponent<SpriteRenderer>();
@@ -127,6 +129,8 @@ public class FighterData : MonoBehaviour
 
 	void Update()
 	{
+		m_wasPositionManipulated = false;
+
 		m_animationControler.F_update(Time.deltaTime);
 
 		if (m_moving)
@@ -169,6 +173,16 @@ public class FighterData : MonoBehaviour
 		m_velocity[1] = back;
 		m_moving = true;
 		m_moving_Left_Right = Random.Range(0, 2) == 0;
+	}
+
+	public void SetPosition(Vector3 otherFighterPosition, float horizontalOffset, float verticalOffset)
+	{
+		m_wasPositionManipulated = true;
+
+		otherFighterPosition += (this.transform.right * horizontalOffset);
+		otherFighterPosition += (this.transform.up * verticalOffset);
+
+		this.transform.position = otherFighterPosition;
 	}
 
 	public void WalkForward()
@@ -262,5 +276,10 @@ public class FighterData : MonoBehaviour
 	public Sprite[] GetSprites()
 	{
 		return m_sprites;
+	}
+
+	public bool GetWasPositionManipulated()
+	{
+		return m_wasPositionManipulated;
 	}
 }

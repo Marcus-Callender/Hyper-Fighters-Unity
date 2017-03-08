@@ -278,6 +278,8 @@ public class HeavyAttack : BaseMove
 
 public class Throw : BaseMove
 {
+	float m_timeInUpdate2 = 0.0f;
+
 	void Start()
 	{
 		base.Initialize();
@@ -334,6 +336,8 @@ public class Throw : BaseMove
 
 		if (!m_me.IsAnimating())
 		{
+			m_me.SetAnimaton(E_ANIMATIONS.IDLE);
+			m_timeInUpdate2 = 0.0f;
 			return true;
 		}
 
@@ -344,7 +348,27 @@ public class Throw : BaseMove
 	{
 		if (myResult == E_RESULT.WIN || myResult == E_RESULT.SP_WIN)
 		{
+			m_me.SetAnimaton(E_ANIMATIONS.THROW);
 			enemy.SetAnimaton(E_ANIMATIONS.THROWN);
+
+			m_timeInUpdate2 += Time.deltaTime;
+
+			if (m_timeInUpdate2 < 1.0f)
+			{
+				enemy.SetPosition(m_me.GetComponent<Transform>().position, -1.0f, 0.5f);
+			}
+			else if (m_timeInUpdate2 < 2.0f)
+			{
+				enemy.SetPosition(m_me.GetComponent<Transform>().position, 0.0f, 1.5f);
+			}
+			else if (m_timeInUpdate2 < 2.5f)
+			{
+				enemy.SetPosition(m_me.GetComponent<Transform>().position, 1.0f, 0.5f);
+			}
+			else if (m_timeInUpdate2 < 3.0f)
+			{
+				enemy.SetPosition(m_me.GetComponent<Transform>().position, 2.0f, 0.0f);
+			}
 
 			if (!enemy.IsAnimating())
 			{
