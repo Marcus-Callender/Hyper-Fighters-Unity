@@ -146,15 +146,18 @@ public class FighterData : MonoBehaviour
 				this.transform.position += this.transform.forward * m_velocity[0] * Time.deltaTime;
 			}
 
-			m_velocity[1] -= m_friction * Time.deltaTime;
-			m_velocity[0] -= m_friction * Time.deltaTime;
+			//m_velocity[1] -= m_friction * Time.deltaTime;
+			//m_velocity[0] -= m_friction * Time.deltaTime;
 
-			if (m_velocity[0] <= 0.0f)
+			m_velocity[1] *= 0.98f/* * Time.deltaTime*/;
+			m_velocity[0] *= 0.98f/* * Time.deltaTime*/;
+
+			if (m_velocity[0] <= 0.1f)
 			{
 				m_velocity[0] = 0.0f;
 			}
 
-			if (m_velocity[1] <= 0.0f)
+			if (m_velocity[1] <= 0.1f)
 			{
 				m_velocity[1] = 0.0f;
 			}
@@ -177,12 +180,16 @@ public class FighterData : MonoBehaviour
 
 	public void SetPosition(Vector3 otherFighterPosition, float horizontalOffset, float verticalOffset)
 	{
+		Vector3 temp = this.transform.position;
+
 		m_wasPositionManipulated = true;
 
 		otherFighterPosition += (this.transform.right * horizontalOffset);
 		otherFighterPosition += (this.transform.up * verticalOffset);
 
 		this.transform.position = otherFighterPosition;
+
+		Debug.Log(temp + " -> " + otherFighterPosition);
 	}
 
 	public void WalkForward()
@@ -251,6 +258,11 @@ public class FighterData : MonoBehaviour
 	public bool IsAnimating()
 	{
 		return m_animationControler.GetPlaying();
+	}
+
+	public bool HasPassedImpactTime()
+	{
+		return m_animationControler.HasPassedImpactTime();
 	}
 
 	public bool isMoving()

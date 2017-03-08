@@ -137,6 +137,7 @@ public class LightAttack : BaseMove
 
 		anim.AddKeyFrame(sprites[18], 0.12f);
 		anim.AddKeyFrame(sprites[19], 0.12f);
+		anim.SetImpactTime(0.24f);
 		anim.AddKeyFrame(sprites[20], 0.72f);
 
 		animCon.AddAnim(anim);
@@ -146,7 +147,7 @@ public class LightAttack : BaseMove
 	{
 		m_me.SetAnimaton(E_ANIMATIONS.LIGHT);
 
-		if (!m_me.IsAnimating())
+		if (m_me.HasPassedImpactTime())
 		{
 			return true;
 		}
@@ -222,6 +223,8 @@ public class HeavyAttack : BaseMove
 		anim.AddKeyFrame(sprites[31], 0.12f);
 		anim.AddKeyFrame(sprites[33], 0.12f);
 
+		anim.SetImpactTime(0.48f);
+
 		anim.AddKeyFrame(sprites[34], 0.12f);
 		anim.AddKeyFrame(sprites[35], 0.12f);
 		anim.AddKeyFrame(sprites[36], 0.12f);
@@ -251,7 +254,7 @@ public class HeavyAttack : BaseMove
 		//m_me.SetVelocity(0.0f, -1.0f);
 		//enemy.SetVelocity(0.0f, 1.0f);
 
-		if (!m_me.IsAnimating())
+		if (m_me.HasPassedImpactTime())
 		{
 			return true;
 		}
