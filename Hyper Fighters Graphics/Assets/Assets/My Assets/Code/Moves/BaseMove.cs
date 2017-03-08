@@ -536,7 +536,11 @@ public class DODGE : BaseMove
 		if (myResult == E_RESULT.WIN || myResult == E_RESULT.SP_WIN)
 		{
 			m_me.SetAnimaton(E_ANIMATIONS.LIGHT);
-			enemy.SetAnimaton(E_ANIMATIONS.HIT);
+
+			if (m_me.HasPassedImpactTime())
+			{
+				enemy.SetAnimaton(E_ANIMATIONS.HIT);
+			}
 
 			if (!m_me.IsAnimating())
 			{
