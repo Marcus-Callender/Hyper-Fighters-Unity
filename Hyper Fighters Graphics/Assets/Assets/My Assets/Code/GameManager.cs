@@ -151,7 +151,7 @@ public class GameManager : MonoBehaviour
 		}
 		else if (m_state == E_GameStates.RESET_DISTANCE)
 		{
-			if (m_posManager.ResetCharicterDistance())
+			if (m_posManager.CharicterDistanceCheck())
 			{
 				m_state = E_GameStates.MOVE_SELECT;
 			}

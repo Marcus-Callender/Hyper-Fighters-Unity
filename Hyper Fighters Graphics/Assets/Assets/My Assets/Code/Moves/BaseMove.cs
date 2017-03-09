@@ -29,11 +29,6 @@ public class BaseMove : MonoBehaviour
 	protected E_MOVE_TYPE m_type;
 	protected FighterData m_me;
 
-	void Start()
-	{
-		m_me = gameObject.GetComponent<FighterData>();
-	}
-
 	public virtual void Initialize()
 	{
 		m_me = gameObject.GetComponent<FighterData>();
