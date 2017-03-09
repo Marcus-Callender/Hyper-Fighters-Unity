@@ -40,7 +40,7 @@ public class FighterBase : MonoBehaviour
 		m_moves[1] = gameObject.AddComponent<HeavyAttack>();
 		m_moves[2] = gameObject.AddComponent<Throw>();
 		m_moves[3] = gameObject.AddComponent<Block>();
-		m_moves[4] = gameObject.AddComponent<DODGE>();
+		m_moves[4] = gameObject.AddComponent<Dodge>();
 		m_moves[5] = gameObject.AddComponent<HeavyAttack>();
 
 		m_moves[0].SetAnimation(m_Data.GetAnimationControler(), m_Data.GetSprites());

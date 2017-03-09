@@ -42,7 +42,7 @@ public class FighterData : MonoBehaviour
 
 	public Sprite[] m_sprites;
 	SpriteRenderer m_sprite;
-	private float m_movementSpeed = 1.5f;
+	private float m_movementSpeed = 3.5f;
 
 	AnimationControler m_animationControler;
 	Timer m_timer;
