@@ -92,6 +92,11 @@ public class AnimationControler : MonoBehaviour
 		return true;
 	}
 
+	public bool CheckCurrentAnimation(E_ANIMATIONS anim)
+	{
+		return ((int) anim == m_currentAnim);
+	}
+
 	public bool GetPlaying()
 	{
 		return m_animations[m_currentAnim].GetPlaying();

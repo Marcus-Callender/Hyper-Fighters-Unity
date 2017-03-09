@@ -283,6 +283,11 @@ public class FighterData : MonoBehaviour
 		m_animationControler.SetAnim((int) z);
 	}
 
+	public bool CheckCurrentAnimation(E_ANIMATIONS anim)
+	{
+		return m_animationControler.CheckCurrentAnimation(anim);
+	}
+
 	public void StartSeccondAnimation()
 	{
 		m_animationControler.MoveToNextAnim();
