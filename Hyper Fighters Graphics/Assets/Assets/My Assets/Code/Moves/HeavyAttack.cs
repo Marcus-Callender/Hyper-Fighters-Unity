@@ -82,8 +82,6 @@ public class HeavyAttack : BaseMove
 	public override bool Update1(FighterData enemy)
 	{
 		m_me.SetAnimaton(E_ANIMATIONS.HEAVY);
-		//m_me.SetVelocity(0.0f, -1.0f);
-		//enemy.SetVelocity(0.0f, 1.0f);
 
 		if (m_me.HasPassedImpactTime())
 		{
@@ -95,6 +93,16 @@ public class HeavyAttack : BaseMove
 
 	public override bool Update2(E_RESULT myResult, E_RESULT otherResult, FighterData enemy)
 	{
+		if (m_me.CheckCurrentAnimation(E_ANIMATIONS.HEAVY))
+		{
+			m_me.SetVelocity(0.0f, -3.0f);
+
+			if (m_me.DistanceFromEnemy(enemy) < 1.0f)
+			{
+				enemy.SetVelocity(2.0f, 3.0f);
+			}
+		}
+
 		if (myResult == E_RESULT.WIN || myResult == E_RESULT.SP_WIN)
 		{
 			enemy.SetAnimaton(E_ANIMATIONS.HIT);
