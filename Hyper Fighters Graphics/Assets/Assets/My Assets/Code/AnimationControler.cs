@@ -43,6 +43,8 @@ public class AnimationControler : MonoBehaviour
 
 	public void MoveToNextAnim()
 	{
+		Debug.Log("Moved to seccond animation");
+
 		if (m_nextAnim != -1)
 		{
 			m_currentAnim = m_nextAnim;
@@ -109,6 +111,8 @@ public class AnimationControler : MonoBehaviour
 
 	public void SetPause(bool pause)
 	{
+		Debug.Log("Animation paused");
+
 		m_animations[m_currentAnim].SetPause(pause);
 	}
 }

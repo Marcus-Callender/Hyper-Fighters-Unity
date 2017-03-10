@@ -165,7 +165,7 @@ public class FighterData : MonoBehaviour
 			if ((m_velocity[0] == 0.0f) && (m_velocity[1] == 0.0f))
 			{
 				m_moving = false;
-				m_sprite.sprite = m_sprites[0];
+				//m_sprite.sprite = m_sprites[0];
 			}
 		}
 	}
