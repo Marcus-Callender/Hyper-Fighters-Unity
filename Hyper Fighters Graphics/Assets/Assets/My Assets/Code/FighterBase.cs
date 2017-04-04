@@ -95,8 +95,6 @@ public class FighterBase : MonoBehaviour
 		{
 			if (m_inputs[z] == KeyCode.None)
 			{
-				//Debug.Log("Please enter a key for " + m_moveNames[z] + ".");
-
 				foreach (KeyCode key in System.Enum.GetValues(typeof(KeyCode)))
 				{
 					if (Input.GetKeyDown(key))

@@ -180,16 +180,21 @@ public class FighterData : MonoBehaviour
 
 	public void SetPosition(Vector3 otherFighterPosition, float horizontalOffset, float verticalOffset)
 	{
-		Vector3 temp = this.transform.position;
+        //Vector3 myTemp = this.transform.position;
+        //Vector3 otherTemp = otherFighterPosition;
 
-		m_wasPositionManipulated = true;
+        m_wasPositionManipulated = true;
 
-		otherFighterPosition += (this.transform.right * horizontalOffset);
-		otherFighterPosition += (this.transform.up * verticalOffset);
+        //otherTemp += (this.transform.right * horizontalOffset);
+        //otherTemp += (this.transform.up * verticalOffset);
 
-		this.transform.position = otherFighterPosition;
+        //this.transform.position = otherTemp;
 
-		Debug.Log(temp + " -> " + otherFighterPosition);
+        //Debug.Log(myTemp + " -> " + otherTemp);
+
+        this.transform.position = otherFighterPosition;
+        this.transform.position += this.transform.right * horizontalOffset;
+        this.transform.position += this.transform.up * verticalOffset;
 	}
 
 	public void WalkForward()

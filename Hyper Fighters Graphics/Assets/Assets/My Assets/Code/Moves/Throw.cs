@@ -88,22 +88,26 @@ public class Throw : BaseMove
 
 			if (m_timeInUpdate2 < 1.0f)
 			{
-				enemy.SetPosition(m_me.GetComponent<Transform>().position, -1.0f, 0.5f);
-			}
-			else if (m_timeInUpdate2 < 2.0f)
+                //enemy.SetPosition(m_me.GetComponent<Transform>().position, -1.0f, 0.5f);
+                enemy.SetPosition(m_me.GetComponent<Transform>().position, 2.0f, 2.5f);
+            }
+            else if (m_timeInUpdate2 < 2.0f)
 			{
-				enemy.SetPosition(m_me.GetComponent<Transform>().position, 0.0f, 1.5f);
-			}
-			else if (m_timeInUpdate2 < 2.5f)
+                //enemy.SetPosition(m_me.GetComponent<Transform>().position, 0.0f, 1.5f);
+                enemy.SetPosition(m_me.GetComponent<Transform>().position, 0.0f, 7.5f);
+            }
+            else if (m_timeInUpdate2 < 2.5f)
 			{
-				enemy.SetPosition(m_me.GetComponent<Transform>().position, 1.0f, 0.5f);
-			}
-			else if (m_timeInUpdate2 < 3.0f)
+                //enemy.SetPosition(m_me.GetComponent<Transform>().position, 1.0f, 0.5f);
+                enemy.SetPosition(m_me.GetComponent<Transform>().position, -5.0f, 2.5f);
+            }
+            else if (m_timeInUpdate2 < 3.0f)
 			{
-				enemy.SetPosition(m_me.GetComponent<Transform>().position, 2.0f, 0.0f);
-			}
+                //enemy.SetPosition(m_me.GetComponent<Transform>().position, 2.0f, 0.0f);
+                enemy.SetPosition(m_me.GetComponent<Transform>().position, -10.0f, 0.0f);
+            }
 
-			if (!enemy.IsAnimating())
+            if (!enemy.IsAnimating())
 			{
 				return true;
 			}
