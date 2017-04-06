@@ -109,7 +109,6 @@ public class Throw : BaseMove
 
             if (!enemy.IsAnimating())
 			{
-                m_timeInUpdate2 = 0.0f;
 				return true;
 			}
 		}
