@@ -115,6 +115,11 @@ public class AnimationControler : MonoBehaviour
 
 		m_animations[m_currentAnim].SetPause(pause);
 	}
+
+    public int GetCurrentFrame()
+    {
+        return m_animations[m_currentAnim].GetCurrentKey();
+    }
 }
 
 
@@ -202,7 +207,7 @@ public class Animation
 	{
 		m_currentAnimTime = 0.0f;
 		m_playing = false;
-		m_currentKey = 0;
+		//m_currentKey = 0;
 	}
 
 	private float GetAnimationTime()
@@ -258,5 +263,10 @@ public class Animation
 	{
 		m_paused = pause;
 	}
+
+    public int GetCurrentKey()
+    {
+        return m_currentKey;
+    }
 }
 
