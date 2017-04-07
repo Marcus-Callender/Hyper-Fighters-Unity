@@ -49,6 +49,9 @@ public class GameManager : MonoBehaviour
 
 		m_posManager = GetComponent<PositionManager>();
 		m_posManager.Initialize(m_charicters[0], m_charicters[1], m_camera.gameObject);
+
+	    m_charicterScripts[0].SetAnimation(E_ANIMATIONS.IDLE);
+	    m_charicterScripts[1].SetAnimation(E_ANIMATIONS.IDLE);
 	}
 	
 	void Update()
@@ -58,16 +61,16 @@ public class GameManager : MonoBehaviour
 			if (m_charicterScripts[0].StartKeyAssign())
 			{
 				if (m_charicterScripts[1].StartKeyAssign())
-				{
-					m_state = E_GameStates.MOVE_SELECT;
+                {
+                    if (m_posManager.CharicterDistanceCheck())
+                    {
+                        m_state = E_GameStates.MOVE_SELECT;
+                    }
 				}
 			}
 
 			m_charicterScripts[0].WriteMoveUI();
 			m_charicterScripts[1].WriteMoveUI();
-
-			m_charicterScripts[0].SetAnimation(E_ANIMATIONS.IDLE);
-			m_charicterScripts[1].SetAnimation(E_ANIMATIONS.IDLE);
 		}
 		else if (m_state == E_GameStates.MOVE_SELECT)
 		{
