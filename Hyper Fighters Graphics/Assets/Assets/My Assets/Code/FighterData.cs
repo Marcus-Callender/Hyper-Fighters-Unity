@@ -113,10 +113,10 @@ public class FighterData : MonoBehaviour
 		m_animationControler.AddAnim(hitAnim);
 
 		Animation ThrownAnim = new Animation();
-		ThrownAnim.AddKeyFrame(m_sprites[86], 1.0f);
-		ThrownAnim.AddKeyFrame(m_sprites[96], 1.0f);
-		ThrownAnim.AddKeyFrame(m_sprites[89], 0.5f);
-		ThrownAnim.AddKeyFrame(m_sprites[90], 0.5f);
+		ThrownAnim.AddKeyFrame(m_sprites[86], 0.5f);
+		ThrownAnim.AddKeyFrame(m_sprites[96], 0.2f);
+		ThrownAnim.AddKeyFrame(m_sprites[89], 0.2f);
+		ThrownAnim.AddKeyFrame(m_sprites[90], 0.2f);
 		m_animationControler.AddAnim(ThrownAnim);
 
 		Animation ThrowRejectAnim = new Animation();
@@ -127,7 +127,7 @@ public class FighterData : MonoBehaviour
 		m_animationControler.F_play();
 	}
 
-	void Update()
+	public void F_Update()
 	{
 		m_wasPositionManipulated = false;
 
@@ -170,8 +170,10 @@ public class FighterData : MonoBehaviour
 		}
 	}
 
-	public void SetVelocity(float side, float back)
+	public void SetVelocity(float side, float back, bool stopCamera = false)
 	{
+        m_wasPositionManipulated = stopCamera;
+
 		m_velocity[0] = side;
 		m_velocity[1] = back;
 		m_moving = true;

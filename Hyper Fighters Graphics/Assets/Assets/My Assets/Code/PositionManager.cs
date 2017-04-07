@@ -69,7 +69,7 @@ public class PositionManager : MonoBehaviour
 			m_charicterData[0].WalkBackward();
 			m_charicterData[1].WalkBackward();
 
-			if (GetDistance() < 10.0f)
+			if (GetDistance() < 8.0f)
 			{
 				return false;
 			}
@@ -79,7 +79,7 @@ public class PositionManager : MonoBehaviour
 			m_charicterData[0].WalkForward();
 			m_charicterData[1].WalkForward();
 
-			if (GetDistance() > 8.0f)
+			if (GetDistance() > 6.0f)
 			{
 				return false;
 			}
@@ -95,11 +95,11 @@ public class PositionManager : MonoBehaviour
 	{
 		float distance = GetDistance();
 
-		if (distance > 10.0f)
+		if (distance > 8.0f)
 		{
 			m_charictersFar = true;
 		}
-		else if (distance < 8.0f)
+		else if (distance < 6.0f)
 		{
 			m_charictersClose = true;
 		}

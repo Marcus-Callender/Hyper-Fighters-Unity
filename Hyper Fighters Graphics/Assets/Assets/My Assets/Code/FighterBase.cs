@@ -60,6 +60,8 @@ public class FighterBase : MonoBehaviour
 	
 	void Update()
 	{
+        m_Data.F_Update();
+
 		RenderNameUI();
 	}
 

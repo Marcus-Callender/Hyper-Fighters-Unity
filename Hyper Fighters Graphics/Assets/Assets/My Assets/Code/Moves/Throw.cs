@@ -86,7 +86,13 @@ public class Throw : BaseMove
 
             m_timeInUpdate2 += Time.deltaTime;
 
-            if (enemy.GetAnimationControler().GetCurrentFrame() == 0)
+            if (m_me.GetAnimationControler().GetCurrentFrame() == 1)
+            {
+
+                enemy.SetPosition(m_me.GetComponent<Transform>().position, 2.0f, 1.5f);
+            }
+
+            else if (enemy.GetAnimationControler().GetCurrentFrame() == 0)
             {
                 if (m_timeInUpdate2 > 1.0f)
                 {
@@ -94,8 +100,12 @@ public class Throw : BaseMove
                 }
 
                 //enemy.SetPosition(m_me.GetComponent<Transform>().position, -1.0f, 0.5f);
-                enemy.SetPosition(m_me.GetComponent<Transform>().position, 0.0f, 1.5f);
+                enemy.SetPosition(m_me.GetComponent<Transform>().position, -2.0f, 1.5f);
             }
+            /*else
+            {
+                enemy.SetVelocity(-2.0f, 3.0f - m_timeInUpdate2, true);
+            }*/
             else if (enemy.GetAnimationControler().GetCurrentFrame() == 1)
             {
                 if (m_timeInUpdate2 > 2.0f)
