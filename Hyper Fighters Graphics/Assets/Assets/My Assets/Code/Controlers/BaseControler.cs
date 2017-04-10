@@ -4,16 +4,23 @@ using UnityEngine;
 
 using UnityEngine.UI;
 
+public enum E_SimpleResult
+{
+    WIN,
+    DRAW,
+    LOSE
+}
+
 public class BaseControler : ScriptableObject /*MonoBehaviour*/
 {
-    const int m_c_numInputs = 6;
-    FighterData m_me;
-    InputTracker m_inputTracker;
+    protected const int m_c_numInputs = 6;
+    protected FighterData m_me;
+    protected InputTracker m_inputTracker;
 
-    int m_currentMove;
+    protected int m_currentMove;
 
-    KeyCode[] m_inputs = new KeyCode[m_c_numInputs];
-    string[] m_moveNames = new string[m_c_numInputs];
+    protected KeyCode[] m_inputs = new KeyCode[m_c_numInputs];
+    protected string[] m_moveNames = new string[m_c_numInputs];
 
     public void Initialize(FighterData me, InputTracker inputTracker)
     {
@@ -23,14 +30,12 @@ public class BaseControler : ScriptableObject /*MonoBehaviour*/
 
         for (int z = 0; z < m_c_numInputs; z++)
         {
-
             m_inputs[0] = KeyCode.None;
             m_inputs[1] = KeyCode.None;
             m_inputs[2] = KeyCode.None;
             m_inputs[3] = KeyCode.None;
             m_inputs[4] = KeyCode.None;
             m_inputs[5] = KeyCode.None;
-
         }
 
         m_moveNames[0] = "Light";
@@ -41,7 +46,7 @@ public class BaseControler : ScriptableObject /*MonoBehaviour*/
         m_moveNames[5] = "Hyper";
     }
 
-    public bool Setup()
+    public virtual bool Setup()
     {
         for (int z = 0; z < m_c_numInputs; z++)
         {
@@ -65,7 +70,7 @@ public class BaseControler : ScriptableObject /*MonoBehaviour*/
         return true;
     }
 
-    public void WriteMoveUI(Text moveUI)
+    public virtual void WriteMoveUI(Text moveUI)
     {
         string temp = "";
 
@@ -77,7 +82,7 @@ public class BaseControler : ScriptableObject /*MonoBehaviour*/
         moveUI.text = temp;
     }
 
-    public void RevealMovesUI(Text moveUI)
+    public virtual void RevealMovesUI(Text moveUI)
     {
         string temp = "";
 
@@ -96,7 +101,7 @@ public class BaseControler : ScriptableObject /*MonoBehaviour*/
         moveUI.text = temp;
     }
 
-    public int SelectMove()
+    public virtual int SelectMove()
     {
         for (int z = 0; z < m_c_numInputs; z++)
         {

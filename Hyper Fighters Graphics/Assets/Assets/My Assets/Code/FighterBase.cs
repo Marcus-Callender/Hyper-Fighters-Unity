@@ -243,8 +243,8 @@ public class FighterBase : MonoBehaviour
         return m_Data;
     }
 
-    public KeyCode[] GetKeys()
-    {
-        return m_controler.GetInputKeys();
-    }
+    //public KeyCode[] GetKeys()
+    //{
+    //    return m_controler.GetInputKeys();
+    //}
 }

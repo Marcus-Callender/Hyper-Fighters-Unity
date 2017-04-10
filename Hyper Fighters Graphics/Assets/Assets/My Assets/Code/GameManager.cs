@@ -39,8 +39,8 @@ public class GameManager : MonoBehaviour
 		m_charicterScripts[0] = m_charicters[0].GetComponent<FighterBase>();
 		m_charicterScripts[1] = m_charicters[1].GetComponent<FighterBase>();
 
-		m_charicterScripts[0].Initialize(1, m_canvas, m_inputTracker, new BaseControler());
-		m_charicterScripts[1].Initialize(2, m_canvas, m_inputTracker, new BaseControler());
+		m_charicterScripts[0].Initialize(1, m_canvas, m_inputTracker, ScriptableObject.CreateInstance<BaseControler>());
+		m_charicterScripts[1].Initialize(2, m_canvas, m_inputTracker, ScriptableObject.CreateInstance<AI_Controler>());
 
 		m_charicters[0].transform.position = new Vector3(5.0f, 0.0f, 0.0f);
 		m_charicters[1].transform.position = new Vector3(-5.0f, 0.0f, 0.0f);
