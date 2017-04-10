@@ -23,13 +23,6 @@ public class FighterBase : MonoBehaviour
         m_Data = gameObject.GetComponent<FighterData>();
         m_Data.Initialize();
 
-        //m_moveNames[0] = "Light";
-        //m_moveNames[1] = "Heavy";
-        //m_moveNames[2] = "Throw";
-        //m_moveNames[3] = "Block";
-        //m_moveNames[4] = "Dodge";
-        //m_moveNames[5] = "Hyper";
-
         m_moves[0] = gameObject.AddComponent<LightAttack>();
         m_moves[1] = gameObject.AddComponent<HeavyAttack>();
         m_moves[2] = gameObject.AddComponent<Throw>();
@@ -90,63 +83,16 @@ public class FighterBase : MonoBehaviour
 
     public bool StartKeyAssign()
     {
-        //for (int z = 0; z < m_c_numInputs; z++)
-        //{
-        //    if (m_inputs[z] == KeyCode.None)
-        //    {
-        //        foreach (KeyCode key in System.Enum.GetValues(typeof(KeyCode)))
-        //        {
-        //            if (Input.GetKeyDown(key))
-        //            {
-        //                if (m_inputTracker.IsKeyInUse(key))
-        //                {
-        //                    m_inputs[z] = key;
-        //                }
-        //            }
-        //        }
-
-        //        return false;
-        //    }
-        //}
-
-        //return true;
-
-
         return m_controler.Setup();
     }
 
     public void WriteMoveUI()
     {
-        //string temp = "";
-
-        //for (int z = 0; z < m_c_numInputs; z++)
-        //{
-        //    temp += m_moveNames[z] + " : " + m_inputs[z] + "\n";
-        //}
-
-        //m_moveUI.text = temp;
-
         m_controler.WriteMoveUI(m_moveUI);
     }
 
     public void RevealMovesUI()
     {
-        //string temp = "";
-
-        //for (int z = 0; z < m_c_numInputs; z++)
-        //{
-        //    if (z == m_currentMove)
-        //    {
-        //        temp += ">>" + m_moveNames[z] + " : " + m_inputs[z] + "<<\n";
-        //    }
-        //    else
-        //    {
-        //        temp += m_moveNames[z] + " : " + m_inputs[z] + "\n";
-        //    }
-        //}
-
-        //m_moveUI.text = temp;
-
         m_controler.RevealMovesUI(m_moveUI);
     }
 
@@ -158,31 +104,6 @@ public class FighterBase : MonoBehaviour
 
     public bool SelectMove()
     {
-        //if (m_currentMove == -1)
-        //{
-        //	for (int z = 0; z < m_c_numInputs; z++)
-        //	{
-        //		if (Input.GetKeyDown(m_inputs[z]))
-        //		{
-        //			m_currentMove = z;
-
-        //			// if the move is the charicters hyper move
-        //			if (z == 5)
-        //			{
-        //				if (!m_Data.CanUseHyper())
-        //				{
-        //					m_currentMove = -1;
-        //				}
-        //			}
-        //		}
-        //	}
-
-        //	return false;
-        //}
-
-        //return true;
-
-
         if (m_currentMove == -1)
         {
             m_currentMove = m_controler.SelectMove();
@@ -238,13 +159,18 @@ public class FighterBase : MonoBehaviour
         return m_moves[m_currentMove];
     }
 
+    public int GetCurrentMoveNumber()
+    {
+        return m_currentMove;
+    }
+
     public FighterData GetData()
     {
         return m_Data;
     }
 
-    //public KeyCode[] GetKeys()
-    //{
-    //    return m_controler.GetInputKeys();
-    //}
+    public void UpdateControler(E_RESULT myRes, E_RESULT othRes, int opponantsMove)
+    {
+        m_controler.GetResult(myRes, othRes, opponantsMove);
+    }
 }

@@ -8,7 +8,9 @@ public enum E_SimpleResult
 {
     WIN,
     DRAW,
-    LOSE
+    LOSE,
+
+    TOTAL
 }
 
 public class BaseControler : ScriptableObject /*MonoBehaviour*/
@@ -126,8 +128,8 @@ public class BaseControler : ScriptableObject /*MonoBehaviour*/
         return -1;
     }
 
-    public KeyCode[] GetInputKeys()
+    public virtual void GetResult(E_RESULT myRes, E_RESULT othRes, int opponantsMove)
     {
-        return m_inputs;
+
     }
 }

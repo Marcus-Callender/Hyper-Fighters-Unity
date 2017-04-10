@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class AI_Controler : BaseControler
 {
+    int m_opponantPrevMove = -1;
+
+    int [ , , ] m_pastOutcomes = new int[m_c_numInputs, m_c_numInputs, (int) E_SimpleResult.TOTAL];
 
     public override bool Setup()
     {
@@ -58,5 +61,31 @@ public class AI_Controler : BaseControler
         }
 
         return m_currentMove;
+    }
+
+    public override void GetResult(E_RESULT myRes, E_RESULT othRes, int opponantsMove)
+    {
+        // checks opponants last move is valid
+        if (m_opponantPrevMove != -1)
+        {
+            // increments the outcome count for using a specified move after a specified opponant move
+            m_pastOutcomes[m_opponantPrevMove, m_currentMove, (int)findSimpleResult(myRes, othRes)]++;
+        }
+
+        m_opponantPrevMove = opponantsMove;
+    }
+
+    private E_SimpleResult findSimpleResult(E_RESULT myRes, E_RESULT othRes)
+    {
+        if ((int) myRes > (int) othRes)
+        {
+            return E_SimpleResult.WIN;
+        }
+        else if (myRes == othRes)
+        {
+            return E_SimpleResult.DRAW;
+        }
+
+        return E_SimpleResult.LOSE;
     }
 }
