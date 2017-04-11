@@ -10,7 +10,8 @@ public enum E_SimpleResult
     DRAW,
     LOSE,
 
-    TOTAL
+    TOTAL,
+    NONE
 }
 
 public class BaseControler : ScriptableObject /*MonoBehaviour*/

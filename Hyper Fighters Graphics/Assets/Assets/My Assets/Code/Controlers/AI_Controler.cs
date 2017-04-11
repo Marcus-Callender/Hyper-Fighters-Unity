@@ -8,7 +8,16 @@ public class AI_Controler : BaseControler
 {
     int m_opponantPrevMove = -1;
 
+    // this tracks what moves are sucsessful after a given move is used by the opponant
     int [ , , ] m_pastOutcomes = new int[m_c_numInputs, m_c_numInputs, (int) E_SimpleResult.TOTAL];
+    
+    // This tracks what move the opponant uses after a specified move gets a specified result
+    int [ , , ] m_opponantMovePattern = new int [m_c_numInputs, (int) E_SimpleResult.TOTAL, m_c_numInputs];
+    
+    // this tracks the ammount of times the opponant has repeted the same move, starts from 0
+    int m_repetedMovesCount = 0;
+
+    E_SimpleResult m_opponantPrevResult = E_SimpleResult.NONE;
 
     public override bool Setup()
     {
@@ -72,6 +81,22 @@ public class AI_Controler : BaseControler
             m_pastOutcomes[m_opponantPrevMove, m_currentMove, (int)findSimpleResult(myRes, othRes)]++;
         }
 
+        if (opponantsMove == m_opponantPrevMove)
+        {
+            m_repetedMovesCount++;
+        }
+        else
+        {
+            m_repetedMovesCount = 0;
+        }
+
+        if (m_opponantPrevResult != E_SimpleResult.NONE)
+        {
+            m_opponantMovePattern[m_opponantPrevMove, (int) m_opponantPrevResult, opponantsMove]++;
+        }
+
+        m_opponantPrevResult = findOpponantSimpleResult(myRes, othRes);
+
         m_opponantPrevMove = opponantsMove;
     }
 
@@ -87,5 +112,19 @@ public class AI_Controler : BaseControler
         }
 
         return E_SimpleResult.LOSE;
+    }
+
+    private E_SimpleResult findOpponantSimpleResult(E_RESULT myRes, E_RESULT othRes)
+    {
+        if ((int)myRes > (int)othRes)
+        {
+            return E_SimpleResult.LOSE;
+        }
+        else if (myRes == othRes)
+        {
+            return E_SimpleResult.DRAW;
+        }
+
+        return E_SimpleResult.WIN;
     }
 }
