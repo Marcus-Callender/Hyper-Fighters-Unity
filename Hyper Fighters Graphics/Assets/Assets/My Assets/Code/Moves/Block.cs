@@ -10,7 +10,7 @@ public class Block : BaseMove
 		m_type = E_MOVE_TYPE.BLOCK;
 	}
 
-	public override E_RESULT Use(BaseMove enemyMove, FighterData enemy)
+	public override E_RESULT Use(BaseMove enemyMove)
 	{
 		if ((enemyMove.GetMoveType() == E_MOVE_TYPE.L_ATTACK) || (enemyMove.GetMoveType() == E_MOVE_TYPE.H_ATTACK))
 		{

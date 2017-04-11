@@ -20,8 +20,8 @@ public class FighterBase : MonoBehaviour
 
     void Start()
     {
-        m_Data = gameObject.GetComponent<FighterData>();
-        m_Data.Initialize();
+        //m_Data = gameObject.GetComponent<FighterData>();
+        //m_Data.Initialize();
 
         m_moves[0] = gameObject.AddComponent<LightAttack>();
         m_moves[1] = gameObject.AddComponent<HeavyAttack>();
@@ -60,8 +60,11 @@ public class FighterBase : MonoBehaviour
 
         m_inputTracker = refInputTracker;
 
+        m_Data = gameObject.GetComponent<FighterData>();
+        m_Data.Initialize();
+
         m_controler = controler;
-        m_controler.Initialize(m_Data, m_inputTracker);
+        m_controler.Initialize(m_Data, m_inputTracker, m_moves);
 
         for (int z = 0; z < texts.Length; z++)
         {
@@ -80,6 +83,11 @@ public class FighterBase : MonoBehaviour
             }
         }
     }
+
+    public void SetControlerCounters(BaseMove[] opponantsMoves)
+    {
+
+    } 
 
     public bool StartKeyAssign()
     {
@@ -133,9 +141,9 @@ public class FighterBase : MonoBehaviour
 
     }
 
-    public E_RESULT UseMove(BaseMove enemyMove, FighterData enemy)
+    public E_RESULT UseMove(BaseMove enemyMove)
     {
-        return m_moves[m_currentMove].Use(enemyMove, enemy);
+        return m_moves[m_currentMove].Use(enemyMove);
     }
 
     public void Win(BaseMove enemyMove, FighterData enemy)
@@ -157,6 +165,11 @@ public class FighterBase : MonoBehaviour
     public BaseMove GetCurrentMove()
     {
         return m_moves[m_currentMove];
+    }
+
+    public BaseMove[] GetMovesArray()
+    {
+        return m_moves;
     }
 
     public int GetCurrentMoveNumber()

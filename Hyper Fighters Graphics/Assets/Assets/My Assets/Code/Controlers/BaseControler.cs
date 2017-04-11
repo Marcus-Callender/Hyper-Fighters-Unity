@@ -14,7 +14,7 @@ public enum E_SimpleResult
     NONE
 }
 
-public class BaseControler : ScriptableObject /*MonoBehaviour*/
+public class BaseControler : ScriptableObject
 {
     protected const int m_c_numInputs = 6;
     protected FighterData m_me;
@@ -24,8 +24,9 @@ public class BaseControler : ScriptableObject /*MonoBehaviour*/
 
     protected KeyCode[] m_inputs = new KeyCode[m_c_numInputs];
     protected string[] m_moveNames = new string[m_c_numInputs];
+    protected BaseMove[] m_moves = new BaseMove[m_c_numInputs];
 
-    public void Initialize(FighterData me, InputTracker inputTracker)
+    public void Initialize(FighterData me, InputTracker inputTracker, BaseMove[] moves)
     {
         m_me = me;
 
@@ -47,6 +48,8 @@ public class BaseControler : ScriptableObject /*MonoBehaviour*/
         m_moveNames[3] = "Block";
         m_moveNames[4] = "Dodge";
         m_moveNames[5] = "Hyper";
+
+        m_moves = moves;
     }
 
     public virtual bool Setup()
@@ -130,6 +133,11 @@ public class BaseControler : ScriptableObject /*MonoBehaviour*/
     }
 
     public virtual void GetResult(E_RESULT myRes, E_RESULT othRes, int opponantsMove)
+    {
+
+    }
+
+    public virtual void SetMoveCounters(BaseMove[] opponantsMoves)
     {
 
     }

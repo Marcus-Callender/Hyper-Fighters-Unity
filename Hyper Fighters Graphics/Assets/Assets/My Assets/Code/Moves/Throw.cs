@@ -12,7 +12,7 @@ public class Throw : BaseMove
         m_type = E_MOVE_TYPE.THROW;
     }
 
-    public override E_RESULT Use(BaseMove enemyMove, FighterData enemy)
+    public override E_RESULT Use(BaseMove enemyMove)
     {
         if ((enemyMove.GetMoveType() == E_MOVE_TYPE.L_ATTACK) || (enemyMove.GetMoveType() == E_MOVE_TYPE.H_ATTACK))
         {
@@ -94,10 +94,10 @@ public class Throw : BaseMove
 
             else if (enemy.GetAnimationControler().GetCurrentFrame() == 0)
             {
-                if (m_timeInUpdate2 > 1.0f)
-                {
-                    Debug.Log("Not In Sync, Time is: " + m_timeInUpdate2);
-                }
+                //if (m_timeInUpdate2 > 1.0f)
+                //{
+                //    Debug.Log("Not In Sync, Time is: " + m_timeInUpdate2);
+                //}
 
                 //enemy.SetPosition(m_me.GetComponent<Transform>().position, -1.0f, 0.5f);
                 enemy.SetPosition(m_me.GetComponent<Transform>().position, -2.0f, 1.5f);
@@ -108,30 +108,30 @@ public class Throw : BaseMove
             }*/
             else if (enemy.GetAnimationControler().GetCurrentFrame() == 1)
             {
-                if (m_timeInUpdate2 > 2.0f)
-                {
-                    Debug.Log("Not In Sync, Time is: " + m_timeInUpdate2);
-                }
+                //if (m_timeInUpdate2 > 2.0f)
+                //{
+                //    Debug.Log("Not In Sync, Time is: " + m_timeInUpdate2);
+                //}
 
                 //enemy.SetPosition(m_me.GetComponent<Transform>().position, 0.0f, 1.5f);
                 enemy.SetPosition(m_me.GetComponent<Transform>().position, -2.5f, 3.5f);
             }
             else if (enemy.GetAnimationControler().GetCurrentFrame() == 2)
             {
-                if (m_timeInUpdate2 > 2.5f)
-                {
-                    Debug.Log("Not In Sync, Time is: " + m_timeInUpdate2);
-                }
+                //if (m_timeInUpdate2 > 2.5f)
+                //{
+                //    Debug.Log("Not In Sync, Time is: " + m_timeInUpdate2);
+                //}
 
                 //enemy.SetPosition(m_me.GetComponent<Transform>().position, 1.0f, 0.5f);
                 enemy.SetPosition(m_me.GetComponent<Transform>().position, -5.0f, 2.5f);
             }
             else if (enemy.GetAnimationControler().GetCurrentFrame() == 3)
             {
-                if (m_timeInUpdate2 > 3.0f)
-                {
-                    Debug.Log("Not In Sync, Time is: " + m_timeInUpdate2);
-                }
+                //if (m_timeInUpdate2 > 3.0f)
+                //{
+                //    Debug.Log("Not In Sync, Time is: " + m_timeInUpdate2);
+                //}
 
                 //enemy.SetPosition(m_me.GetComponent<Transform>().position, 2.0f, 0.0f);
                 enemy.SetPosition(m_me.GetComponent<Transform>().position, -10.0f, 0.0f);

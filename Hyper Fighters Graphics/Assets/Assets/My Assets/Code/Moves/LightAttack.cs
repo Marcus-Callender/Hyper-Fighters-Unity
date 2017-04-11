@@ -10,7 +10,7 @@ public class LightAttack : BaseMove
 		m_type = E_MOVE_TYPE.L_ATTACK;
 	}
 
-	public override E_RESULT Use(BaseMove enemyMove, FighterData enemy)
+	public override E_RESULT Use(BaseMove enemyMove)
 	{
 		if (enemyMove.GetMoveType() == E_MOVE_TYPE.L_ATTACK)
 		{

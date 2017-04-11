@@ -40,7 +40,7 @@ public class BaseMove : MonoBehaviour
 		m_focusGain = focusGain;
 	}
 
-	public virtual E_RESULT Use(BaseMove enemyMove, FighterData enemy)
+	public virtual E_RESULT Use(BaseMove enemyMove)
 	{
 		return E_RESULT.LOSE;
 	}
