@@ -136,4 +136,25 @@ public class AI_Controler : BaseControler
 
         return E_SimpleResult.LOSE;
     }
+
+    private int findWiningMove(int moveToBeat, E_SimpleResult resultToFind)
+    {
+        int[] suitableMoves = new int [m_c_numInputs];
+        int numSuitableMoves = 0;
+
+        for (int z = 0; z < m_c_numInputs; z++)
+        {
+            if (m_moveMatchups[moveToBeat, z] == resultToFind)
+            {
+                suitableMoves[z] = -1;
+                suitableMoves[numSuitableMoves] = z;
+            }
+        }
+
+        int randomMove = Random.Range(0, numSuitableMoves);
+
+
+
+        return -1;
+    }
 }
