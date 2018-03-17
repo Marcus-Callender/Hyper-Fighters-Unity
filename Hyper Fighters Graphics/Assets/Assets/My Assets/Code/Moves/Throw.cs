@@ -114,7 +114,10 @@ public class Throw : BaseMove
                 //}
 
                 //enemy.SetPosition(m_me.GetComponent<Transform>().position, 0.0f, 1.5f);
-                enemy.SetPosition(m_me.GetComponent<Transform>().position, -2.5f, 3.5f);
+
+                ///enemy.SetPosition(m_me.GetComponent<Transform>().position, -2.5f, 3.5f);
+                enemy.SetVelocity(-2.5f, 3.5f);
+
             }
             else if (enemy.GetAnimationControler().GetCurrentFrame() == 2)
             {

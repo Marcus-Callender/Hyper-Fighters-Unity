@@ -11,11 +11,17 @@ public class PositionManager : MonoBehaviour
 	private bool m_charicterDistanceCheckStart = true;
 	private bool m_charictersClose = false;
 	private bool m_charictersFar = false;
+
+    private float m_yHeight = 0.0f;
 	
+    // camera y height = 4
+    // fighter y heigtht = 0
+
 	void Start()
 	{
 
-	}
+        m_yHeight = ((m_charicters[0].transform.position.y + m_charicters[1].transform.position.y) * 0.5f) + 4.0f;
+    }
 	
 	void Update()
 	{
@@ -23,19 +29,32 @@ public class PositionManager : MonoBehaviour
 		{
 			Vector3 charicterMidpont = (m_charicters[0].transform.position + m_charicters[1].transform.position) * 0.5f;
 
-			m_camera.transform.rotation = Quaternion.identity;
-			m_camera.transform.position = charicterMidpont;
+			//m_camera.transform.rotation = Quaternion.identity;
+			//m_camera.transform.position = charicterMidpont;
+            //
+			//m_camera.transform.LookAt(m_charicters[0].transform.position);
+			//m_camera.transform.Rotate(0.0f, 90.0f, 0.0f);
+            //
+			//m_camera.transform.position -= m_camera.transform.forward * 15.0f;
+			//m_camera.transform.position += m_camera.transform.up * 4.0f;
 
-			m_camera.transform.LookAt(m_charicters[0].transform.position);
-			m_camera.transform.Rotate(0.0f, 90.0f, 0.0f);
+            //m_charicters[0].transform.rotation = m_camera.transform.rotation;
+            //m_charicters[1].transform.rotation = m_camera.transform.rotation;
+            //m_charicters[1].transform.Rotate(0.0f, 180f, 0.0f);
 
-			m_camera.transform.position -= m_camera.transform.forward * 15.0f;
-			m_camera.transform.position += m_camera.transform.up * 4.0f;
+            m_charicters[0].transform.LookAt(new Vector3(m_charicters[1].transform.position.x, 0.0f, m_charicters[1].transform.position.z));
+            m_charicters[1].transform.LookAt(new Vector3(m_charicters[0].transform.position.x, 0.0f, m_charicters[0].transform.position.z));
 
-			m_charicters[0].transform.rotation = m_camera.transform.rotation;
-			m_charicters[1].transform.rotation = m_camera.transform.rotation;
-			m_charicters[1].transform.Rotate(0.0f, 180f, 0.0f);
-		}
+            m_charicters[0].transform.Rotate(0.0f, -90.0f, 0.0f);
+            m_charicters[1].transform.Rotate(0.0f, -90.0f, 0.0f); 
+
+            //m_camera.transform.position = charicterMidpont;
+            m_camera.transform.rotation = m_charicters[0].transform.rotation;
+
+            m_camera.transform.position = new Vector3(charicterMidpont.x, 4.0f, charicterMidpont.z + 15.0f);
+
+            //m_camera.transform.rotation.SetLookRotation(m_camera.transform.forward, Vector3.up);
+        }
 	}
 
 	public void Initialize(GameObject char1, GameObject char2, GameObject camera)

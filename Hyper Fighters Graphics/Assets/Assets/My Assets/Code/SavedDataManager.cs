@@ -9,7 +9,7 @@ public class SavedDataManager : MonoBehaviour
 
     void Start()
     {
-        filePath = Application.dataPath + "/MyAssets/SavedData/";
+        filePath = Application.dataPath + "/MyAssets/"; //"/MyAssets/SavedData/";
 
         Debug.Log(LoadData("Data.json"));
     }
