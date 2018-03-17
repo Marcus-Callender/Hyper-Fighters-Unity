@@ -72,7 +72,7 @@ public class AnimationControler : MonoBehaviour
 
 		if (z != m_currentAnim)
 		{
-			Debug.Log("Anim changed from " + (E_ANIMATIONS)m_currentAnim + " to " + (E_ANIMATIONS)z);
+			///Debug.Log("Anim changed from " + (E_ANIMATIONS)m_currentAnim + " to " + (E_ANIMATIONS)z);
 			m_animations[z].Play();
 		}
 

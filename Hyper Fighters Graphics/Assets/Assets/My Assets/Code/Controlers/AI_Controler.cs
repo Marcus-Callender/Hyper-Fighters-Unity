@@ -24,6 +24,8 @@ public class AI_Controler : BaseControler
 
     public override bool Setup()
     {
+        m_currentMove = 0;
+
         return true;
     }
 
@@ -63,7 +65,7 @@ public class AI_Controler : BaseControler
     {
 
 
-        if (m_currentMove == -1)
+        //if (m_currentMove == -1)
         {
             m_currentMove = Random.Range(0, m_c_numInputs);
         }

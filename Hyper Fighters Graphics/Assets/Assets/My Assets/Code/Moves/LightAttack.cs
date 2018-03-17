@@ -51,10 +51,10 @@ public class LightAttack : BaseMove
 	{
 		Animation anim = new Animation();
 
-		anim.AddKeyFrame(sprites[18], 0.12f);
-		anim.AddKeyFrame(sprites[19], 0.12f);
+		anim.AddKeyFrame(sprites[18], 0.10f);
+		anim.AddKeyFrame(sprites[19], 0.10f);
 		anim.SetImpactTime(0.24f);
-		anim.AddKeyFrame(sprites[20], 0.72f);
+		anim.AddKeyFrame(sprites[20], 0.5f);
 
 		animCon.AddAnim(anim);
 	}

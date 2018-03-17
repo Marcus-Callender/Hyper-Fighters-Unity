@@ -149,15 +149,15 @@ public class FighterData : MonoBehaviour
 			//m_velocity[1] -= m_friction * Time.deltaTime;
 			//m_velocity[0] -= m_friction * Time.deltaTime;
 
-			m_velocity[1] *= 0.98f/* * Time.deltaTime*/;
-			m_velocity[0] *= 0.98f/* * Time.deltaTime*/;
+			m_velocity[1] *= 0.95f/* * Time.deltaTime*/;
+			m_velocity[0] *= 0.95f/* * Time.deltaTime*/;
 
-			if (m_velocity[0] <= 0.1f)
+			if (m_velocity[0] <= 0.3f)
 			{
 				m_velocity[0] = 0.0f;
 			}
 
-			if (m_velocity[1] <= 0.1f)
+			if (m_velocity[1] <= 0.3f)
 			{
 				m_velocity[1] = 0.0f;
 			}

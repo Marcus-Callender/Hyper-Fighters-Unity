@@ -49,32 +49,32 @@ public class HeavyAttack : BaseMove
 	{
 		Animation anim = new Animation();
 
-		anim.AddKeyFrame(sprites[29], 0.12f);
-		anim.AddKeyFrame(sprites[30], 0.12f);
-		anim.AddKeyFrame(sprites[31], 0.12f);
-		anim.AddKeyFrame(sprites[33], 0.12f);
+		anim.AddKeyFrame(sprites[29], 0.10f);
+		anim.AddKeyFrame(sprites[30], 0.10f);
+		anim.AddKeyFrame(sprites[31], 0.10f);
+		anim.AddKeyFrame(sprites[33], 0.10f);
 
 		anim.SetImpactTime(0.48f);
 
-		anim.AddKeyFrame(sprites[34], 0.12f);
-		anim.AddKeyFrame(sprites[35], 0.12f);
-		anim.AddKeyFrame(sprites[36], 0.12f);
+		anim.AddKeyFrame(sprites[34], 0.10f);
+		anim.AddKeyFrame(sprites[35], 0.10f);
+		anim.AddKeyFrame(sprites[36], 0.10f);
 
-		anim.AddKeyFrame(sprites[34], 0.12f);
-		anim.AddKeyFrame(sprites[35], 0.12f);
-		anim.AddKeyFrame(sprites[36], 0.12f);
+		anim.AddKeyFrame(sprites[34], 0.10f);
+		anim.AddKeyFrame(sprites[35], 0.10f);
+		anim.AddKeyFrame(sprites[36], 0.10f);
 
-		anim.AddKeyFrame(sprites[34], 0.12f);
-		anim.AddKeyFrame(sprites[35], 0.12f);
-		anim.AddKeyFrame(sprites[36], 0.12f);
+		anim.AddKeyFrame(sprites[34], 0.10f);
+		anim.AddKeyFrame(sprites[35], 0.10f);
+		anim.AddKeyFrame(sprites[36], 0.10f);
 
-		anim.AddKeyFrame(sprites[34], 0.12f);
-		anim.AddKeyFrame(sprites[35], 0.12f);
-		anim.AddKeyFrame(sprites[36], 0.12f);
+		anim.AddKeyFrame(sprites[34], 0.10f);
+		anim.AddKeyFrame(sprites[35], 0.10f);
+		anim.AddKeyFrame(sprites[36], 0.10f);
 
-		anim.AddKeyFrame(sprites[34], 0.12f);
-		anim.AddKeyFrame(sprites[35], 0.12f);
-		anim.AddKeyFrame(sprites[36], 0.12f);
+		anim.AddKeyFrame(sprites[34], 0.10f);
+		anim.AddKeyFrame(sprites[35], 0.10f);
+		anim.AddKeyFrame(sprites[36], 0.10f);
 
 		animCon.AddAnim(anim);
 	}
