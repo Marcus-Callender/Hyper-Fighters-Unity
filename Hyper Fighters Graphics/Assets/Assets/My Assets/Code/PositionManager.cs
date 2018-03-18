@@ -42,20 +42,23 @@ public class PositionManager : MonoBehaviour
             //m_charicters[1].transform.rotation = m_camera.transform.rotation;
             //m_charicters[1].transform.Rotate(0.0f, 180f, 0.0f);
 
-            m_charicters[0].transform.LookAt(new Vector3(m_charicters[1].transform.position.x, 0.0f, m_charicters[1].transform.position.z));
-            m_charicters[1].transform.LookAt(new Vector3(m_charicters[0].transform.position.x, 0.0f, m_charicters[0].transform.position.z));
+            m_charicters[0].transform.LookAt(new Vector3(m_charicters[1].transform.position.x, m_charicters[0].transform.position.y, m_charicters[1].transform.position.z));
+            m_charicters[1].transform.LookAt(new Vector3(m_charicters[0].transform.position.x, m_charicters[1].transform.position.y, m_charicters[0].transform.position.z));
 
             m_charicters[0].transform.Rotate(0.0f, -90.0f, 0.0f);
-            m_charicters[1].transform.Rotate(0.0f, -90.0f, 0.0f); 
+            m_charicters[1].transform.Rotate(0.0f, -90.0f, 0.0f);
 
-            //m_camera.transform.position = charicterMidpont;
             m_camera.transform.rotation = m_charicters[0].transform.rotation;
 
-            m_camera.transform.position = new Vector3(charicterMidpont.x, 4.0f, charicterMidpont.z + 15.0f);
+            m_camera.transform.position = charicterMidpont;
+            m_camera.transform.position -= m_camera.transform.forward * 15.0f;
+            Vector3 newPos = m_camera.transform.position;
+            newPos.y = 4.0f;
+            m_camera.transform.position = newPos;
 
             //m_camera.transform.rotation.SetLookRotation(m_camera.transform.forward, Vector3.up);
         }
-	}
+    }
 
 	public void Initialize(GameObject char1, GameObject char2, GameObject camera)
 	{

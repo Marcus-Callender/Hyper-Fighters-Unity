@@ -116,7 +116,7 @@ public class Throw : BaseMove
                 //enemy.SetPosition(m_me.GetComponent<Transform>().position, 0.0f, 1.5f);
 
                 ///enemy.SetPosition(m_me.GetComponent<Transform>().position, -2.5f, 3.5f);
-                enemy.SetVelocity(-2.5f, 3.5f);
+                enemy.SetThrowVelocity(-2.5f, 3.5f, 3.0f);
 
             }
             else if (enemy.GetAnimationControler().GetCurrentFrame() == 2)
@@ -127,7 +127,7 @@ public class Throw : BaseMove
                 //}
 
                 //enemy.SetPosition(m_me.GetComponent<Transform>().position, 1.0f, 0.5f);
-                enemy.SetPosition(m_me.GetComponent<Transform>().position, -5.0f, 2.5f);
+                ///enemy.SetPosition(m_me.GetComponent<Transform>().position, -5.0f, 2.5f);
             }
             else if (enemy.GetAnimationControler().GetCurrentFrame() == 3)
             {
@@ -137,11 +137,15 @@ public class Throw : BaseMove
                 //}
 
                 //enemy.SetPosition(m_me.GetComponent<Transform>().position, 2.0f, 0.0f);
-                enemy.SetPosition(m_me.GetComponent<Transform>().position, -10.0f, 0.0f);
+                ///enemy.SetPosition(m_me.GetComponent<Transform>().position, -10.0f, 0.0f);
             }
 
-            if (!enemy.IsAnimating())
+            if (enemy.gameObject.transform.position.y <= 0.0f)
             {
+                Vector3 enemyPos = enemy.gameObject.transform.position;
+                enemyPos.y = 0.0f;
+                enemy.gameObject.transform.position = enemyPos;
+
                 return true;
             }
         }

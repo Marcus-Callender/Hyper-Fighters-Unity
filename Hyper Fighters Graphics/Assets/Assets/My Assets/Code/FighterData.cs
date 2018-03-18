@@ -34,6 +34,7 @@ public class FighterData : MonoBehaviour
 	//void* m_pStatus;
 	//C_Status* m_pStatuses[3];
 	float[] m_velocity = new float[2];
+    float m_upVel = 0.0f;
 	bool m_moving = false;
 	float m_friction = 1.0f;
 
@@ -46,6 +47,7 @@ public class FighterData : MonoBehaviour
 
 	AnimationControler m_animationControler;
 	Timer m_timer;
+    private bool m_isBeingThrown = false;
 
 	bool m_wasPositionManipulated = false;
 
@@ -133,7 +135,38 @@ public class FighterData : MonoBehaviour
 
 		m_animationControler.F_update(Time.deltaTime);
 
-		if (m_moving)
+        if (m_isBeingThrown)
+        {
+            if (transform.position.y <= 0.0f)
+            {
+                Vector3 newPos = transform.position;
+                newPos.y = 0.0f;
+                transform.position = newPos;
+
+                m_upVel = 0.0f;
+                m_isBeingThrown = false;
+            }
+            else
+            {
+                m_upVel -= (9.81f * Time.deltaTime);
+
+                this.transform.position -= this.transform.right * m_velocity[1] * Time.deltaTime;
+
+                this.transform.position += this.transform.up * m_upVel * Time.deltaTime;
+
+                if (m_moving_Left_Right)
+                {
+                    this.transform.position -= this.transform.forward * m_velocity[0] * Time.deltaTime;
+                }
+                else
+                {
+                    this.transform.position += this.transform.forward * m_velocity[0] * Time.deltaTime;
+                }
+
+
+            }
+        }
+		else if (m_moving)
 		{
 			this.transform.position -= this.transform.right * m_velocity[1] * Time.deltaTime;
 
@@ -178,9 +211,21 @@ public class FighterData : MonoBehaviour
 		m_velocity[1] = back;
 		m_moving = true;
 		m_moving_Left_Right = Random.Range(0, 2) == 0;
-	}
+    }
 
-	public void SetPosition(Vector3 otherFighterPosition, float horizontalOffset, float verticalOffset)
+    public void SetThrowVelocity(float side, float back, float up, bool stopCamera = false)
+    {
+        m_wasPositionManipulated = stopCamera;
+
+        m_velocity[0] = side;
+        m_velocity[1] = back;
+        m_upVel = up;
+        m_moving = true;
+        m_isBeingThrown = true;
+        m_moving_Left_Right = Random.Range(0, 2) == 0;
+    }
+    
+    public void SetPosition(Vector3 otherFighterPosition, float horizontalOffset, float verticalOffset)
 	{
         //Vector3 myTemp = this.transform.position;
         //Vector3 otherTemp = otherFighterPosition;
