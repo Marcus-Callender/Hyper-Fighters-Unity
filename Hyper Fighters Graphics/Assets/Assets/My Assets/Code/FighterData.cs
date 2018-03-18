@@ -117,7 +117,7 @@ public class FighterData : MonoBehaviour
 		Animation ThrownAnim = new Animation();
 		ThrownAnim.AddKeyFrame(m_sprites[86], 0.36f);
 		ThrownAnim.AddKeyFrame(m_sprites[96], 0.2f);
-		ThrownAnim.AddKeyFrame(m_sprites[89], 0.2f);
+		ThrownAnim.AddKeyFrame(m_sprites[89], 0.9f);
 		ThrownAnim.AddKeyFrame(m_sprites[90], 0.2f);
 		m_animationControler.AddAnim(ThrownAnim);
 
