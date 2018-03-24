@@ -12,9 +12,9 @@ public class FighterBase : MonoBehaviour
     BaseMove[] m_moves = new BaseMove[m_c_numInputs];
     FighterData m_Data;
     int m_playerNum;
-    Text m_healthUI;
+    //Text m_healthUI;
     Text m_moveUI;
-    Text m_hyperUI;
+    //Text m_hyperUI;
     InputTracker m_inputTracker;
     BaseControler m_controler;
 
@@ -58,10 +58,9 @@ public class FighterBase : MonoBehaviour
 
         Text[] texts = UICanvas.GetComponentsInChildren<Text>();
 
-        m_inputTracker = refInputTracker;
-
         m_Data = gameObject.GetComponent<FighterData>();
-        m_Data.Initialize();
+
+        m_inputTracker = refInputTracker;
 
         m_controler = controler;
         m_controler.Initialize(m_Data, m_inputTracker, m_moves);
@@ -70,18 +69,20 @@ public class FighterBase : MonoBehaviour
         {
             if (texts[z].name == ("Player " + m_playerNum + " Health"))
             {
-                m_healthUI = texts[z];
+                m_Data.m_healthUI = texts[z].gameObject.GetComponent<HealthUIManager>();
             }
             else if (texts[z].name == ("Player " + m_playerNum + " Hyper"))
             {
-                m_hyperUI = texts[z];
-                m_hyperUI.text = ("Player " + m_playerNum + " hyper!");
+                //m_hyperUI = texts[z];
+                //m_hyperUI.text = ("Player " + m_playerNum + " hyper!");
+                m_Data.m_focusUI = texts[z].gameObject.GetComponent<FocusUIManager>();
             }
             else if (texts[z].name == ("Player " + m_playerNum + " Moves"))
             {
                 m_moveUI = texts[z];
             }
         }
+        m_Data.Initialize();
     }
 
     public void SetControlerCounters(BaseMove[] opponantsMoves)
@@ -106,8 +107,8 @@ public class FighterBase : MonoBehaviour
 
     public void RenderNameUI()
     {
-        m_healthUI.text = m_Data.GetHpUIString();
-        m_hyperUI.text = m_Data.GetFocusUIString();
+        //m_healthUI.text = m_Data.GetHpUIString();
+        //m_hyperUI.text = m_Data.GetFocusUIString();
     }
 
     public bool SelectMove()

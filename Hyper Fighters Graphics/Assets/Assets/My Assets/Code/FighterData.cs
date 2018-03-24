@@ -24,7 +24,7 @@ public enum E_ANIMATIONS
 public class FighterData : MonoBehaviour
 {
 	int m_hp;
-	int m_previousHP;
+	//int m_previousHP;
 	int m_maxHP;
 	string m_name;
 	int m_focus;
@@ -50,8 +50,10 @@ public class FighterData : MonoBehaviour
     private bool m_isBeingThrown = false;
 
 	bool m_wasPositionManipulated = false;
+    public HealthUIManager m_healthUI;
+    public FocusUIManager m_focusUI;
 
-	void Start()
+    void Start()
 	{
 		//m_sprite = gameObject.GetComponent<SpriteRenderer>();
 		//m_animationControler = gameObject.AddComponent<AnimationControler>();
@@ -70,14 +72,17 @@ public class FighterData : MonoBehaviour
 		m_focus = 0;
 		m_maxFocus = 100;
 
-		m_previousHP = m_hp;
+		//m_previousHP = m_hp;
 		m_previousFocus = m_focus;
 
 		m_timer = gameObject.AddComponent<Timer>();
 		m_timer.Initialize(2.0f);
 
 		InitializeAnimations();
-	}
+
+        m_healthUI.Init(m_hp);
+        m_focusUI.Init(100);
+    }
 
 	private void InitializeAnimations()
 	{
@@ -260,10 +265,11 @@ public class FighterData : MonoBehaviour
 
 	public void takeDamage(int ammount)
 	{
-		m_previousHP = m_hp;
+		//m_previousHP = m_hp;
 		m_hp -= ammount;
-
-		gainFocus((int)(ammount * 0.3f));
+        m_healthUI.takeDamage(ammount);
+        
+        gainFocus((int)(ammount * 0.3f));
 	}
 
 	public void gainFocus(int ammount)
@@ -277,22 +283,27 @@ public class FighterData : MonoBehaviour
 		{
 			m_focus = m_maxFocus;
 		}
+
+        m_focusUI.gainFocus(ammount);
 	}
 
-	public string GetHpUIString()
+	/*public string GetHpUIString()
 	{
 		return "Health: " + m_timer.Interpolate(m_previousHP, m_hp);
-	}
+	}*/
 
-	public string GetFocusUIString()
+	/*public string GetFocusUIString()
 	{
 		return "Focus: " + m_timer.Interpolate(m_previousFocus, m_focus) + "/" + m_maxFocus;
-	}
+	}*/
 
 	public void Rest()
 	{
-		m_previousHP = m_hp;
+        //m_previousHP = m_hp;
+
 		m_previousFocus = m_focus;
+        m_healthUI.Rest();
+        m_focusUI.Rest();
 	}
 
 	public bool CanUseHyper()
