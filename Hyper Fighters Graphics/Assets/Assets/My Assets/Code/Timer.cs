@@ -35,8 +35,13 @@ public class Timer : MonoBehaviour
 		m_playing = true;
 	}
 
-	public int Interpolate(float small, float big)
+	public int I_Interpolate(float small, float big)
 	{
 		return (int)(((big - small) * (m_timeCount / m_time)) + small);
-	}
+    }
+
+    public float F_Interpolate(float small, float big)
+    {
+        return ((big - small) * (m_timeCount / m_time)) + small;
+    }
 }

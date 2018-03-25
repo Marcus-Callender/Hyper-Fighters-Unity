@@ -7,6 +7,7 @@ public class HealthUIManager : MonoBehaviour
 {
     [SerializeField] private Text m_text;
     [SerializeField] private  RectTransform m_healthBar;
+    private Image m_healthBarImage;
 
     Timer m_timer;
 
@@ -19,9 +20,10 @@ public class HealthUIManager : MonoBehaviour
     void Start()
     {
         m_healthBarSize = m_healthBar.rect.width;
+        m_healthBarImage = m_healthBar.gameObject.GetComponent<Image>();
 
         m_timer = gameObject.AddComponent<Timer>();
-        m_timer.Initialize(2.0f);
+        m_timer.Initialize(0.5f);
     }
 
     public void Init(int maxHp)
@@ -46,12 +48,23 @@ public class HealthUIManager : MonoBehaviour
 
     void Update()
     {
-        m_text.text = ("Health: " + m_timer.Interpolate(m_previousHP, m_hp));
-        m_healthBar.sizeDelta = new Vector2(((float)m_timer.Interpolate(m_previousHP, m_hp) / m_maxHp) * m_healthBarSize, m_healthBar.rect.height);
+        if (m_previousHP > (m_maxHp / 2))
+        {
+            m_healthBarImage.color = Color.Lerp(Color.yellow, Color.green, (((float)m_previousHP - (m_maxHp / 2.0f)) / ((float)m_maxHp / 2.0f)));
+        }
+        else
+        {
+            m_healthBarImage.color = Color.Lerp(Color.red, Color.yellow, ((float)m_previousHP / ((float)m_maxHp / 2.0f)));
+        }
+
+        Debug.Log("Health presentage: " + (float)m_previousHP / m_maxHp);
+
+        m_text.text = ("Health: " + /*m_timer.I_Interpolate(m_previousHP, m_hp)*/m_previousHP);
+        m_healthBar.sizeDelta = new Vector2(m_timer.F_Interpolate(m_previousHP, m_hp) / m_maxHp * m_healthBarSize, m_healthBar.rect.height);
+        m_previousHP = Mathf.RoundToInt(m_timer.F_Interpolate(m_previousHP, m_hp));
     }
 
     public void Rest()
     {
-        m_previousHP = m_hp;
     }
 }

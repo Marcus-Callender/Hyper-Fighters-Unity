@@ -18,6 +18,8 @@ public enum E_ANIMATIONS
 	DODGE,
 	COUNTER,
 
+    //KO_D,
+
 	TOTAL
 };
 
@@ -126,9 +128,13 @@ public class FighterData : MonoBehaviour
 		ThrownAnim.AddKeyFrame(m_sprites[90], 0.2f);
 		m_animationControler.AddAnim(ThrownAnim);
 
-		Animation ThrowRejectAnim = new Animation();
+        Animation ThrowRejectAnim = new Animation();
 		ThrowRejectAnim.AddKeyFrame(m_sprites[84], 1.0f);
 		m_animationControler.AddAnim(ThrowRejectAnim);
+
+        //Animation KOd = new Animation();
+        //ThrownAnim.AddKeyFrame(m_sprites[90], 3.0f);
+        //m_animationControler.AddAnim(KOd);
 
 		m_animationControler.SetAnim((int)E_ANIMATIONS.IDLE);
 		m_animationControler.F_play();
@@ -311,8 +317,8 @@ public class FighterData : MonoBehaviour
 		if (m_focus == 100)
 		{
 			m_previousFocus = m_focus;
-			m_focus = 0;
-			return true;
+            gainFocus(-100);
+            return true;
 		}
 
 		return false;

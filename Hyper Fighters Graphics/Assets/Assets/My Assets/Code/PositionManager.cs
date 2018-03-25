@@ -101,7 +101,7 @@ public class PositionManager : MonoBehaviour
 			m_charicterData[0].WalkForward();
 			m_charicterData[1].WalkForward();
 
-			if (GetDistance() > 6.0f)
+			if (GetDistance() > 4.5f)
 			{
 				return false;
 			}

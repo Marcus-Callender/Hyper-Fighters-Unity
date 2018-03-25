@@ -21,7 +21,7 @@ public class FocusUIManager : MonoBehaviour
         m_healthBarSize = m_healthBar.rect.width;
 
         m_timer = gameObject.AddComponent<Timer>();
-        m_timer.Initialize(2.0f);
+        m_timer.Initialize(0.5f);
     }
 
     public void Init(int maxFocus)
@@ -46,12 +46,12 @@ public class FocusUIManager : MonoBehaviour
 
     void Update()
     {
-        m_text.text = ("Focus: " + m_timer.Interpolate(m_previousFocus, m_focus) + "/" + m_maxFocus);
-        m_healthBar.sizeDelta = new Vector2((m_timer.Interpolate(m_previousFocus, m_focus) / 100.0f) * m_healthBarSize, m_healthBar.rect.height);
+        m_text.text = ("Focus: " + m_timer.I_Interpolate(m_previousFocus, m_focus) + "/" + m_maxFocus);
+        m_healthBar.sizeDelta = new Vector2((m_timer.F_Interpolate(m_previousFocus, m_focus) / 100.0f) * m_healthBarSize, m_healthBar.rect.height);
+        m_previousFocus = m_focus;
     }
 
     public void Rest()
     {
-        m_previousFocus = m_focus;
     }
 }
