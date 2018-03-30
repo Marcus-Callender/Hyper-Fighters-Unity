@@ -340,9 +340,14 @@ public class FighterData : MonoBehaviour
 	public bool HasPassedImpactTime()
 	{
 		return m_animationControler.HasPassedImpactTime();
-	}
+    }
 
-	public bool isMoving()
+    public bool HasPassedDamageTime()
+    {
+        return m_animationControler.HasPassedDamageTime();
+    }
+
+    public bool isMoving()
 	{
 		return m_moving;
 	}

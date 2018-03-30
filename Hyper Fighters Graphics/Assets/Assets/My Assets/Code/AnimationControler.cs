@@ -119,9 +119,14 @@ public class AnimationControler : MonoBehaviour
 	public bool HasPassedImpactTime()
 	{
 		return m_animations[m_currentAnim].HasPassedImpactTime();
-	}
+    }
 
-	public void SetPause(bool pause)
+    public bool HasPassedDamageTime()
+    {
+        return m_animations[m_currentAnim].HasPassedDamageTime();
+    }
+
+    public void SetPause(bool pause)
 	{
 		Debug.Log("Animation paused");
 
@@ -143,8 +148,9 @@ public class Animation
 	private int m_currentKey = 0;
 
 	private float m_impactTime = 0.0f;
+	private float m_damageTime = 0.0f;
 
-	public Sprite[] m_sprites = new Sprite[20];
+    public Sprite[] m_sprites = new Sprite[20];
 	public float[] m_displayTimes = new float[20];
 	public int m_numberKeys = 0;
 
@@ -259,9 +265,24 @@ public class Animation
 		}
 
 		return false;
-	}
+    }
 
-	public bool GetPlaying()
+    public void SetDamageTime(float damageTime)
+    {
+        m_damageTime = damageTime;
+    }
+
+    public bool HasPassedDamageTime()
+    {
+        if (m_currentAnimTime >= m_damageTime)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public bool GetPlaying()
 	{
 		return m_playing;
 	}

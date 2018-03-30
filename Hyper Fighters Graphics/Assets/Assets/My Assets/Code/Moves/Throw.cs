@@ -52,6 +52,7 @@ public class Throw : BaseMove
         anim.AddKeyFrame(sprites[56], 0.12f);
         anim.AddKeyFrame(sprites[57], 0.12f);
         anim.AddKeyFrame(sprites[58], 0.72f);
+		anim.SetDamageTime(0.48f);
 
         animCon.AddAnim(anim, E_ANIMATIONS.THROW);
     }

@@ -37,9 +37,6 @@ public class LightAttack : BaseMove
 		enemy.SetVelocity(1.0f, 1.0f);
 
 		m_me.SetAnimaton(E_ANIMATIONS.LIGHT);
-
-		enemy.takeDamage(m_damage);
-		m_me.gainFocus(m_focusGain);
 	}
 
 	public override void Lose(BaseMove enemyMove, FighterData enemy)
@@ -54,7 +51,8 @@ public class LightAttack : BaseMove
 		anim.AddKeyFrame(sprites[18], 0.10f);
 		anim.AddKeyFrame(sprites[19], 0.10f);
 		anim.SetImpactTime(0.24f);
-		anim.AddKeyFrame(sprites[20], 0.2f);
+		anim.SetDamageTime(0.24f);
+        anim.AddKeyFrame(sprites[20], 0.2f);
 
 		animCon.AddAnim(anim, E_ANIMATIONS.LIGHT);
 	}
@@ -65,6 +63,9 @@ public class LightAttack : BaseMove
 
 		if (m_me.HasPassedImpactTime())
 		{
+		    enemy.takeDamage(m_damage);
+		    m_me.gainFocus(m_focusGain);
+
 			return true;
 		}
 

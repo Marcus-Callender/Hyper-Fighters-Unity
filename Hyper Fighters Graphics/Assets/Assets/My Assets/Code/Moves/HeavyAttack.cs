@@ -35,9 +35,6 @@ public class HeavyAttack : BaseMove
 	public override void Win(BaseMove enemyMove, FighterData enemy)
 	{
 		m_me.SetVelocity(0.0f, -2.0f);
-
-		enemy.takeDamage(m_damage);
-		m_me.gainFocus(m_focusGain);
 	}
 
 	public override void Lose(BaseMove enemyMove, FighterData enemy)
@@ -55,8 +52,9 @@ public class HeavyAttack : BaseMove
 		anim.AddKeyFrame(sprites[33], 0.10f);
 
 		anim.SetImpactTime(0.48f);
+		anim.SetDamageTime(0.48f);
 
-		anim.AddKeyFrame(sprites[34], 0.10f);
+        anim.AddKeyFrame(sprites[34], 0.10f);
 		anim.AddKeyFrame(sprites[35], 0.10f);
 		anim.AddKeyFrame(sprites[36], 0.10f);
 
@@ -85,6 +83,9 @@ public class HeavyAttack : BaseMove
 
 		if (m_me.HasPassedImpactTime())
 		{
+		    enemy.takeDamage(m_damage);
+		    m_me.gainFocus(m_focusGain);
+
 			return true;
 		}
 

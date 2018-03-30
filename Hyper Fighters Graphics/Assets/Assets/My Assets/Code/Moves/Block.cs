@@ -45,8 +45,9 @@ public class Block : BaseMove
 		Animation anim = new Animation();
 
 		anim.AddKeyFrame(sprites[13], 1.5f);
+        anim.SetDamageTime(1.0f);
 
-		animCon.AddAnim(anim, E_ANIMATIONS.BLOCK);
+        animCon.AddAnim(anim, E_ANIMATIONS.BLOCK);
 	}
 
 	public override bool Update1(FighterData enemy)
