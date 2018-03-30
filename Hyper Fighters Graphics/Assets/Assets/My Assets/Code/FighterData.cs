@@ -290,7 +290,7 @@ public class FighterData : MonoBehaviour
 			m_focus = m_maxFocus;
 		}
 
-        m_focusUI.gainFocus(ammount);
+        m_focusUI.GainFocus(ammount);
 	}
 
 	/*public string GetHpUIString()
