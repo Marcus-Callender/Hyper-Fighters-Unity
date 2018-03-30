@@ -56,7 +56,7 @@ public class LightAttack : BaseMove
 		anim.SetImpactTime(0.24f);
 		anim.AddKeyFrame(sprites[20], 0.5f);
 
-		animCon.AddAnim(anim);
+		animCon.AddAnim(anim, E_ANIMATIONS.LIGHT);
 	}
 
 	public override bool Update1(FighterData enemy)

@@ -48,7 +48,7 @@ public class FocusUIManager : MonoBehaviour
 
     void Update()
     {
-        float lerpVal = ((float)m_previousFocus) / ((float)m_maxFocus / 2.0f);
+        float lerpVal = ((float)m_previousFocus) / ((float)m_maxFocus);
         m_focusBarImage.color = Lerp(Color.blue, Color.red, lerpVal);
 
         m_text.text = ("Focus: " + m_timer.I_Interpolate(m_previousFocus, m_focus) + "/" + m_maxFocus);

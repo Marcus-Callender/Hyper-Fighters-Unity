@@ -187,4 +187,9 @@ public class FighterBase : MonoBehaviour
     {
         m_controler.GetResult(myRes, othRes, opponantsMove);
     }
+
+    public bool IsKOd()
+    {
+        return m_Data.IsKOd();
+    }
 }

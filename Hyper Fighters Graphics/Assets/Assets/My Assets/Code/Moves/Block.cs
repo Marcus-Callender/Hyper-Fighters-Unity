@@ -46,7 +46,7 @@ public class Block : BaseMove
 
 		anim.AddKeyFrame(sprites[13], 1.5f);
 
-		animCon.AddAnim(anim);
+		animCon.AddAnim(anim, E_ANIMATIONS.BLOCK);
 	}
 
 	public override bool Update1(FighterData enemy)

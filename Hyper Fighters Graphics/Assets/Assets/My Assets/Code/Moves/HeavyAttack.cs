@@ -76,7 +76,7 @@ public class HeavyAttack : BaseMove
 		anim.AddKeyFrame(sprites[35], 0.10f);
 		anim.AddKeyFrame(sprites[36], 0.10f);
 
-		animCon.AddAnim(anim);
+		animCon.AddAnim(anim, E_ANIMATIONS.HEAVY);
 	}
 
 	public override bool Update1(FighterData enemy)

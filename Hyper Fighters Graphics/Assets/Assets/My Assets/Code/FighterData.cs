@@ -10,6 +10,7 @@ public enum E_ANIMATIONS
 	HIT,
 	THROWN,
 	THROW_REJECT,
+    KO_D,
 
 	LIGHT,
 	HEAVY,
@@ -17,9 +18,7 @@ public enum E_ANIMATIONS
 	BLOCK,
 	DODGE,
 	COUNTER,
-
-    //KO_D,
-
+    
 	TOTAL
 };
 
@@ -98,7 +97,7 @@ public class FighterData : MonoBehaviour
 		idleAnim.AddKeyFrame(m_sprites[2], 0.12f);
 		idleAnim.AddKeyFrame(m_sprites[1], 0.12f);
 		idleAnim.RepeatAnim();
-		m_animationControler.AddAnim(idleAnim);
+		m_animationControler.AddAnim(idleAnim, E_ANIMATIONS.IDLE);
 
 		Animation walkForwardAnim = new Animation();
 		walkForwardAnim.AddKeyFrame(m_sprites[9], 0.12f);
@@ -106,7 +105,7 @@ public class FighterData : MonoBehaviour
 		walkForwardAnim.AddKeyFrame(m_sprites[7], 0.12f);
 		walkForwardAnim.AddKeyFrame(m_sprites[6], 0.12f);
 		walkForwardAnim.RepeatAnim();
-		m_animationControler.AddAnim(walkForwardAnim);
+		m_animationControler.AddAnim(walkForwardAnim, E_ANIMATIONS.WALK_FORWARD);
 
 		Animation walkBackwardAnim = new Animation();
 		walkBackwardAnim.AddKeyFrame(m_sprites[6], 0.12f);
@@ -114,27 +113,27 @@ public class FighterData : MonoBehaviour
 		walkBackwardAnim.AddKeyFrame(m_sprites[8], 0.12f);
 		walkBackwardAnim.AddKeyFrame(m_sprites[9], 0.12f);
 		walkBackwardAnim.RepeatAnim();
-		m_animationControler.AddAnim(walkBackwardAnim);
+		m_animationControler.AddAnim(walkBackwardAnim, E_ANIMATIONS.WALK_BACKWARD);
 
 		Animation hitAnim = new Animation();
 		hitAnim.AddKeyFrame(m_sprites[85], 1.0f);
 		hitAnim.AddKeyFrame(m_sprites[85], 0.1f);
-		m_animationControler.AddAnim(hitAnim);
+		m_animationControler.AddAnim(hitAnim, E_ANIMATIONS.HIT);
 
 		Animation ThrownAnim = new Animation();
 		ThrownAnim.AddKeyFrame(m_sprites[86], 0.36f);
 		ThrownAnim.AddKeyFrame(m_sprites[96], 0.2f);
 		ThrownAnim.AddKeyFrame(m_sprites[89], 0.9f);
 		ThrownAnim.AddKeyFrame(m_sprites[90], 0.2f);
-		m_animationControler.AddAnim(ThrownAnim);
+		m_animationControler.AddAnim(ThrownAnim, E_ANIMATIONS.THROWN);
 
         Animation ThrowRejectAnim = new Animation();
 		ThrowRejectAnim.AddKeyFrame(m_sprites[84], 1.0f);
-		m_animationControler.AddAnim(ThrowRejectAnim);
+		m_animationControler.AddAnim(ThrowRejectAnim, E_ANIMATIONS.THROW_REJECT);
 
-        //Animation KOd = new Animation();
-        //ThrownAnim.AddKeyFrame(m_sprites[90], 3.0f);
-        //m_animationControler.AddAnim(KOd);
+        Animation KOd = new Animation();
+        KOd.AddKeyFrame(m_sprites[90], 3.0f);
+        m_animationControler.AddAnim(KOd, E_ANIMATIONS.KO_D);
 
 		m_animationControler.SetAnim((int)E_ANIMATIONS.IDLE);
 		m_animationControler.F_play();
@@ -376,4 +375,9 @@ public class FighterData : MonoBehaviour
 	{
 		return m_wasPositionManipulated;
 	}
+
+    public bool IsKOd()
+    {
+        return m_hp <= 0;
+    }
 }

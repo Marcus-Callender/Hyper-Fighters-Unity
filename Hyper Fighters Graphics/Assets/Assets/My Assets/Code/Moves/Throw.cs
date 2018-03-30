@@ -53,7 +53,7 @@ public class Throw : BaseMove
         anim.AddKeyFrame(sprites[57], 0.12f);
         anim.AddKeyFrame(sprites[58], 0.72f);
 
-        animCon.AddAnim(anim);
+        animCon.AddAnim(anim, E_ANIMATIONS.THROW);
     }
 
     public override bool Update1(FighterData enemy)

@@ -6,8 +6,8 @@ public class AnimationControler : MonoBehaviour
 {
 	private SpriteRenderer m_spriteRenderer;
 
-	private Animation[] m_animations = new Animation[20];
-	private int m_numAnims = 0;
+	private Animation[] m_animations = new Animation[(int)E_ANIMATIONS.TOTAL];
+	private int m_numAnims = (int)E_ANIMATIONS.TOTAL;
 	private int m_currentAnim = 0;
 	private int m_nextAnim = -1;
 
@@ -16,20 +16,32 @@ public class AnimationControler : MonoBehaviour
 		m_spriteRenderer = spriteRenderer;
 	}
 
-	public void AddAnim(Animation newAnim)
+	public void AddAnim(Animation newAnim, E_ANIMATIONS animTag)
 	{
-		for (int z = 0; z < 20; z++)
-		{
-			if (m_animations[z] == null)
-			{
-				m_animations[m_numAnims] = newAnim;
-				m_animations[m_numAnims].Initialize(m_spriteRenderer);
-				m_numAnims++;
+        //for (int z = 0; z < (int)E_ANIMATIONS.TOTAL; z++)
+        //{
+        //	if (m_animations[z] == null)
+        //	{
+        //		m_animations[m_numAnims] = newAnim;
+        //		m_animations[m_numAnims].Initialize(m_spriteRenderer);
+        //		m_numAnims++;
+        //
+        //      Debug.Log("Amim: " + z + " was set to: " + animTag);
+        //
+        //		break;
+        //	}
+        //}
 
-				break;
-			}
-		}
-	}
+        if (m_animations[(int)animTag] == null)
+        {
+            m_animations[(int)animTag] = newAnim;
+            m_animations[(int)animTag].Initialize(m_spriteRenderer);
+        }
+        else
+        {
+            Debug.LogWarning("Amim: " + (int)animTag + " is already in use.");
+        }
+    }
 
 	public void F_update(float deltaTime)
 	{
@@ -72,7 +84,7 @@ public class AnimationControler : MonoBehaviour
 
 		if (z != m_currentAnim)
 		{
-			///Debug.Log("Anim changed from " + (E_ANIMATIONS)m_currentAnim + " to " + (E_ANIMATIONS)z);
+			//Debug.Log("Anim changed from " + (E_ANIMATIONS)m_currentAnim + " to " + (E_ANIMATIONS)z);
 			m_animations[z].Play();
 		}
 

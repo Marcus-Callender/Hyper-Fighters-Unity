@@ -48,7 +48,7 @@ public class Dodge : BaseMove
 
 		anim.AddKeyFrame(sprites[5], 1.0f);
 
-		animCon.AddAnim(anim);
+		animCon.AddAnim(anim, E_ANIMATIONS.DODGE);
 	}
 
 	public override bool Update1(FighterData enemy)

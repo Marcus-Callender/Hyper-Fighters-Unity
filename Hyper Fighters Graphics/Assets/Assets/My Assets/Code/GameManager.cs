@@ -10,7 +10,8 @@ enum E_GameStates
     USE_ACTIONS1,
     USE_ACTIONS2,
     RESET,
-    RESET_DISTANCE
+    RESET_DISTANCE,
+    END_GAME
 }
 
 public class GameManager : MonoBehaviour
@@ -155,6 +156,8 @@ public class GameManager : MonoBehaviour
 
             m_charicterScripts[0].RevealMovesUI();
             m_charicterScripts[1].RevealMovesUI();
+
+            CheckForKO();
         }
         else if (m_state == E_GameStates.RESET_DISTANCE)
         {
@@ -165,6 +168,19 @@ public class GameManager : MonoBehaviour
 
             m_charicterScripts[0].RevealMovesUI();
             m_charicterScripts[1].RevealMovesUI();
+        }
+        else if (m_state == E_GameStates.END_GAME)
+        {
+            m_charicterScripts[0].SetAnimation(m_charicterScripts[0].IsKOd() ? E_ANIMATIONS.KO_D : E_ANIMATIONS.IDLE);
+            m_charicterScripts[1].SetAnimation(m_charicterScripts[1].IsKOd() ? E_ANIMATIONS.KO_D : E_ANIMATIONS.IDLE);
+        }
+    }
+
+    void CheckForKO()
+    {
+        if (m_charicterScripts[0].IsKOd() || m_charicterScripts[1].IsKOd())
+        {
+            m_state = E_GameStates.END_GAME;
         }
     }
 }
