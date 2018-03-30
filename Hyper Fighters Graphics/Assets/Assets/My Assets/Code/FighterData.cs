@@ -128,11 +128,12 @@ public class FighterData : MonoBehaviour
 		m_animationControler.AddAnim(ThrownAnim, E_ANIMATIONS.THROWN);
 
         Animation ThrowRejectAnim = new Animation();
-		ThrowRejectAnim.AddKeyFrame(m_sprites[84], 1.0f);
+		ThrowRejectAnim.AddKeyFrame(m_sprites[84], 0.25f);
 		m_animationControler.AddAnim(ThrowRejectAnim, E_ANIMATIONS.THROW_REJECT);
 
         Animation KOd = new Animation();
-        KOd.AddKeyFrame(m_sprites[90], 3.0f);
+        KOd.AddKeyFrame(m_sprites[93], 0.75f);
+        KOd.AddKeyFrame(m_sprites[90], 900.0f);
         m_animationControler.AddAnim(KOd, E_ANIMATIONS.KO_D);
 
 		m_animationControler.SetAnim((int)E_ANIMATIONS.IDLE);

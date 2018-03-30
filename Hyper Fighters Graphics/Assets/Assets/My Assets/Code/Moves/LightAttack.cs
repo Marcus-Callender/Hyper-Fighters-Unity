@@ -54,7 +54,7 @@ public class LightAttack : BaseMove
 		anim.AddKeyFrame(sprites[18], 0.10f);
 		anim.AddKeyFrame(sprites[19], 0.10f);
 		anim.SetImpactTime(0.24f);
-		anim.AddKeyFrame(sprites[20], 0.5f);
+		anim.AddKeyFrame(sprites[20], 0.2f);
 
 		animCon.AddAnim(anim, E_ANIMATIONS.LIGHT);
 	}
@@ -77,7 +77,7 @@ public class LightAttack : BaseMove
 		{
 			enemy.SetAnimaton(E_ANIMATIONS.HIT);
 
-			if (!enemy.IsAnimating())
+			if (!m_me.IsAnimating())
 			{
 				return true;
 			}

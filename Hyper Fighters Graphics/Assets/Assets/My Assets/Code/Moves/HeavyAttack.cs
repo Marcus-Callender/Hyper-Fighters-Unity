@@ -108,7 +108,7 @@ public class HeavyAttack : BaseMove
 			enemy.SetAnimaton(E_ANIMATIONS.HIT);
 			enemy.SetVelocity(1.0f, 1.0f);
 
-			if (!enemy.IsAnimating())
+			if (!m_me.IsAnimating())
 			{
 				return true;
 			}
