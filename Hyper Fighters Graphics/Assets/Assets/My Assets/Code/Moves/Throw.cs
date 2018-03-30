@@ -14,6 +14,8 @@ public class Throw : BaseMove
 
     public override E_RESULT Use(BaseMove enemyMove)
     {
+        m_hasDamaged = false;
+
         if ((enemyMove.GetMoveType() == E_MOVE_TYPE.L_ATTACK) || (enemyMove.GetMoveType() == E_MOVE_TYPE.H_ATTACK))
         {
             return E_RESULT.LOSE;
@@ -35,9 +37,6 @@ public class Throw : BaseMove
         enemy.SetVelocity(1.5f, 1.5f);
         m_me.SetAnimaton(E_ANIMATIONS.THROW);
         enemy.SetAnimaton(E_ANIMATIONS.THROWN);
-
-        enemy.takeDamage(m_damage);
-        m_me.gainFocus(m_focusGain);
     }
 
     public override void Lose(BaseMove enemyMove, FighterData enemy)
@@ -146,6 +145,9 @@ public class Throw : BaseMove
                 Vector3 enemyPos = enemy.gameObject.transform.position;
                 enemyPos.y = 0.0f;
                 enemy.gameObject.transform.position = enemyPos;
+                
+                enemy.takeDamage(m_damage);
+                m_me.gainFocus(m_focusGain);
 
                 return true;
             }
