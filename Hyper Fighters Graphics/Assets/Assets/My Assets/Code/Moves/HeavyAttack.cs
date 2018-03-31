@@ -101,7 +101,7 @@ public class HeavyAttack : BaseMove
 		{
 			m_me.SetVelocity(0.0f, -3.0f);
 
-			if (m_me.DistanceFromEnemy(enemy) < 1.0f)
+			if (m_me.DistanceFromEnemy(enemy) < 3.0f)
 			{
 				enemy.SetVelocity(2.0f, 3.5f);
 			}
