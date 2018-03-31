@@ -51,7 +51,7 @@ public class Dodge : BaseMove
 		animCon.AddAnim(anim, E_ANIMATIONS.DODGE);
 	}
 
-	public override bool Update1(FighterData enemy)
+	public override bool Update1(E_RESULT myResult, E_RESULT otherResult, FighterData enemy)
 	{
 		m_me.SetAnimaton(E_ANIMATIONS.DODGE);
 

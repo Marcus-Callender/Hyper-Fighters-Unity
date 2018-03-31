@@ -50,7 +50,7 @@ public class Block : BaseMove
         animCon.AddAnim(anim, E_ANIMATIONS.BLOCK);
 	}
 
-	public override bool Update1(FighterData enemy)
+	public override bool Update1(E_RESULT myResult, E_RESULT otherResult, FighterData enemy)
 	{
 		m_me.SetAnimaton(E_ANIMATIONS.BLOCK);
 
@@ -66,7 +66,7 @@ public class Block : BaseMove
 	{
 		if (myResult == E_RESULT.WIN || myResult == E_RESULT.SP_WIN)
 		{
-			if (!m_me.isMoving())
+			if (!enemy.IsAnimating())
 			{
 				return true;
 			}

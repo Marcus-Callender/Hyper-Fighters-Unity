@@ -122,9 +122,9 @@ public class FighterBase : MonoBehaviour
         return true;
     }
 
-    public bool MoveUpdate1(FighterData enemy)
+    public bool MoveUpdate1(E_RESULT myResult, E_RESULT otherResult, FighterData enemy)
     {
-        return m_moves[m_currentMove].Update1(enemy);
+        return m_moves[m_currentMove].Update1(myResult, otherResult, enemy);
     }
 
     public bool MoveUpdate2(E_RESULT myResult, E_RESULT otherResult, FighterData enemy)

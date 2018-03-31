@@ -54,7 +54,7 @@ public class Throw : BaseMove
         animCon.AddAnim(anim, E_ANIMATIONS.THROW);
     }
 
-    public override bool Update1(FighterData enemy)
+    public override bool Update1(E_RESULT myResult, E_RESULT otherResult, FighterData enemy)
     {
         //m_me.SetAnimaton(E_ANIMATIONS.THROW);
 
@@ -143,9 +143,12 @@ public class Throw : BaseMove
                 Vector3 enemyPos = enemy.gameObject.transform.position;
                 enemyPos.y = 0.0f;
                 enemy.gameObject.transform.position = enemyPos;
-                
-                enemy.takeDamage(m_damage);
-                m_me.gainFocus(m_focusGain);
+
+                if (myResult >= otherResult)
+                {
+                    enemy.takeDamage(m_damage);
+                    m_me.gainFocus(m_focusGain);
+                }
 
                 return true;
             }

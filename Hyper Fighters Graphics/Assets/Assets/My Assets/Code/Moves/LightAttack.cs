@@ -57,14 +57,17 @@ public class LightAttack : BaseMove
 		animCon.AddAnim(anim, E_ANIMATIONS.LIGHT);
 	}
 
-	public override bool Update1(FighterData enemy)
+	public override bool Update1(E_RESULT myResult, E_RESULT otherResult, FighterData enemy)
 	{
 		m_me.SetAnimaton(E_ANIMATIONS.LIGHT);
 
 		if (m_me.HasPassedImpactTime())
 		{
-		    enemy.takeDamage(m_damage);
-		    m_me.gainFocus(m_focusGain);
+            if (myResult >= otherResult)
+            {
+		        enemy.takeDamage(m_damage);
+		        m_me.gainFocus(m_focusGain);
+            }
 
 			return true;
 		}

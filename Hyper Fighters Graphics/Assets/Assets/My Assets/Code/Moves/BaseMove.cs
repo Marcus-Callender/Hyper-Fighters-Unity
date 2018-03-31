@@ -60,7 +60,7 @@ public class BaseMove : MonoBehaviour
 		
 	}
 
-	public virtual bool Update1(FighterData enemy)
+	public virtual bool Update1(E_RESULT myResult, E_RESULT otherResult, FighterData enemy)
 	{
 		return true;
 	}

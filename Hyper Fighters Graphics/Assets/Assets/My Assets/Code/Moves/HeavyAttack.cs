@@ -77,14 +77,17 @@ public class HeavyAttack : BaseMove
 		animCon.AddAnim(anim, E_ANIMATIONS.HEAVY);
 	}
 
-	public override bool Update1(FighterData enemy)
+	public override bool Update1(E_RESULT myResult, E_RESULT otherResult, FighterData enemy)
 	{
 		m_me.SetAnimaton(E_ANIMATIONS.HEAVY);
 
 		if (m_me.HasPassedImpactTime())
 		{
-		    enemy.takeDamage(m_damage);
-		    m_me.gainFocus(m_focusGain);
+            if (myResult >= otherResult)
+            {
+                enemy.takeDamage(m_damage);
+    		    m_me.gainFocus(m_focusGain);
+            }
 
 			return true;
 		}
@@ -100,7 +103,7 @@ public class HeavyAttack : BaseMove
 
 			if (m_me.DistanceFromEnemy(enemy) < 1.0f)
 			{
-				enemy.SetVelocity(2.0f, 3.0f);
+				enemy.SetVelocity(2.0f, 3.5f);
 			}
 		}
 

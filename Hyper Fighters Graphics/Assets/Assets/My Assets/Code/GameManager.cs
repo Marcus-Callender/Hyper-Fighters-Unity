@@ -128,9 +128,9 @@ public class GameManager : MonoBehaviour
         }
         else if (m_state == E_GameStates.USE_ACTIONS1)
         {
-            bool temp = m_charicterScripts[1].MoveUpdate1(m_charicterScripts[0].GetData());
+            bool temp = m_charicterScripts[1].MoveUpdate1(m_results[1], m_results[0], m_charicterScripts[0].GetData());
 
-            if (m_charicterScripts[0].MoveUpdate1(m_charicterScripts[1].GetData()) || temp)
+            if (m_charicterScripts[0].MoveUpdate1(m_results[0], m_results[1], m_charicterScripts[1].GetData()) || temp)
             {
                 m_state = E_GameStates.USE_ACTIONS2;
             }
