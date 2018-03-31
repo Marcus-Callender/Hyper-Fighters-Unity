@@ -26,6 +26,9 @@ public class AI_Controler : BaseControler
     {
         m_currentMove = 0;
 
+        m_pastOutcomes = ExpandArray(SavedDataManager.m_instance.LoadIntArray("Outcomes.sav"), 6, 6, 3);
+        m_opponantMovePattern = ExpandArray(SavedDataManager.m_instance.LoadIntArray("MovePatterns.sav"), 6, 3, 6);
+
         return true;
     }
 
@@ -87,8 +90,15 @@ public class AI_Controler : BaseControler
         // checks opponants last move is valid
         if (m_opponantPrevMove != -1)
         {
+            Debug.Log("Array: " + m_opponantPrevMove + ", " + m_currentMove + ", " + (int)findSimpleResult(myRes, othRes));
+            
             // increments the outcome count for using a specified move after a specified opponant move
             m_pastOutcomes[m_opponantPrevMove, m_currentMove, (int)findSimpleResult(myRes, othRes)]++;
+
+            if (m_opponantPrevResult != E_SimpleResult.NONE)
+            {
+                m_opponantMovePattern[m_opponantPrevMove, (int) m_opponantPrevResult, opponantsMove]++;
+            }
         }
 
         if (opponantsMove == m_opponantPrevMove)
@@ -98,11 +108,6 @@ public class AI_Controler : BaseControler
         else
         {
             m_repetedMovesCount = 0;
-        }
-
-        if (m_opponantPrevResult != E_SimpleResult.NONE)
-        {
-            m_opponantMovePattern[m_opponantPrevMove, (int) m_opponantPrevResult, opponantsMove]++;
         }
 
         // reversing the paramiters gives the opponants result
@@ -154,9 +159,97 @@ public class AI_Controler : BaseControler
         }
 
         int randomMove = Random.Range(0, numSuitableMoves);
-
-
-
+        
         return -1;
     }
+
+    public override void OnGameEnd()
+    {
+        SavedDataManager.m_instance.SaveData(FlattenArray(m_pastOutcomes, 6, 6, 3), "Outcomes.sav");
+        SavedDataManager.m_instance.SaveData(FlattenArray(m_opponantMovePattern, 6, 3, 6), "MovePatterns.sav");
+    }
+
+    private int[] FlattenArray(int[ , , ] array, int one, int two, int three)
+    {
+        int[] newArray = new int[one * two * three];
+
+        int total = 0;
+
+        for (int z = 0; z < one; z++)
+        {
+            for (int x = 0; x < two; x++)
+            {
+                for (int c = 0; c < three; c++)
+                {
+                    newArray[total] = array[z, x, c];
+                    total++;
+                }
+            }
+        }
+
+        return newArray;
+    }
+
+    private int[,,] ExpandArray(int[] array, int one, int two, int three)
+    {
+        int[,,] newArray = new int[one, two, three];
+
+        int total = 0;
+
+        for (int z = 0; z < one; z++)
+        {
+            for (int x = 0; x < two; x++)
+            {
+                for (int c = 0; c < three; c++)
+                {
+                    newArray[z, x, c] = array[total];
+                    total++;
+                }
+            }
+        }
+
+        return newArray;
+    }
+
+    /*private int[ , , ] ExpandArrayOutcome(int[] array)
+    {
+        int[ , , ] newArray = new int[6,6,3];
+
+        int total = 0;
+
+        for (int z = 0; z < 3; z++)
+        {
+            for (int x = 0; x < 3; x++)
+            {
+                for (int c = 0; c < 3; c++)
+                {
+                    newArray[z, x, c] = array[total];
+                    total++;
+                }
+            }
+        }
+
+        return newArray;
+    }
+
+    private int[,,] ExpandArrayPattern(int[] array)
+    {
+        int[,,] newArray = new int[6, 3, 6];
+
+        int total = 0;
+
+        for (int z = 0; z < 3; z++)
+        {
+            for (int x = 0; x < 3; x++)
+            {
+                for (int c = 0; c < 3; c++)
+                {
+                    newArray[z, x, c] = array[total];
+                    total++;
+                }
+            }
+        }
+
+        return newArray;
+    }*/
 }

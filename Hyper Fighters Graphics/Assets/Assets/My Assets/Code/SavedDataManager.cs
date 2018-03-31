@@ -2,31 +2,43 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using System;
 
 public class SavedDataManager : MonoBehaviour
 {
     private string filePath = "";
+    public static SavedDataManager m_instance = null;
 
     void Start()
     {
-        Debug.Log("Save data manager initializing.");
-
-        filePath = Application.dataPath + "/SaveData/"; //"/MyAssets/SavedData/";
-
-        try
+        if (m_instance != null)
         {
-            if (!Directory.Exists(filePath))
+            Destroy(this);
+            Debug.LogError("Trying to create multiple save data managers is not allowed!!!!");
+        }
+        else
+        {
+            m_instance = this;
+
+            Debug.Log("Save data manager initializing.");
+
+            filePath = Application.dataPath + "/SaveData/";
+
+            try
             {
-                Directory.CreateDirectory(filePath);
+                if (!Directory.Exists(filePath))
+                {
+                    Directory.CreateDirectory(filePath);
+                }
+
+            }
+            catch (IOException ex)
+            {
+                Debug.Log("Save data manager exception: " + ex.Message);
             }
 
+            Debug.Log(LoadData("Data.json"));
         }
-        catch (IOException ex)
-        {
-            Debug.Log("Save data manager exception: " + ex.Message);
-        }
-
-        Debug.Log(LoadData("Data.json"));
     }
 
     public string LoadData(string fileName)
@@ -47,5 +59,27 @@ public class SavedDataManager : MonoBehaviour
         }
 
         return "NULL";
+    }
+
+    public int[] LoadIntArray(string fileName)
+    {
+        byte[] bytes = File.ReadAllBytes(filePath + fileName);
+        int[] data = new int[bytes.Length * sizeof(byte)];
+
+        Buffer.BlockCopy(bytes, 0, data, 0, data.Length);
+        return data;
+    }
+
+    public void SaveData(string data, string fileName)
+    {
+
+    }
+
+    public void SaveData(int[] data, string fileName)
+    {
+        byte[] bytes = new byte[data.Length * sizeof(int)];
+        Buffer.BlockCopy(data, 0, bytes, 0, bytes.Length);
+
+        File.WriteAllBytes(filePath + fileName, bytes);
     }
 }

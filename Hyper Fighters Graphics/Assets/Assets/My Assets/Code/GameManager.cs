@@ -180,6 +180,9 @@ public class GameManager : MonoBehaviour
     {
         if (m_charicterScripts[0].IsKOd() || m_charicterScripts[1].IsKOd())
         {
+            m_charicterScripts[0].OnGameEnd();
+            m_charicterScripts[1].OnGameEnd();
+
             m_state = E_GameStates.END_GAME;
         }
     }

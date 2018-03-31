@@ -192,4 +192,9 @@ public class FighterBase : MonoBehaviour
     {
         return m_Data.IsKOd();
     }
+
+    public void OnGameEnd()
+    {
+        m_controler.OnGameEnd();
+    }
 }

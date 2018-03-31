@@ -141,4 +141,9 @@ public class BaseControler : ScriptableObject
     {
 
     }
+
+    public virtual void OnGameEnd()
+    {
+
+    }
 }
