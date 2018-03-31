@@ -14,8 +14,6 @@ public class Throw : BaseMove
 
     public override E_RESULT Use(BaseMove enemyMove)
     {
-        m_hasDamaged = false;
-
         if ((enemyMove.GetMoveType() == E_MOVE_TYPE.L_ATTACK) || (enemyMove.GetMoveType() == E_MOVE_TYPE.H_ATTACK))
         {
             return E_RESULT.LOSE;
