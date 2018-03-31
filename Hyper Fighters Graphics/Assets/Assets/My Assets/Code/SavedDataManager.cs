@@ -9,7 +9,22 @@ public class SavedDataManager : MonoBehaviour
 
     void Start()
     {
-        filePath = Application.dataPath + "/MyAssets/"; //"/MyAssets/SavedData/";
+        Debug.Log("Save data manager initializing.");
+
+        filePath = Application.dataPath + "/SaveData/"; //"/MyAssets/SavedData/";
+
+        try
+        {
+            if (!Directory.Exists(filePath))
+            {
+                Directory.CreateDirectory(filePath);
+            }
+
+        }
+        catch (IOException ex)
+        {
+            Debug.Log("Save data manager exception: " + ex.Message);
+        }
 
         Debug.Log(LoadData("Data.json"));
     }
@@ -26,8 +41,9 @@ public class SavedDataManager : MonoBehaviour
         else
         {
             Debug.Log("file dosen't exist");
-            File.Create(totalFilePath);
+            FileStream fs = File.Create(totalFilePath);
             File.WriteAllText(totalFilePath, "Hello");
+            fs.Close();
         }
 
         return "NULL";
