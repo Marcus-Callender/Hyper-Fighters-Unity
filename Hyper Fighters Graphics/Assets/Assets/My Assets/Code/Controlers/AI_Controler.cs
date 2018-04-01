@@ -72,11 +72,12 @@ public class AI_Controler : BaseControler
     {
         if (m_currentMove == -1 || m_opponantPrevMove == -1 || m_opponantPrevResult == E_SimpleResult.NONE)
         {
-            m_currentMove = Random.Range(0, m_c_numInputs);
+            // do not include hyper move
+            m_currentMove = Random.Range(0, m_c_numInputs - 1);
         }
         else
         {
-            // check for valid move in function
+            // most likely move for the oponent to use
             int bestIndex = 0;
 
             for (int z = 1; z < (int)E_MOVE_TYPE.TOTAL; z++)
@@ -87,23 +88,20 @@ public class AI_Controler : BaseControler
                 }
             }
 
-            for (int z = 0; z < m_c_numInputs; z++)
+            int[] posibleCounters = new int[m_c_numInputs];
+            int posibleCountersCount = 0;
+
+            for (int z = 0; z < m_c_numInputs - 1; z++)
             {
                 if (m_moveMatchups[z, bestIndex] == E_SimpleResult.WIN)
                 {
-                    m_currentMove = z;
+                    posibleCounters[posibleCountersCount] = z;
+                    posibleCountersCount++;
                 }
             }
+
+            m_currentMove = posibleCounters[Random.Range(0, posibleCountersCount)];
         }
-        
-        //if (m_currentMove == 5)
-        //{
-        //    if (!m_me.CanUseHyper())
-        //    {
-        //        m_currentMove = -1;
-        //        return -1;
-        //    }
-        //}
         
         return m_currentMove;
     }
@@ -149,6 +147,8 @@ public class AI_Controler : BaseControler
                 E_RESULT oppRes = opponantsMoves[x].Use(m_moves[z]);
 
                 m_moveMatchups[z, x] = findSimpleResult(myRes, oppRes);
+
+
             }
         }
     }
