@@ -20,14 +20,18 @@ public class AI_Controler : BaseControler
     // tracks what moves of the AIs will beet the players moves
     E_SimpleResult[ , ] m_moveMatchups = new E_SimpleResult[m_c_numInputs, m_c_numInputs];
 
+    int[ , ] m_moveMatchupsChart = new int[m_c_numInputs, m_c_numInputs];
+
     E_SimpleResult m_opponantPrevResult = E_SimpleResult.NONE;
 
-    public override bool Setup()
+    public override bool Setup(BaseMove[] opponentsMoves)
     {
         m_currentMove = 0;
 
         m_pastOutcomes = ExpandArray(SavedDataManager.m_instance.LoadIntArray("Outcomes.sav"), 6, 6, 3);
         m_opponantMovePattern = ExpandArray(SavedDataManager.m_instance.LoadIntArray("MovePatterns.sav"), 6, 3, 6);
+
+        SetMoveCounters(opponentsMoves);
 
         return true;
     }
@@ -66,22 +70,41 @@ public class AI_Controler : BaseControler
 
     public override int SelectMove()
     {
-
-
-        //if (m_currentMove == -1)
+        if (m_currentMove == -1 || m_opponantPrevMove == -1 || m_opponantPrevResult == E_SimpleResult.NONE)
         {
             m_currentMove = Random.Range(0, m_c_numInputs);
         }
-
-        if (m_currentMove == 5)
+        else
         {
-            if (!m_me.CanUseHyper())
+            // check for valid move in function
+            int bestIndex = 0;
+
+            for (int z = 1; z < (int)E_MOVE_TYPE.TOTAL; z++)
             {
-                m_currentMove = -1;
-                return -1;
+                if (m_opponantMovePattern[(int)m_opponantPrevMove, (int)m_opponantPrevResult, z] > m_opponantMovePattern[(int)m_opponantPrevMove, (int)m_opponantPrevResult, bestIndex])
+                {
+                    bestIndex = z;
+                }
+            }
+
+            for (int z = 0; z < m_c_numInputs; z++)
+            {
+                if (m_moveMatchups[z, bestIndex] == E_SimpleResult.WIN)
+                {
+                    m_currentMove = z;
+                }
             }
         }
-
+        
+        //if (m_currentMove == 5)
+        //{
+        //    if (!m_me.CanUseHyper())
+        //    {
+        //        m_currentMove = -1;
+        //        return -1;
+        //    }
+        //}
+        
         return m_currentMove;
     }
 
@@ -123,7 +146,7 @@ public class AI_Controler : BaseControler
             for (int x = 0; x < m_c_numInputs; x++)
             {
                 E_RESULT myRes = m_moves[z].Use(opponantsMoves[x]);
-                E_RESULT oppRes = opponantsMoves[z].Use(m_moves[x]);
+                E_RESULT oppRes = opponantsMoves[x].Use(m_moves[z]);
 
                 m_moveMatchups[z, x] = findSimpleResult(myRes, oppRes);
             }
@@ -211,45 +234,27 @@ public class AI_Controler : BaseControler
         return newArray;
     }
 
-    /*private int[ , , ] ExpandArrayOutcome(int[] array)
+    private int PredictMoveConfidence()
     {
-        int[ , , ] newArray = new int[6,6,3];
+        // based on the previous move, previous fight result
+        // returns the attacks, throws and defeces used on previus senarious
+        ///int _attacks = m_data[m_previousType][m_previousResult][AI_ATTACK];
+        ///int _blocks = m_data[m_previousType][m_previousResult][AI_BLOCK];
+        ///int _throws = m_data[m_previousType][m_previousResult][AI_THROW];
 
-        int total = 0;
+        ///if (_attacks == _blocks && _blocks == _throws)
+        ///{
+        ///    return 3;
+        ///}
+        ///else if (_attacks != _blocks && _blocks != _throws && _throws != _attacks)
+        ///{
+        ///    return 1;
+        ///}
+        ///else
+        ///{
+        ///    return 2;
+        ///}
 
-        for (int z = 0; z < 3; z++)
-        {
-            for (int x = 0; x < 3; x++)
-            {
-                for (int c = 0; c < 3; c++)
-                {
-                    newArray[z, x, c] = array[total];
-                    total++;
-                }
-            }
-        }
-
-        return newArray;
+        return 0;
     }
-
-    private int[,,] ExpandArrayPattern(int[] array)
-    {
-        int[,,] newArray = new int[6, 3, 6];
-
-        int total = 0;
-
-        for (int z = 0; z < 3; z++)
-        {
-            for (int x = 0; x < 3; x++)
-            {
-                for (int c = 0; c < 3; c++)
-                {
-                    newArray[z, x, c] = array[total];
-                    total++;
-                }
-            }
-        }
-
-        return newArray;
-    }*/
 }

@@ -52,7 +52,7 @@ public class BaseControler : ScriptableObject
         m_moves = moves;
     }
 
-    public virtual bool Setup()
+    public virtual bool Setup(BaseMove[] opponentsMoves)
     {
         for (int z = 0; z < m_c_numInputs; z++)
         {

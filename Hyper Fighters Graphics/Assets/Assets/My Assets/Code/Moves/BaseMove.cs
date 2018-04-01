@@ -8,7 +8,8 @@ public enum E_MOVE_TYPE
 	H_ATTACK,
 	THROW,
 	BLOCK,
-	DODGE
+	DODGE,
+    TOTAL
 }
 
 public enum E_RESULT

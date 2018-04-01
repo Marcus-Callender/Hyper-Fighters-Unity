@@ -90,9 +90,9 @@ public class FighterBase : MonoBehaviour
 
     } 
 
-    public bool StartKeyAssign()
+    public bool StartKeyAssign(BaseMove[] opponentsMoves)
     {
-        return m_controler.Setup();
+        return m_controler.Setup(opponentsMoves);
     }
 
     public void WriteMoveUI()

@@ -59,9 +59,9 @@ public class GameManager : MonoBehaviour
     {
         if (m_state == E_GameStates.SETUP)
         {
-            if (m_charicterScripts[0].StartKeyAssign())
+            if (m_charicterScripts[0].StartKeyAssign(m_charicterScripts[1].GetMovesArray()))
             {
-                if (m_charicterScripts[1].StartKeyAssign())
+                if (m_charicterScripts[1].StartKeyAssign(m_charicterScripts[0].GetMovesArray()))
                 {
                     if (m_posManager.CharicterDistanceCheck())
                     {
