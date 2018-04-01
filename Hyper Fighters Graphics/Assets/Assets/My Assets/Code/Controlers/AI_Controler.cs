@@ -88,19 +88,26 @@ public class AI_Controler : BaseControler
                 }
             }
 
-            int[] posibleCounters = new int[m_c_numInputs];
-            int posibleCountersCount = 0;
-
-            for (int z = 0; z < m_c_numInputs - 1; z++)
+            if (m_moveMatchups[m_c_numInputs - 1, bestIndex] == E_SimpleResult.WIN && m_me.CanUseHyper())
             {
-                if (m_moveMatchups[z, bestIndex] == E_SimpleResult.WIN)
-                {
-                    posibleCounters[posibleCountersCount] = z;
-                    posibleCountersCount++;
-                }
+                m_currentMove = m_c_numInputs - 1;
             }
+            else
+            {
+                int[] posibleCounters = new int[m_c_numInputs];
+                int posibleCountersCount = 0;
 
-            m_currentMove = posibleCounters[Random.Range(0, posibleCountersCount)];
+                for (int z = 0; z < m_c_numInputs - 1; z++)
+                {
+                    if (m_moveMatchups[z, bestIndex] == E_SimpleResult.WIN)
+                    {
+                        posibleCounters[posibleCountersCount] = z;
+                        posibleCountersCount++;
+                    }
+                }
+
+                m_currentMove = posibleCounters[Random.Range(0, posibleCountersCount)];
+            }
         }
         
         return m_currentMove;
