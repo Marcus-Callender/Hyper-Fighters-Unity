@@ -24,6 +24,7 @@ public class SavedDataManager : MonoBehaviour
 
             filePath = Application.dataPath + "/SaveData/";
 
+            // create the file directory if it does not already exist
             try
             {
                 if (!Directory.Exists(filePath))
@@ -36,8 +37,6 @@ public class SavedDataManager : MonoBehaviour
             {
                 Debug.Log("Save data manager exception: " + ex.Message);
             }
-
-            Debug.Log(LoadData("Data.json"));
         }
     }
 
@@ -58,6 +57,7 @@ public class SavedDataManager : MonoBehaviour
             fs.Close();
         }
 
+        Debug.LogError("File: " + fileName + " could not be loaded.");
         return "NULL";
     }
 
