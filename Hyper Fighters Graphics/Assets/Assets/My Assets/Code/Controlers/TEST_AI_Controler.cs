@@ -4,7 +4,7 @@ using UnityEngine;
 
 using UnityEngine.UI;
 
-public class AI_Controler : BaseControler
+public class TEST_AI_Controler : BaseControler
 {
     int m_opponantPrevMove = -1;
 
