@@ -118,8 +118,6 @@ public class AI_Controler : BaseControler
         // checks opponants last move is valid
         if (m_opponantPrevMove != -1)
         {
-            Debug.Log("Array: " + m_opponantPrevMove + ", " + m_currentMove + ", " + (int)findSimpleResult(myRes, othRes));
-            
             // increments the outcome count for using a specified move after a specified opponant move
             m_pastOutcomes[m_opponantPrevMove, m_currentMove, (int)findSimpleResult(myRes, othRes)]++;
 
