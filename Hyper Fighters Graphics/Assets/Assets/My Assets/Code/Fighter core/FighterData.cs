@@ -18,6 +18,7 @@ public enum E_ANIMATIONS
 	BLOCK,
 	DODGE,
 	COUNTER,
+    HYPER,
     
 	TOTAL
 };
